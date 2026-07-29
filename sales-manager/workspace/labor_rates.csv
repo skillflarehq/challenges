@@ -1,0 +1,6 @@
+role,pay_type,typical_monthly_usd,typical_daily_usd,commission_per_unit_usd,training_days,max_span_of_control,notes
+village_sales_agent,hybrid,0,3.50,1.00,3,1,Base day rate on active days + commission; many are part-time
+team_lead,hybrid,90,0,0.25,5,8,Oversees agents; small override on team units
+warehouse_clerk_hub,salary,110,0,0,2,1,Mbeya hub stock and dispatch
+casual_porter,daily,0,4.00,0,0,1,Loading days only
+sales_manager_self,salary,0,0,0,0,3,"Your role is in-scope budget-wise only if you allocate a stipend; otherwise treat as given"

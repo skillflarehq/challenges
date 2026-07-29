@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "title": "Calculate EER for an R22 refrigeration cycle",
+  "slug": "eer-calculation-refrigeration-r22",
+  "version": 1,
+  "image": "refrigeration",
+  "duration_minutes": 45,
+  "skills_assessed": [
+    "Vapor-compression refrigeration cycle analysis",
+    "Refrigerant property lookup and state-point definition",
+    "COP and EER calculation with non-ideal compression",
+    "Comparison to an inverse Carnot reference cycle"
+  ],
+  "role": {
+    "title": "HVAC / refrigeration engineer",
+    "seniority": "Junior to mid",
+    "company_context": "Commercial and light-industrial refrigeration contractor. Engineers size and check vapor-compression systems for cold rooms and process chillers, document cycle performance (COP/EER), and compare real machines to an ideal Carnot benchmark for design reviews and client reports.",
+    "day_to_day": [
+      "Build thermodynamic state-point tables for vapor-compression cycles from design temperatures and refrigerant data",
+      "Look up refrigerant properties from tables, software, or online tools and document the source",
+      "Calculate refrigerating effect, compressor work, COP, and EER including compression efficiency",
+      "Compare cycle performance to an inverse Carnot reference that accounts for heat-exchanger temperature differences",
+      "Write clear calculation notes a senior engineer can review without guessing assumptions"
+    ],
+    "required_skills": [
+      "Can define evaporator, compressor, condenser, and expansion states for a simple vapor-compression cycle",
+      "Comfortable reading R22 (or similar) thermodynamic properties from tables or property software",
+      "Can apply isentropic and actual compression work with a given compression efficiency",
+      "Understands COP, EER, and COP of an inverse Carnot refrigerator"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with CoolProp, REFPROP, or manufacturer property software",
+      "Experience with p-h diagrams and suction-line superheat conventions",
+      "Prior cold-room or commercial refrigeration design work"
+    ],
+    "constraints": [
+      "Assessment is a thermodynamics calculation work sample — not building production software or a containerized app",
+      "Candidates may use any tools they like for refrigerant properties and arithmetic",
+      "Do not require paid licensed software beyond what is freely available on the desktop or online",
+      "Starter files on the desktop are shared scenery (parameters and a blank calculation template), not a solved answer"
+    ]
+  },
+  "problem_statement": {
+    "title": "Calculate EER and Carnot-relative efficiency for an R22 system",
+    "summary": "You are checking the thermodynamic performance of a simple vapor-compression refrigeration system using R22. Design data are fixed below. Produce a clear calculation of the actual cycle COP and EER, then compare performance to an inverse Carnot cycle with a 10 K temperature difference at both the evaporator and the condenser. You are free to use any tools you like (spreadsheets, calculators, CoolProp/REFPROP, ASHRAE or manufacturer tables, online property tools, etc.) to obtain R22 properties — document which source you used.",
+    "outcomes": [
+      "Build a state-point table covering at least evaporator outlet, compressor inlet, compressor discharge, condenser outlet, and expansion-valve inlet.",
+      "Calculate refrigerating effect, compressor work (using the given compression efficiency), COP, and EER of the actual cycle.",
+      "Calculate the COP of the inverse Carnot reference with ΔT = 10 K at both evaporator and condenser, and the efficiency of the actual cycle relative to that Carnot COP."
+    ],
+    "constraints": [
+      "Use the fixed design data: Tev = −10 °C; suction superheat = 10 K; useful superheat = 0 K; Tcond = +30 °C; refrigerant R22; compression efficiency η_comp = 0.7.",
+      "Interpret useful superheat 0 K as saturated vapor leaving the evaporator at Tev; interpret suction superheat 10 K as compressor inlet 10 K above saturation at evaporator pressure.",
+      "For the Carnot reference, apply ΔT = 10 K on both sides: T_cold = Tev − 10 K and T_hot = Tcond + 10 K.",
+      "State your assumptions and the property data source. Prefer concrete numbers and a readable state table over slogans."
+    ],
+    "deliverables": "A written calculation (document, notes, or spreadsheet) that a reviewer can follow: state-point table with enthalpies (and other properties as needed), energy balances for q_evap and w_comp, COP, EER, Carnot COP, and Carnot-relative efficiency η_Carnot = COP_actual / COP_Carnot. Optionally attach working files from property software — not required if the written calculation is complete and consistent."
+  },
+  "rubric": [
+    {
+      "name": "Cycle state-point analysis",
+      "weight": 25,
+      "description": "Correctly identifies saturated vapor at Tev = −10 °C (useful superheat 0 K), compressor inlet with 10 K suction superheat at evaporator pressure, saturated liquid at Tcond = +30 °C, and isenthalpic expansion (h4 = h3)."
+    },
+    {
+      "name": "COP and EER calculation",
+      "weight": 30,
+      "description": "Enthalpy-based refrigerating effect and compressor work are coherent; η_comp = 0.7 is applied as W = W_isentropic / 0.7 (not inverted); COP and EER are reported with a correct EER conversion (EER ≈ COP × 3.412)."
+    },
+    {
+      "name": "Carnot reference cycle",
+      "weight": 25,
+      "description": "Uses ΔT = 10 K at both evaporator and condenser for T_cold and T_hot; applies COP_Carnot = T_cold / (T_hot − T_cold) with absolute temperatures; computes η_Carnot = COP_actual / COP_Carnot consistently."
+    },
+    {
+      "name": "Assumptions and data sourcing",
+      "weight": 10,
+      "description": "States the refrigerant property source and visible cycle assumptions (e.g. negligible pressure drops, saturated liquid leaving the condenser, isenthalpic throttling)."
+    },
+    {
+      "name": "Clarity of deliverable",
+      "weight": 10,
+      "description": "Readable state table and final numbers a reviewer can follow without guessing intermediate steps or units."
+    }
+  ],
+  "variation": {
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (written thermodynamics calculation with COP/EER and Carnot comparison)",
+      "Do not change workspace files that are not listed under variation.files",
+      "Do not turn the challenge into software engineering, containerization, or a multi-refrigerant parametric study"
+    ],
+    "shared_axes": [],
+    "problem_statement": {
+      "mode": "locked",
+      "constraints": [
+        "This challenge uses a shared problem statement for every candidate",
+        "Do not paraphrase or rewrite outcomes, constraints, or deliverables per instance"
+      ],
+      "sync_with": []
+    },
+    "files": []
+  }
+}

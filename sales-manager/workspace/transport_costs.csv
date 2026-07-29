@@ -1,0 +1,5 @@
+route_id,from_location,to_location,mode,cost_per_trip_usd,max_units_per_trip,one_way_hours,runs_per_week_available,notes
+TR-01,Mbeya hub warehouse,Igoma junction,pickup_truck,55,400,1.5,5,Main trunk leg; book 48h ahead in rainy season
+TR-02,Igoma junction,Nankanga,moto_with_trailer,18,60,1.2,10,Last-mile; two trips may be needed per truck unload
+TR-03,Mbeya hub warehouse,Nankanga,hired_pickup_direct,85,350,2.5,3,Direct hire; useful for launch stock dump
+TR-04,Nankanga,nearby villages (avg),boda_boda,4,15,0.5,20,Agent restock within territory

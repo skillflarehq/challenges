@@ -1,0 +1,13 @@
+line_id,category,subcategory,planned_usd,notes
+B-01,inventory,Sunking Pico Plus wholesale,,Fill using product_catalog wholesale x unit_target (and buffer)
+B-02,inventory,accessories buffer,,Optional bulbs/kits; keep small
+B-03,transport,hub_to_community trips,,Use transport_costs capacity and trip counts
+B-04,transport,in_community restock,,Boda/agent restock
+B-05,labor,village_sales_agents,,Days active x rate + commissions
+B-06,labor,team_lead,,Salary and/or override
+B-07,labor,hub_clerk_or_porters,,Only if needed for dispatch peaks
+B-08,training,agent_onboarding,,Training days x people x daily cost
+B-09,working_capital,cash_float,,Agent floats; fraud-sensitive
+B-10,misc,marketing_demos_airtime,,Keep modest
+B-11,contingency,reserve,,Recommend leaving a small reserve inside the 10000 budget
+B-12,total,campaign_budget_cap,10000,Do not exceed budget_usd axis without explicit justification

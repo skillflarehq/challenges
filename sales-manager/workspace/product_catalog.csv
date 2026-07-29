@@ -1,0 +1,4 @@
+sku_code,product_name,category,wholesale_usd,suggested_retail_usd,warranty_months,units_per_carton,weight_kg,notes
+SK-PP-01,Sunking Pico Plus,portable_solar_lantern,12.50,18.00,24,20,0.35,Primary campaign SKU; phone charging capable
+SK-HM-02,Sunking Home 60,solar_home_kit,48.00,72.00,24,4,2.10,Upsell only; not the campaign target
+SK-BL-03,Sunking Bulb Duo,replacement_bulb_pack,3.20,5.00,12,50,0.15,Accessory attach; optional

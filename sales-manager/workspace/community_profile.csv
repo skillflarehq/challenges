@@ -1,0 +1,2 @@
+community_id,community_name,region,district,country,population,households,avg_household_size,electrification_pct,pct_hh_under_2usd_day,primary_livelihood,market_day,nearest_hub,hub_distance_km,notes
+NKG-01,Nankanga,Mbeya,Chunya,Tanzania,4200,780,5.4,18,62,smallholder_farming,Saturday,Mbeya city,48,Target community for this campaign; sparse grid; strong Saturday market

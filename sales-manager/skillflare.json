@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "title": "Plan last-mile solar sales in Nankanga",
+  "slug": "sales-manager-sunking-nankanga",
+  "version": 1,
+  "image": "npm",
+  "duration_minutes": 90,
+  "skills_assessed": [
+    "Territory and last-mile sales planning",
+    "Unit economics and budget allocation",
+    "Field team design and training",
+    "Fraud and operational risk controls",
+    "Data-informed planning with spreadsheets and maps"
+  ],
+  "role": {
+    "title": "Field sales manager",
+    "seniority": "Mid",
+    "company_context": "Off-grid solar distributor expanding last-mile retail of portable solar lanterns across rural Tanzania. Regional sales managers own territory P&L, agent networks, inventory movement from regional hubs, and field reporting quality. Hiring for Mbeya to turn a defined community target into a credible six-month operating plan.",
+    "day_to_day": [
+      "Set weekly unit and cash targets for village agents and team leads",
+      "Plan inventory pulls from the Mbeya hub and last-mile transport into communities",
+      "Hire, train, and coach agents on product demos, pricing, and cash handling",
+      "Review agent sales logs for anomalies, stockouts, and suspected fraud",
+      "Report progress to regional leadership with simple tools (spreadsheets, maps, short written updates)"
+    ],
+    "required_skills": [
+      "Can build a coherent sales plan that ties headcount, pay, inventory, and transport to a unit target and budget",
+      "Comfortable using spreadsheet data and basic map/GPS context for territory decisions",
+      "Can describe practical fraud controls for cash and inventory in the field",
+      "Can specify how field staff report activity without inventing heavy enterprise software"
+    ],
+    "nice_to_have_skills": [
+      "Prior last-mile, FMCG, or PAYG solar field experience in East Africa",
+      "Familiarity with QGIS or similar for plotting community points",
+      "Experience designing agent commission and training curricula"
+    ],
+    "constraints": [
+      "Assessment is a planning and talk-through exercise using provided desktop data — not building production software or a full CRM",
+      "Do not require cloud SaaS accounts or paid datasets beyond what is on the desktop",
+      "Candidate may use browser, spreadsheets, and QGIS; starter CSVs are shared scenery unless variation policy marks them",
+      "Do not turn the challenge into a pure math puzzle with one correct org chart"
+    ]
+  },
+  "problem_statement": {
+    "title": "Sell 500 Sunking Pico Plus units in Nankanga",
+    "summary": "You are a sales manager covering the Mbeya region, Tanzania. You have a $10,000 budget to sell 500 units of the Sunking Pico Plus in six months in the Nankanga community (GPS: -8.255937980286378, 32.05191394550532). Starter CSVs on the desktop give community, product, transport, labor, sample sales, and map context — use them. Write a thorough plan covering as many operating aspects as you can; the more complete and spoken-through your reasoning, the stronger the result.",
+    "outcomes": [
+      "Produce a written operating plan for hitting the unit target within budget and timeline.",
+      "Address hiring (how many people, pay, training), logistics into the community, how units/connections are sold, fraud mitigation, and how sales managers/agents report back.",
+      "Ground the plan in the provided CSVs and, where useful, spreadsheets or QGIS on the desktop."
+    ],
+    "constraints": [
+      "Stay within the stated budget, unit target, product, community, and six-month window unless you explicitly justify a trade-off.",
+      "Do not invent a different product line or geography as the primary plan.",
+      "Prefer concrete numbers (headcount, pay, trips, stock) over slogans; show how they fit the budget.",
+      "Talk through your reasoning in depth — sparse bullet lists without justification are weak."
+    ],
+    "deliverables": "A clear written plan (document or long-form notes) that a reviewer can follow: team design, economics, logistics, selling approach, fraud controls, and reporting tools. Optionally include spreadsheet working files or map screenshots that support the numbers — not required if the written plan is complete and consistent with the data."
+  },
+  "rubric": [
+    {
+      "name": "Feasibility and unit economics",
+      "weight": 30,
+      "description": "Budget and unit math are coherent for ~500 units in six months; inventory, pay, and transport costs are plausible relative to the provided rate cards."
+    },
+    {
+      "name": "Go-to-market and logistics",
+      "weight": 25,
+      "description": "Credible path from Mbeya hub to Nankanga and a selling motion suited to the community (agents, market days, demos) rather than generic marketing copy."
+    },
+    {
+      "name": "Team and operations design",
+      "weight": 20,
+      "description": "Hiring, pay, training, and span of control are specific and operable; roles match the labor_rates context."
+    },
+    {
+      "name": "Fraud and reporting controls",
+      "weight": 15,
+      "description": "Names practical fraud risks (cash, phantom sales, stock leakage) and simple reporting tools field staff can actually use."
+    },
+    {
+      "name": "Clarity and use of data",
+      "weight": 10,
+      "description": "Plan is thorough and well reasoned; references starter CSVs/maps where relevant instead of ignoring them."
+    }
+  ],
+  "variation": {
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (written last-mile sales plan using provided data/tools)",
+      "Do not change workspace files that are not listed under variation.files",
+      "Do not turn the challenge into software engineering, CRM implementation, or pure spreadsheet formula tests"
+    ],
+    "shared_axes": [
+      "region",
+      "community",
+      "product_name",
+      "budget_usd",
+      "unit_target",
+      "months"
+    ],
+    "problem_statement": {
+      "mode": "rewrite",
+      "constraints": [
+        "Keep the same assessment shape: last-mile solar/product sales plan with budget, unit target, timeline, hiring, logistics, fraud, and reporting",
+        "Filled shared_axes literals must appear coherently in the candidate-facing brief",
+        "Do not reveal grader truth or a model answer"
+      ],
+      "sync_with": [
+        "community_profile.csv",
+        "product_catalog.csv",
+        "transport_costs.csv",
+        "territory_points.csv",
+        "budget_template.csv"
+      ]
+    },
+    "files": [
+      {
+        "path": "community_profile.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep the same columns and CSV structure",
+          "Community name and region must match shared_axes",
+          "Keep realistic rural East Africa scale (not a large city)"
+        ],
+        "sync_with": [
+          "territory_points.csv",
+          "transport_costs.csv"
+        ]
+      },
+      {
+        "path": "product_catalog.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep the same columns; primary SKU name must match product_name axis",
+          "Keep portable solar / similar last-mile product economics"
+        ],
+        "sync_with": []
+      },
+      {
+        "path": "transport_costs.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep the same columns",
+          "Routes should connect a regional hub to the target community from shared_axes"
+        ],
+        "sync_with": [
+          "community_profile.csv",
+          "territory_points.csv"
+        ]
+      },
+      {
+        "path": "labor_rates.csv",
+        "mode": "paraphrase",
+        "constraints": [
+          "Keep the same columns and role kinds; change surface labels/rates only within a similar band"
+        ],
+        "sync_with": []
+      },
+      {
+        "path": "sales_log_sample.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep the same columns; regenerate sample rows with plausible anomalies for fraud discussion",
+          "Product references should align with product_name when present"
+        ],
+        "sync_with": [
+          "product_catalog.csv"
+        ]
+      },
+      {
+        "path": "territory_points.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep name,lat,lon columns; include the target community and a few nearby points",
+          "Coordinates must be internally consistent with the community/region story"
+        ],
+        "sync_with": [
+          "community_profile.csv"
+        ]
+      },
+      {
+        "path": "budget_template.csv",
+        "mode": "paraphrase",
+        "constraints": [
+          "Keep line-item category structure; notes may mention budget_usd axis",
+          "Do not pre-fill a complete solved budget"
+        ],
+        "sync_with": []
+      }
+    ]
+  }
+}

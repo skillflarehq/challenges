@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "title": "Containerize a Fastify app",
+  "slug": "docker-backend-developer-fastify",
+  "version": 1,
+  "image": "npm",
+  "duration_minutes": 60,
+  "skills_assessed": [
+    "Dockerfile authoring",
+    "Multi-stage builds",
+    "Container networking basics"
+  ],
+  "role": {
+    "title": "Backend / DevOps engineer",
+    "seniority": "Mid to senior",
+    "company_context": "Product-led SaaS company shipping Node services. A small platform team owns local-to-prod container patterns so feature teams can run and ship APIs without reinventing Docker each time. Hiring to strengthen day-to-day containerization and runtime hygiene on that team.",
+    "day_to_day": [
+      "Package and run internal Node/Fastify services in Docker for local and staging use",
+      "Keep images lean (multi-stage builds, sensible bases) and document how others rebuild them",
+      "Review Dockerfiles and Compose setups for port publishing, health checks, and non-root defaults",
+      "Pair with backend engineers on “works on my machine → works in a container” issues",
+      "Improve shared templates and conventions for service containerization"
+    ],
+    "required_skills": [
+      "Comfortable writing Dockerfiles for Node apps (including lockfile-based installs)",
+      "Solid grasp of container networking basics (published ports, listen host, health endpoints)",
+      "Can explain and apply multi-stage or otherwise lean image practices",
+      "Can validate a running container against expected HTTP behavior"
+    ],
+    "nice_to_have_skills": [
+      "Docker Compose for multi-service or proxy setups",
+      "Familiarity with Alpine/slim Node bases and non-root USER patterns",
+      "Experience reviewing PRs for container security and image size",
+      "Prior work on internal platform or developer-experience tooling"
+    ],
+    "constraints": [
+      "Assessment focuses on containerizing an existing Fastify app — not redesigning the service or swapping frameworks",
+      "Do not test Kubernetes, cloud IaC, or CI pipeline design in this challenge",
+      "Candidate works in a desktop environment with Terminal and Docker available",
+      "Starter app files in the workspace are shared scenery; do not require inventing a different stack"
+    ]
+  },
+  "problem_statement": {
+    "title": "Containerize the Fastify app",
+    "summary": "A small Node.js (Fastify) service is on your desktop. Your job is to package it so it runs reliably as a container.",
+    "outcomes": [
+      "Build an image that starts the app and serves its HTTP routes.",
+      "Expose the service so it can be reached from outside the container on a documented host port.",
+      "Keep the runtime image reasonably small and suitable for a production-like baseline (prefer a multi-stage build when dependencies are installed during the image build)."
+    ],
+    "constraints": [
+      "Do not change the app’s public behavior: GET / and GET /health must keep working as they do today.",
+      "The process inside the container should listen on a port you can map (default app port is 3000 unless you document otherwise).",
+      "Prefer running the app process as a non-root user in the final image when the base image supports it.",
+      "Starter files on the desktop stay as shared scenery — treat them as the application source you containerize; do not replace them with a different stack."
+    ],
+    "deliverables": "Produce whatever files and commands a reviewer needs to rebuild and run your image from this desktop (for example a Dockerfile, and optionally Compose). Leave clear enough structure that someone else can build and start the service without guessing."
+  },
+  "rubric": [
+    {
+      "name": "Working container",
+      "weight": 40,
+      "description": "YES/NO: Did the candidate demonstrate a running container that serves the starter Fastify routes (GET / and/or GET /health) through a published host port? Answer YES only if video or narrative shows a successful check (browser or curl) against the mapped port. Build-only, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Dockerfile quality",
+      "weight": 30,
+      "description": "YES/NO: Does the final Dockerfile use a reproducible lockfile install (npm ci or equivalent) and a lean final runtime (multi-stage or alpine/slim Node base, not an unexplained full OS image)? Answer YES only if both are visible in the deliverable Dockerfile. Missing lockfile-based install or a heavyweight unjustified base = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Runtime hygiene",
+      "weight": 20,
+      "description": "YES/NO: Does the final image configuration run the app as a non-root user (USER or equivalent) and expose/document a container port suitable for publishing (e.g. EXPOSE)? Answer YES only if both appear in the final Dockerfile (or equivalent compose). Missing non-root USER or no port exposure/documentation = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "description": "YES/NO: Is there a Dockerfile (or equivalent) left on the desktop that a reviewer could use to rebuild the image without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional compose/notes must be accurate if present. No Dockerfile / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band",
+      "Do not change workspace files that are not listed under variation.files",
+      "Do not introduce Kubernetes, cloud IaC, or a different application stack"
+    ],
+    "shared_axes": [],
+    "problem_statement": {
+      "mode": "locked",
+      "constraints": [
+        "This challenge uses a shared problem statement for every candidate",
+        "Do not paraphrase or rewrite outcomes, constraints, or deliverables per instance"
+      ],
+      "sync_with": []
+    },
+    "files": []
+  }
+}
