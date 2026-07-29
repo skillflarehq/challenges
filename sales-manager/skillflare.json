@@ -3,7 +3,7 @@
   "title": "Plan last-mile solar sales in Nankanga",
   "slug": "sales-manager-sunking-nankanga",
   "version": 1,
-  "image": "npm",
+  "image": "finance",
   "duration_minutes": 90,
   "skills_assessed": [
     "Territory and last-mile sales planning",
@@ -37,7 +37,7 @@
     "constraints": [
       "Assessment is a planning and talk-through exercise using provided desktop data — not building production software or a full CRM",
       "Do not require cloud SaaS accounts or paid datasets beyond what is on the desktop",
-      "Candidate may use browser, spreadsheets, and QGIS; starter CSVs are shared scenery unless variation policy marks them",
+      "Candidates may use browser, spreadsheets, and QGIS; starter CSVs on the desktop are shared scenery, not a solved plan",
       "Do not turn the challenge into a pure math puzzle with one correct org chart"
     ]
   },
@@ -91,103 +91,15 @@
       "Do not change workspace files that are not listed under variation.files",
       "Do not turn the challenge into software engineering, CRM implementation, or pure spreadsheet formula tests"
     ],
-    "shared_axes": [
-      "region",
-      "community",
-      "product_name",
-      "budget_usd",
-      "unit_target",
-      "months"
-    ],
+    "shared_axes": [],
     "problem_statement": {
-      "mode": "rewrite",
+      "mode": "locked",
       "constraints": [
-        "Keep the same assessment shape: last-mile solar/product sales plan with budget, unit target, timeline, hiring, logistics, fraud, and reporting",
-        "Filled shared_axes literals must appear coherently in the candidate-facing brief",
-        "Do not reveal grader truth or a model answer"
+        "This challenge uses a shared problem statement for every candidate",
+        "Do not paraphrase or rewrite outcomes, constraints, or deliverables per instance"
       ],
-      "sync_with": [
-        "community_profile.csv",
-        "product_catalog.csv",
-        "transport_costs.csv",
-        "territory_points.csv",
-        "budget_template.csv"
-      ]
+      "sync_with": []
     },
-    "files": [
-      {
-        "path": "community_profile.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep the same columns and CSV structure",
-          "Community name and region must match shared_axes",
-          "Keep realistic rural East Africa scale (not a large city)"
-        ],
-        "sync_with": [
-          "territory_points.csv",
-          "transport_costs.csv"
-        ]
-      },
-      {
-        "path": "product_catalog.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep the same columns; primary SKU name must match product_name axis",
-          "Keep portable solar / similar last-mile product economics"
-        ],
-        "sync_with": []
-      },
-      {
-        "path": "transport_costs.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep the same columns",
-          "Routes should connect a regional hub to the target community from shared_axes"
-        ],
-        "sync_with": [
-          "community_profile.csv",
-          "territory_points.csv"
-        ]
-      },
-      {
-        "path": "labor_rates.csv",
-        "mode": "paraphrase",
-        "constraints": [
-          "Keep the same columns and role kinds; change surface labels/rates only within a similar band"
-        ],
-        "sync_with": []
-      },
-      {
-        "path": "sales_log_sample.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep the same columns; regenerate sample rows with plausible anomalies for fraud discussion",
-          "Product references should align with product_name when present"
-        ],
-        "sync_with": [
-          "product_catalog.csv"
-        ]
-      },
-      {
-        "path": "territory_points.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep name,lat,lon columns; include the target community and a few nearby points",
-          "Coordinates must be internally consistent with the community/region story"
-        ],
-        "sync_with": [
-          "community_profile.csv"
-        ]
-      },
-      {
-        "path": "budget_template.csv",
-        "mode": "paraphrase",
-        "constraints": [
-          "Keep line-item category structure; notes may mention budget_usd axis",
-          "Do not pre-fill a complete solved budget"
-        ],
-        "sync_with": []
-      }
-    ]
+    "files": []
   }
 }

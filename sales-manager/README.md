@@ -8,6 +8,10 @@ Canonical Skillflare challenge package for a **field sales manager** last-mile p
 | `truth_pack.md` | Grader mark scheme (required `##` headings) |
 | `workspace/` | Candidate starter CSVs (import into Sheets / use with QGIS) |
 
-This package sets `shared_axes` and marks the CSV files under `variation.files` so Publish can generate isomorphic instances. Unlisted paths stay locked.
+This package keeps a **shared** instance for every candidate: `shared_axes: []`, `problem_statement.mode: "locked"`, empty `sync_with` / `files`. Candidates use the starter CSVs plus desktop tools (spreadsheets, maps); no solved plan is shipped under `workspace/`.
+
+```bash
+node challenges/validate-challenge.mjs challenges/sales-manager
+```
 
 Do not put solution plans or answer keys under `workspace/`.
