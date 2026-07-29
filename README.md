@@ -9,6 +9,7 @@ This repository holds **example Skillflare challenges**: timed, role-shaped work
 | [`eer-calculation`](eer-calculation/) | Thermodynamics / refrigeration calculation work sample |
 | [`sales-manager`](sales-manager/) | Field sales planning work sample |
 | [`docker-node`](docker-node/) | Docker/Node example package layout |
+| [`supabase-bus-ticketing`](supabase-bus-ticketing/) | Vue + Supabase Kenya bus ticketing work sample |
 
 ## Package layout
 

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "title": "Build a Kenya intercity bus ticketing platform",
+  "slug": "supabase-bus-ticketing-kenya",
+  "version": 1,
+  "image": "npm",
+  "duration_minutes": 45,
+  "skills_assessed": [
+    "Vue SPA development",
+    "Supabase schema, Auth, and RLS",
+    "Booking domain modeling",
+    "End-to-end product demo"
+  ],
+  "role": {
+    "title": "Full-stack engineer (Vue + Supabase)",
+    "seniority": "Mid",
+    "company_context": "Early product team building a digital ticketing product for Kenya intercity buses. Engineers own the passenger booking experience end to end: Postgres schema and Row Level Security on Supabase, plus a thin Vue client that talks to it. Hiring someone who can ship a credible MVP without a separate custom API layer unless they choose one.",
+    "day_to_day": [
+      "Model routes, trips, seats/capacity, and bookings in Postgres on Supabase",
+      "Configure Auth and RLS so passengers only see and mutate their own bookings",
+      "Build Vue screens for search, trip selection, and booking confirmation",
+      "Seed enough Kenya corridor data to demo a real search → book path",
+      "Leave clear run notes so a teammate can reproduce the demo locally or against a hosted project"
+    ],
+    "required_skills": [
+      "Comfortable building a Vue SPA that calls a backend over HTTP",
+      "Can design a relational schema for trips and bookings and apply Supabase Auth + RLS",
+      "Can prevent obvious double-booking (constraints, transactions, or explicit holds)",
+      "Can document how to run the frontend and connect it to Supabase without leaking secrets"
+    ],
+    "nice_to_have_skills": [
+      "Supabase Edge Functions or RPC for atomic booking",
+      "Seat-map UI beyond a simple remaining-capacity counter",
+      "Local Supabase CLI workflow (supabase start / migrations)"
+    ],
+    "constraints": [
+      "Assessment is a greenfield MVP — no starter app, schema, or seed data is provided on the desktop",
+      "Primary UI must be Vue; primary backend must be Supabase (Postgres + Auth + RLS)",
+      "Do not require a real payment gateway; booking may create a confirmed or held ticket record only",
+      "Do not turn the challenge into operator fleet ops, live GPS tracking, or a multi-tenant marketplace"
+    ]
+  },
+  "problem_statement": {
+    "title": "Ship a passenger booking MVP for Kenya intercity buses",
+    "summary": "You are building a small digital ticketing product for intercity buses in Kenya. There are no starter files on the desktop — design and implement everything yourself. Use Supabase for the backend (Postgres, Auth, RLS) and Vue for the frontend that points at it. Seed enough realistic Kenya routes/trips (prices in KES) that a reviewer can search, pick a trip, and complete a booking as a signed-in passenger. Payments are out of scope: a successful booking should persist a confirmed or held ticket without a real payment provider.",
+    "outcomes": [
+      "Stand up a Supabase project with Auth and a schema covering routes (or equivalent), trips, seat/capacity inventory, and bookings.",
+      "Apply RLS so booking and user-owned data are protected appropriately (anonymous users must not freely write or read other people’s bookings).",
+      "Build a Vue app that searches available trips, selects a seat or ticket allocation, and completes a booking against that Supabase backend.",
+      "Leave short run notes so a reviewer can reproduce the demo (local Supabase CLI and/or hosted project setup without guessing)."
+    ],
+    "constraints": [
+      "Geography and currency: Kenya corridors and KES pricing.",
+      "UI stack: Vue. Backend stack: Supabase (Postgres + Auth + RLS). A separate custom API is optional, not required.",
+      "No real payment gateway, PSP SDK, or card capture — booking creates a confirmed or held record only.",
+      "Do not commit service-role keys, passwords, or other secrets into the deliverable; document how env vars are set instead.",
+      "Scope is passenger booking MVP only — not operator dispatch, live vehicle tracking, or a multi-operator marketplace."
+    ],
+    "deliverables": "A working Vue frontend, Supabase schema/migrations (or equivalent SQL the reviewer can apply), and a README with how to run both sides (local `supabase start` and/or hosted project URL plus anon-key setup). A reviewer should be able to create a user, search trips, book, and see the booking persisted."
+  },
+  "rubric": [
+    {
+      "name": "Working end-to-end booking demo",
+      "weight": 35,
+      "description": "Reviewer can run (or follow documented hosted setup for) the Vue app against Supabase, sign in or sign up, search trips, and complete a booking that appears as a persisted row. Mock-only UI with no real Supabase write path does not earn this criterion."
+    },
+    {
+      "name": "Schema and booking integrity",
+      "weight": 25,
+      "description": "Schema models trips and bookings coherently (routes/trips/capacity or seats). Double-booking of the same seat or overselling capacity is mitigated (unique constraint, transactional RPC, hold, or equivalent) rather than left to unchecked concurrent inserts."
+    },
+    {
+      "name": "Auth and RLS quality",
+      "weight": 20,
+      "description": "Auth is used for the booking path; RLS (or equivalent server-side enforcement) prevents anonymous unrestricted writes and prevents one user from freely reading or mutating another user’s bookings. Policies that are effectively `true` for booking writes fail this criterion."
+    },
+    {
+      "name": "Vue UX clarity for search to book",
+      "weight": 10,
+      "description": "Search → trip selection → book confirmation is understandable without guessing; empty and error states are usable enough for a demo."
+    },
+    {
+      "name": "Reproducibility",
+      "weight": 10,
+      "description": "README (or equivalent notes) explain how to run frontend and backend; no service-role or other secrets are committed. Reviewer can reproduce without reverse-engineering undocumented steps."
+    }
+  ],
+  "variation": {
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (greenfield Vue + Supabase passenger booking MVP)",
+      "Do not change workspace files that are not listed under variation.files",
+      "Do not replace Vue as the primary UI or Supabase as the primary backend",
+      "Do not add starter scaffolds, seed solutions, or answer keys under workspace/"
+    ],
+    "shared_axes": [],
+    "problem_statement": {
+      "mode": "locked",
+      "constraints": [
+        "This challenge uses a shared problem statement for every candidate",
+        "Do not paraphrase or rewrite outcomes, constraints, or deliverables per instance"
+      ],
+      "sync_with": []
+    },
+    "files": []
+  }
+}
