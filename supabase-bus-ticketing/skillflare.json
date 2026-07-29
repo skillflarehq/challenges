@@ -62,27 +62,27 @@
     {
       "name": "Working end-to-end booking demo",
       "weight": 35,
-      "description": "Reviewer can run (or follow documented hosted setup for) the Vue app against Supabase, sign in or sign up, search trips, and complete a booking that appears as a persisted row. Mock-only UI with no real Supabase write path does not earn this criterion."
+      "description": "YES/NO: Can a reviewer run (or follow documented hosted setup for) the Vue app against Supabase, sign in or sign up, search trips, and complete a booking that appears as a persisted row? Answer YES only if video or narrative shows a real Supabase write path end-to-end. Mock-only UI with no persisted booking, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Schema and booking integrity",
       "weight": 25,
-      "description": "Schema models trips and bookings coherently (routes/trips/capacity or seats). Double-booking of the same seat or overselling capacity is mitigated (unique constraint, transactional RPC, hold, or equivalent) rather than left to unchecked concurrent inserts."
+      "description": "YES/NO: Does the schema model trips and bookings coherently (routes/trips/capacity or seats), and is double-booking of the same seat or overselling capacity mitigated (unique constraint, transactional RPC, hold, or equivalent)? Answer YES only if both a coherent model and an oversell/double-book mitigation are visible. Unchecked concurrent inserts with no integrity control = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Auth and RLS quality",
       "weight": 20,
-      "description": "Auth is used for the booking path; RLS (or equivalent server-side enforcement) prevents anonymous unrestricted writes and prevents one user from freely reading or mutating another user’s bookings. Policies that are effectively `true` for booking writes fail this criterion."
+      "description": "YES/NO: Is Auth used for the booking path, and does RLS (or equivalent server-side enforcement) prevent anonymous unrestricted writes and prevent one user from freely reading or mutating another user’s bookings? Answer YES only if both Auth on the booking path and non-trivial RLS/enforcement are present. Policies that are effectively `true` for booking writes, or no Auth on booking = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Vue UX clarity for search to book",
       "weight": 10,
-      "description": "Search → trip selection → book confirmation is understandable without guessing; empty and error states are usable enough for a demo."
+      "description": "YES/NO: Is search → trip selection → book confirmation understandable without guessing, with empty and error states usable enough for a demo? Answer YES if a reviewer can follow the flow without reverse-engineering the UI. Broken or opaque flow that forces guessing next steps = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Reproducibility",
       "weight": 10,
-      "description": "README (or equivalent notes) explain how to run frontend and backend; no service-role or other secrets are committed. Reviewer can reproduce without reverse-engineering undocumented steps."
+      "description": "YES/NO: Do README (or equivalent notes) explain how to run frontend and backend, with no service-role or other secrets committed, such that a reviewer can reproduce without reverse-engineering undocumented steps? Answer YES only if run notes are sufficient and secrets are not committed. Empty/undocumented deliverable or committed service-role secrets = NO. YES = full points; NO or unclear = 0."
     }
   ],
   "variation": {

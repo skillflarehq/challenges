@@ -61,27 +61,27 @@
     {
       "name": "Feasibility and unit economics",
       "weight": 30,
-      "description": "Budget and unit math are coherent for ~500 units in six months; inventory, pay, and transport costs are plausible relative to the provided rate cards."
+      "description": "YES/NO: Are budget and unit math coherent for ~500 units in six months, with inventory, pay, and transport costs plausible relative to the provided rate cards? Answer YES only if the numbers add up against the starter CSVs and stay within (or explicitly justify trade-offs on) the $10,000 / 500-unit frame. Incoherent totals, ignored budget/target, or rates that contradict the data = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Go-to-market and logistics",
       "weight": 25,
-      "description": "Credible path from Mbeya hub to Nankanga and a selling motion suited to the community (agents, market days, demos) rather than generic marketing copy."
+      "description": "YES/NO: Does the plan describe a credible path from the Mbeya hub to Nankanga and a selling motion suited to the community (agents, market days, demos) rather than generic marketing copy? Answer YES only if both logistics into the community and a grounded selling approach are present. Generic sales theory with no last-mile path, or logistics with no selling motion = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Team and operations design",
       "weight": 20,
-      "description": "Hiring, pay, training, and span of control are specific and operable; roles match the labor_rates context."
+      "description": "YES/NO: Are hiring, pay, training, and span of control specific and operable, with roles matching the labor_rates context? Answer YES only if headcount/pay/training are concrete enough to run and consistent with the provided labor data. Vague org slogans or pay/roles that ignore labor_rates = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Fraud and reporting controls",
       "weight": 15,
-      "description": "Names practical fraud risks (cash, phantom sales, stock leakage) and simple reporting tools field staff can actually use."
+      "description": "YES/NO: Does the plan name practical fraud risks (cash, phantom sales, stock leakage) and simple reporting tools field staff can actually use? Answer YES only if both fraud controls and a usable reporting approach are present. Missing fraud discussion, or inventing heavy enterprise software with no practical field reporting = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity and use of data",
       "weight": 10,
-      "description": "Plan is thorough and well reasoned; references starter CSVs/maps where relevant instead of ignoring them."
+      "description": "YES/NO: Is the plan thorough and well reasoned, and does it reference starter CSVs/maps where relevant instead of ignoring them? Answer YES if depth of reasoning is clear and the provided data is used. Extremely sparse bullets without justification, or a plan that never engages the starter files = NO. YES = full points; NO or unclear = 0."
     }
   ],
   "variation": {

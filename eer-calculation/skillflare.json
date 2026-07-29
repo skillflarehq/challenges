@@ -60,27 +60,27 @@
     {
       "name": "Cycle state-point analysis",
       "weight": 25,
-      "description": "Correctly identifies saturated vapor at Tev = −10 °C (useful superheat 0 K), compressor inlet with 10 K suction superheat at evaporator pressure, saturated liquid at Tcond = +30 °C, and isenthalpic expansion (h4 = h3)."
+      "description": "YES/NO: Does the deliverable correctly identify saturated vapor at Tev = −10 °C (useful superheat 0 K), compressor inlet with 10 K suction superheat at evaporator pressure, saturated liquid at Tcond = +30 °C, and isenthalpic expansion (h4 = h3)? Answer YES only if all four state/expansion conventions are visible and consistent. Collapsed useful/suction superheat into one state, wrong condenser phase, or non-isenthalpic expansion = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "COP and EER calculation",
       "weight": 30,
-      "description": "Enthalpy-based refrigerating effect and compressor work are coherent; η_comp = 0.7 is applied as W = W_isentropic / 0.7 (not inverted); COP and EER are reported with a correct EER conversion (EER ≈ COP × 3.412)."
+      "description": "YES/NO: Are refrigerating effect and compressor work enthalpy-coherent, with η_comp = 0.7 applied as W = W_isentropic / 0.7 (not inverted), and both COP and EER reported with a correct EER conversion (EER ≈ COP × 3.412)? Answer YES only if q/w, η_comp application, COP, and EER are all present and consistent. Inverted η_comp, missing EER, or incoherent energy balances = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Carnot reference cycle",
       "weight": 25,
-      "description": "Uses ΔT = 10 K at both evaporator and condenser for T_cold and T_hot; applies COP_Carnot = T_cold / (T_hot − T_cold) with absolute temperatures; computes η_Carnot = COP_actual / COP_Carnot consistently."
+      "description": "YES/NO: Does the deliverable use ΔT = 10 K at both evaporator and condenser for T_cold and T_hot, apply COP_Carnot = T_cold / (T_hot − T_cold) with absolute temperatures, and compute η_Carnot = COP_actual / COP_Carnot consistently? Answer YES only if all three are correct. Missing ΔT, °C instead of kelvin, heat-engine Carnot, or missing relative efficiency = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Assumptions and data sourcing",
       "weight": 10,
-      "description": "States the refrigerant property source and visible cycle assumptions (e.g. negligible pressure drops, saturated liquid leaving the condenser, isenthalpic throttling)."
+      "description": "YES/NO: Does the deliverable state the refrigerant property source and visible cycle assumptions (e.g. negligible pressure drops, saturated liquid leaving the condenser, isenthalpic throttling)? Answer YES only if both a property source and key assumptions are explicit. Numbers with no source and no stated assumptions = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity of deliverable",
       "weight": 10,
-      "description": "Readable state table and final numbers a reviewer can follow without guessing intermediate steps or units."
+      "description": "YES/NO: Is there a readable state table and final numbers a reviewer can follow without guessing intermediate steps or units? Answer YES if the calculation path is auditable end-to-end. Opaque scrap numbers or missing table/finals that force guessing = NO. YES = full points; NO or unclear = 0."
     }
   ],
   "variation": {
