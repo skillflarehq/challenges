@@ -19,3 +19,6 @@ Notes:
     at evaporator pressure (compressor inlet temperature = 0 °C).
   - Obtain R22 thermodynamic properties from any source you choose
     (tables, CoolProp/REFPROP, online tools, etc.) and document the source.
+  - Deliverable must include cooling EER and heat-pump COP (q_cond / w_comp).
+    EER applies to refrigeration (cooling); COP as a heat-pump metric applies
+    when the same system also provides heating.

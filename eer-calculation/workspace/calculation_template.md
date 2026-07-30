@@ -2,6 +2,8 @@
 
 Fill in this template (or an equivalent spreadsheet). Do not leave critical steps implied.
 
+Report **both** cooling EER and heat-pump COP: EER applies in refrigeration (cooling) mode; COP as a heat-pump figure of merit applies when the same system also provides heating.
+
 ## Given data
 
 - Tev =
@@ -46,23 +48,26 @@ Optional ASCII p-h sketch:
 ## Energy balance
 
 - q_evap =
+- q_cond = q_evap + w_comp =
 - w_isentropic =
 - w_comp =
-- COP =
-- EER =
+- EER_cooling = q_evap / w_comp =
+- EER = EER_cooling × 3.412 =
+- COP_HP = q_cond / w_comp (or EER_cooling + 1) =
 
 ## Carnot reference (ΔT = 10 K both sides)
 
 - T_cold (K) =
 - T_hot (K) =
-- COP_Carnot =
-- η_Carnot = COP / COP_Carnot =
+- EER_Carnot =
+- η_Carnot = EER_cooling / EER_Carnot =
 
 ## Results summary
 
 | Result | Value | Units |
 |--------|-------|-------|
-| COP | | — |
+| EER_cooling | | — |
 | EER | | |
-| COP_Carnot | | — |
+| COP_HP | | — |
+| EER_Carnot | | — |
 | η_Carnot | | — |

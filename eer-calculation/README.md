@@ -1,6 +1,6 @@
 # EER refrigeration challenge (Skillflare package)
 
-Canonical Skillflare challenge package for a **thermodynamics calculation** work sample: vapor-compression cycle COP/EER and inverse Carnot comparison for a fixed R22 system. Closed-world content lives in `skillflare.json`; grader prose stays in `truth_pack.md`.
+Canonical Skillflare challenge package for a **thermodynamics calculation** work sample: vapor-compression cycle cooling EER and heat-pump COP, plus inverse Carnot comparison for a fixed R22 system. Closed-world content lives in `skillflare.json`; grader prose stays in `truth_pack.md`.
 
 | Path | Role |
 |------|------|
