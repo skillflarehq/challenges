@@ -94,15 +94,6 @@
       "Do not turn the challenge into software engineering, CRM implementation, or pure spreadsheet formula tests",
       "Keep isomorphic difficulty: budget_usd/unit_target ≈ $20 via ratio_range, primary wholesale ≈ $11.75–$12.75, and community-scaled transport that still leaves similar opex headroom after inventory"
     ],
-    "shared_axes": [],
-    "problem_statement": {
-      "mode": "locked",
-      "constraints": [
-        "Default skeleton brief matches Nankanga / Sunking Pico Plus / 500 / $10000; combinatorial apply renders instance briefs"
-      ],
-      "sync_with": []
-    },
-    "files": [],
     "factors": [
       {
         "id": "community",

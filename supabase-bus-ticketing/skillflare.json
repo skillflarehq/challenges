@@ -89,19 +89,9 @@
     "invariants": [
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (greenfield Vue + Supabase passenger booking MVP)",
-      "Do not change workspace files that are not listed under variation.files",
       "Do not replace Vue as the primary UI or Supabase as the primary backend",
-      "Do not add starter scaffolds, seed solutions, or answer keys under workspace/"
-    ],
-    "shared_axes": [],
-    "problem_statement": {
-      "mode": "locked",
-      "constraints": [
-        "This challenge uses a shared problem statement for every candidate",
-        "Do not paraphrase or rewrite outcomes, constraints, or deliverables per instance"
-      ],
-      "sync_with": []
-    },
-    "files": []
+      "Do not add starter scaffolds, seed solutions, or answer keys under workspace/",
+      "No combinatorial variation catalog yet — every candidate gets the same locked brief and empty workspace"
+    ]
   }
 }

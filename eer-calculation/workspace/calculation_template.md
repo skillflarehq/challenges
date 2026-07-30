@@ -6,12 +6,13 @@ EU nomenclature (EN 14511-style steady-state): **EER** = cooling (`q_evap / w_co
 
 ## Given data
 
-- Tev =
-- Useful superheat =
-- Suction superheat =
-- Tcond =
-- Refrigerant =
-- η_comp =
+- Tev = −10 °C
+- Useful superheat = 0 K
+- Suction superheat = 10 K
+- Tcond = +30 °C
+- Refrigerant = R22
+- η_comp = 0.70
+- Carnot ΔT = 9 K
 - Property data source =
 
 ## Assumptions
@@ -22,8 +23,8 @@ EU nomenclature (EN 14511-style steady-state): **EER** = cooling (`q_evap / w_co
 
 | Point | Description | T (°C) | P (kPa) | h (kJ/kg) | s (kJ/kg·K) | Phase / notes |
 |-------|-------------|--------|---------|-----------|-------------|---------------|
-| Evap outlet | Useful SH = 0 | | | | | |
-| 1 Compressor inlet | Suction SH = 10 K | | | | | |
+| Evap outlet | Useful SH = 0 K | | | | | |
+| 1 Compressor inlet | Suction SH = 10 K (0 °C) | | | | | |
 | 2s Isentropic discharge | s = s1 | | | | | |
 | 2 Actual discharge | η_comp applied | | | | | |
 | 3 Condenser outlet | | | | | | |
@@ -54,10 +55,10 @@ Optional ASCII p-h sketch:
 - EER = q_evap / w_comp =
 - COP = q_cond / w_comp (or EER + 1) =
 
-## Carnot reference (ΔT = 10 K both sides)
+## Carnot reference (ΔT = 9 K both sides)
 
-- T_cold (K) =
-- T_hot (K) =
+- T_cold = Tev + 9 K → (K) =
+- T_hot = Tcond − 9 K → (K) =
 - EER_Carnot =
 - η_Carnot = EER / EER_Carnot =
 

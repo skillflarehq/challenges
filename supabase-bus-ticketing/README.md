@@ -4,11 +4,11 @@ Canonical Skillflare challenge package for a **full-stack Vue + Supabase** Kenya
 
 | Path | Role |
 |------|------|
-| `skillflare.json` | Manifest (metadata, role, problem_statement, rubric, variation policy) |
+| `skillflare.json` | Manifest (metadata, role, problem_statement, rubric, variation invariants) |
 | `truth_pack.md` | Grader mark scheme (required `##` headings) |
 | `workspace/` | Empty by design — candidates build the Vue app and Supabase schema from scratch |
 
-This package keeps a **shared** instance for every candidate: `shared_axes: []`, `problem_statement.mode: "locked"`, empty `sync_with` / `files`. No starter scaffolds or seed data are shipped under `workspace/`.
+This package has **no combinatorial variation catalog** yet: every candidate gets the same locked brief and empty workspace. Invariants document authoring intent only.
 
 ```bash
 node challenges/validate-challenge.mjs challenges/supabase-bus-ticketing

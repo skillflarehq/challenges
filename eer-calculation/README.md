@@ -4,11 +4,13 @@ Canonical Skillflare challenge package for a **thermodynamics calculation** work
 
 | Path | Role |
 |------|------|
-| `skillflare.json` | Manifest (metadata, role, problem_statement, rubric, variation policy) |
+| `skillflare.json` | Manifest (metadata, role, problem_statement, rubric, combinatorial variation catalog) |
 | `truth_pack.md` | Grader mark scheme (required `##` headings) |
 | `workspace/` | Candidate starter files (parameters + blank calculation template) |
 
-This package keeps a **shared** instance for every candidate: `shared_axes: []`, `problem_statement.mode: "locked"`, empty `sync_with` / `files`. Candidates may use any tools they like for R22 properties; no property tables or answer keys are shipped under `workspace/`.
+The skeleton instance is Tev −10 °C / Tcond +30 °C / suction SH 10 K / η_comp 0.70 / Carnot ΔT 9 K (matches `workspace/` and `problem_statement`). With **variations enabled** at challenge create, packaging fans out buffer slots; each run picks an **unused valid permutation** of vetted factor options (`cycle` × `eta_comp` × `carnot_dt`), applies `variation.apply` templates (brief + `system_parameters.txt` + `calculation_template.md`), and writes a thin layer — **no LLM at runtime**. Refrigerant stays R22; cycle bundles keep temperature lift ≈ 35–45 K for isomorphic difficulty.
+
+`variation.strategy: "combinatorial"` is the builder-output shape: factor option bundles + mustache-style `{{key}}` templates. Invariants document authoring intent; runtime does not interpret free-text invariants.
 
 ```bash
 node challenges/validate-challenge.mjs challenges/eer-calculation

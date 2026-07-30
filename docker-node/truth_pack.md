@@ -2,11 +2,11 @@
 
 ## Correctness summary
 
-Candidate produces a working container image for the provided Fastify app. After build and run with a published host port, GET / returns the existing hello payload and GET /health returns status ok. Final image prefers a multi-stage or otherwise lean Node base and does not require root for the app process when feasible.
+Candidate produces a working container image for the provided Fastify app. After build and run with a published host port mapped to the instance’s documented default listen port (see starter `app/index.js` / brief), GET / returns the existing hello payload (message text from the starter file) and GET /health returns status ok. Final image prefers a multi-stage or otherwise lean Node base and does not require root for the app process when feasible.
 
 ## Method notes
 
-Inspect Dockerfile (and optional compose). Build the image, run with a port map, curl / and /health. Check USER instruction or equivalent non-root practice. Confirm package-lock or npm ci usage for reproducible installs.
+Inspect Dockerfile (and optional compose). Build the image, run with a port map to the app’s default port from the starter files, curl / and /health. Check USER instruction or equivalent non-root practice. Confirm package-lock or npm ci usage for reproducible installs. Judge against the instance package name / greeting / default port — not a fixed skeleton-only port 3000.
 
 ## Expected artifacts
 
