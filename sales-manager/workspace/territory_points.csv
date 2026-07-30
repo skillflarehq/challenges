@@ -1,7 +1,7 @@
 point_id,name,place_type,lat,lon,notes
 P-01,Nankanga centre,community,-8.255937980286378,32.05191394550532,Campaign target community
 P-02,Nankanga Saturday market,market,-8.2548,32.0531,Primary weekly market
-P-03,Igoma junction,transit_hub,-8.3125,32.1204,Transfer point from Mbeya road
+P-03,Igoma junction,transit_hub,-8.3125,32.1204,Transfer point from Mbeya–Chunya road
 P-04,Mbuyuni,community,-8.2712,32.0315,Nearby village; optional expansion
 P-05,Luwilo,community,-8.2410,32.0718,Nearby village along feeder road
 P-06,Mbeya hub warehouse,warehouse,-8.9095,33.4608,Regional stock point

@@ -10,6 +10,8 @@ Canonical Skillflare challenge package for a **field sales manager** last-mile p
 
 The skeleton instance is Nankanga / Sunking Pico Plus / 500 units / $10,000 (matches `workspace/` CSVs and `problem_statement`). With **variations enabled** at challenge create, packaging fans out buffer slots; each run picks an **unused valid permutation** of vetted factor options (`community` × `product` × `unit_target` × `budget_usd`), applies `variation.apply` templates (brief + CSVs), and writes a thin layer — **no LLM at runtime**.
 
+Valid budget/unit pairs are constrained to `budget_usd / unit_target ∈ [19, 21]` (≈ $20/unit) so opex headroom after wholesale stays similar across products. Community options vary demographics, livelihood, transit hub, and distance-scaled trip costs; near-hub Mbeya Rural villages use Uyole/Mbalizi routing rather than Igoma.
+
 `variation.strategy: "combinatorial"` is the builder-output shape: factor option bundles + `ratio_range` constraints + mustache-style `{{key}}` templates. Invariants document authoring intent; runtime does not interpret free-text invariants.
 
 ```bash

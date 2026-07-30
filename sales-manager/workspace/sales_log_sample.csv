@@ -3,7 +3,7 @@ T-1001,2025-11-03,AG-12,Nankanga,SK-PP-01,2,mobile_money,36.00,no,,Normal market
 T-1002,2025-11-03,AG-12,Nankanga,SK-PP-01,1,cash,18.00,no,,
 T-1003,2025-11-04,AG-07,Nankanga,SK-PP-01,8,cash,144.00,no,high_cash_volume,Unusually large cash bundle for this agent
 T-1004,2025-11-05,AG-07,Nankanga,SK-PP-01,6,cash,108.00,no,high_cash_volume,Second large cash day in a row
-T-1005,2025-11-06,AG-19,Igoma,SK-PP-01,1,mobile_money,18.00,no,,
+T-1005,2025-11-06,AG-19,Igoma junction,SK-PP-01,1,mobile_money,18.00,no,,
 T-1006,2025-11-07,AG-03,Nankanga,SK-PP-01,3,mobile_money,40.00,yes,price_mismatch,Amount below 3x retail; possible under-ring
 T-1007,2025-11-08,AG-12,Nankanga,SK-BL-03,4,cash,20.00,no,,Accessory attach
 T-1008,2025-11-10,AG-21,Nankanga,SK-PP-01,5,credit_promise,0.00,no,uncollected_credit,No collection recorded after 14 days

@@ -6,7 +6,7 @@ Candidate produces a thorough written operating plan to sell about the stated un
 
 ## Method notes
 
-Read the candidate plan end-to-end. Cross-check claimed headcount and pay against labor_rates.csv and remaining budget after inventory/transport. Sanity-check unit economics using product_catalog.csv wholesale/retail. Check whether transport plan could move enough stock using transport_costs.csv capacity and trips. Look for use of community_profile / territory_points (market day, electrification, map context). Prefer depth of reasoning over short bullet lists. Optional spreadsheets or QGIS screenshots are supporting evidence, not required if the prose is complete. Judge against the instance’s stated community, product, unit target, and budget — not a fixed skeleton geography.
+Read the candidate plan end-to-end. Cross-check claimed headcount and pay against labor_rates.csv and remaining budget after inventory/transport. Sanity-check unit economics using product_catalog.csv wholesale/retail. Check whether transport plan could move enough stock using transport_costs.csv capacity and trips. Look for use of community_profile / territory_points (market day, electrification, map context). Prefer depth of reasoning over short bullet lists. Optional spreadsheets or QGIS screenshots are supporting evidence, not required if the prose is complete. Judge against the instance’s stated community, product, unit target, and budget — not a fixed skeleton geography. Expect candidates to use community-specific demographics, livelihood, market day, transit hub, and transport rate cards from the starter CSVs.
 
 ## Expected artifacts
 
