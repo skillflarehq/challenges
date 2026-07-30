@@ -14,7 +14,7 @@
   "role": {
     "title": "HVAC / refrigeration engineer",
     "seniority": "Junior to mid",
-    "company_context": "Commercial and light-industrial refrigeration contractor. Engineers size and check vapor-compression systems for cold rooms and process chillers, document cycle performance (cooling EER and heat-pump COP when the plant can also heat), and compare real machines to an ideal Carnot benchmark for design reviews and client reports.",
+    "company_context": "Commercial and light-industrial refrigeration contractor. Engineers size and check vapor-compression systems for cold rooms and process chillers, document cycle performance using EU nomenclature (cooling EER and heat-pump COP, both in W/W), and compare real machines to an ideal Carnot benchmark for design reviews and client reports.",
     "day_to_day": [
       "Build thermodynamic state-point tables for vapor-compression cycles from design temperatures and refrigerant data",
       "Look up refrigerant properties from tables, software, or online tools and document the source",
@@ -26,7 +26,7 @@
       "Can define evaporator, compressor, condenser, and expansion states for a simple vapor-compression cycle",
       "Comfortable reading R22 (or similar) thermodynamic properties from tables or property software",
       "Can apply isentropic and actual compression work with a given compression efficiency",
-      "Understands cooling EER, heat-pump COP, and COP of an inverse Carnot refrigerator"
+      "Understands EU EER (cooling, W/W), COP (heating, W/W), and the inverse Carnot refrigerator benchmark"
     ],
     "nice_to_have_skills": [
       "Familiarity with CoolProp, REFPROP, or manufacturer property software",
@@ -42,20 +42,20 @@
   },
   "problem_statement": {
     "title": "Calculate EER, heat-pump COP, and Carnot-relative efficiency for an R22 system",
-    "summary": "You are checking the thermodynamic performance of a simple vapor-compression system using R22. The same machine may cool (refrigeration) or heat (heat pump). Design data are fixed below. Produce a clear calculation of cooling performance (refrigerating COP and EER) and heat-pump COP from condenser heat rejection, then compare refrigeration performance to an inverse Carnot cycle with a 9 K temperature difference at both the evaporator and the condenser. You are free to use any tools you like (spreadsheets, calculators, CoolProp/REFPROP, ASHRAE or manufacturer tables, online property tools, etc.) to obtain R22 properties — document which source you used.",
+    "summary": "You are checking the thermodynamic performance of a simple vapor-compression system using R22. The same machine may cool (refrigeration) or heat (heat pump). Design data are fixed below. Using EU nomenclature (EN 14511-style steady-state metrics), produce a clear calculation of cooling EER and heat-pump COP — both in W/W — then compare cooling performance to an inverse Carnot cycle with a 9 K temperature difference at both the evaporator and the condenser. You are free to use any tools you like (spreadsheets, calculators, CoolProp/REFPROP, ASHRAE or manufacturer tables, online property tools, etc.) to obtain R22 properties — document which source you used.",
     "outcomes": [
       "Build a state-point table covering at least evaporator outlet, compressor inlet, compressor discharge, condenser outlet, and expansion-valve inlet.",
-      "Calculate refrigerating effect, compressor work (using the given compression efficiency), cooling COP and EER, and heat-pump COP (condenser heat / compressor work) of the actual cycle.",
-      "Calculate the COP of the inverse Carnot refrigerator with ΔT = 9 K at both evaporator and condenser, and the efficiency of the actual cycle relative to that Carnot COP."
+      "Calculate refrigerating effect, compressor work (using the given compression efficiency), cooling EER (q_evap / w_comp), and heat-pump COP (q_cond / w_comp) of the actual cycle — both in W/W.",
+      "Calculate the EER of the inverse Carnot refrigerator with ΔT = 9 K at both evaporator and condenser, and the efficiency of the actual cycle relative to that Carnot EER."
     ],
     "constraints": [
       "Use the fixed design data: Tev = −10 °C; suction superheat = 10 K; useful superheat = 0 K; Tcond = +30 °C; refrigerant R22; compression efficiency η_comp = 0.7.",
       "Interpret useful superheat 0 K as saturated vapor leaving the evaporator at Tev; interpret suction superheat 10 K as compressor inlet 10 K above saturation at evaporator pressure.",
       "For the Carnot reference, apply ΔT = 9 K on both sides: T_cold = Tev + 9 K and T_hot = Tcond -9 K.",
-      "Report both cooling EER and heat-pump COP. EER applies to refrigeration (cooling); COP as a heat-pump figure of merit applies when the system also provides heating (q_cond / w_comp).",
+      "Use EU nomenclature: EER = cooling (q_evap / w_comp, W/W); COP = heating / heat pump (q_cond / w_comp, W/W). Do not require a US customary BTU/(W·h) conversion.",
       "State your assumptions and the property data source. Prefer concrete numbers and a readable state table over slogans."
     ],
-    "deliverables": "A written calculation (document, notes, or spreadsheet) that a reviewer can follow: state-point table with enthalpies (and other properties as needed), energy balances for q_evap, q_cond, and w_comp, refrigerating COP (COP_cooling), EER, heat-pump COP (COP_HP = q_cond / w_comp), Carnot COP, and Carnot-relative efficiency η_Carnot = COP_cooling / COP_Carnot. Optionally attach working files from property software — not required if the written calculation is complete and consistent."
+    "deliverables": "A written calculation (document, notes, or spreadsheet) that a reviewer can follow: state-point table with enthalpies (and other properties as needed), energy balances for q_evap, q_cond, and w_comp, cooling EER = q_evap / w_comp, heat-pump COP = q_cond / w_comp, Carnot EER, and Carnot-relative efficiency η_Carnot = EER / EER_Carnot. Optionally attach working files from property software — not required if the written calculation is complete and consistent."
   },
   "rubric": [
     {
@@ -64,14 +64,14 @@
       "description": "YES/NO: Does the deliverable correctly identify saturated vapor at Tev = −10 °C (useful superheat 0 K), compressor inlet with 10 K suction superheat at evaporator pressure, saturated liquid at Tcond = +30 °C, and isenthalpic expansion (h4 = h3)? Answer YES only if all four state/expansion conventions are visible and consistent. Collapsed useful/suction superheat into one state, wrong condenser phase, or non-isenthalpic expansion = NO. YES = full points; NO or unclear = 0."
     },
     {
-      "name": "COP and EER calculation",
+      "name": "EER and COP calculation",
       "weight": 30,
-      "description": "YES/NO: Are refrigerating effect and compressor work enthalpy-coherent, with η_comp = 0.7 applied as W = W_isentropic / 0.7 (not inverted); cooling COP and EER reported with a correct EER conversion (EER ≈ COP_cooling × 3.412); and heat-pump COP reported as q_cond / w_comp (or equivalently COP_cooling + 1) consistent with energy balance? Answer YES only if q/w, η_comp application, COP_cooling, EER, and COP_HP are all present and consistent. Inverted η_comp, missing EER, missing heat-pump COP, or incoherent energy balances = NO. YES = full points; NO or unclear = 0."
+      "description": "YES/NO: Are refrigerating effect and compressor work enthalpy-coherent, with η_comp = 0.7 applied as W = W_isentropic / 0.7 (not inverted); cooling EER reported as q_evap / w_comp (W/W); and heat-pump COP reported as q_cond / w_comp (or equivalently EER + 1) consistent with energy balance? Answer YES only if q/w, η_comp application, EER, and COP are all present and consistent in SI W/W. Inverted η_comp, missing EER, missing COP, or incoherent energy balances = NO. US BTU/(W·h) conversion is not required. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Carnot reference cycle",
       "weight": 25,
-      "description": "YES/NO: Does the deliverable use ΔT = 10 K at both evaporator and condenser for T_cold and T_hot, apply COP_Carnot = T_cold / (T_hot − T_cold) with absolute temperatures, and compute η_Carnot = COP_cooling / COP_Carnot consistently? Answer YES only if all three are correct. Missing ΔT, °C instead of kelvin, heat-engine Carnot, or missing relative efficiency = NO. YES = full points; NO or unclear = 0."
+      "description": "YES/NO: Does the deliverable use ΔT = 10 K at both evaporator and condenser for T_cold and T_hot, apply EER_Carnot = T_cold / (T_hot − T_cold) with absolute temperatures, and compute η_Carnot = EER / EER_Carnot consistently? Answer YES only if all three are correct. Missing ΔT, °C instead of kelvin, heat-engine Carnot, or missing relative efficiency = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Assumptions and data sourcing",
@@ -87,7 +87,7 @@
   "variation": {
     "invariants": [
       "Keep the same skills_assessed and rubric structure/weights",
-      "Keep the same deliverable kinds and difficulty band (written thermodynamics calculation with cooling EER, heat-pump COP, and Carnot comparison)",
+      "Keep the same deliverable kinds and difficulty band (written thermodynamics calculation with cooling EER, heat-pump COP, and Carnot comparison in EU W/W nomenclature)",
       "Do not change workspace files that are not listed under variation.files",
       "Do not turn the challenge into software engineering, containerization, or a multi-refrigerant parametric study"
     ],
