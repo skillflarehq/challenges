@@ -61,12 +61,12 @@
     {
       "name": "Feasibility and unit economics",
       "weight": 30,
-      "description": "YES/NO: Are budget and unit math coherent for ~500 units in six months, with inventory, pay, and transport costs plausible relative to the provided rate cards? Answer YES only if the numbers add up against the starter CSVs and stay within (or explicitly justify trade-offs on) the $10,000 / 500-unit frame. Incoherent totals, ignored budget/target, or rates that contradict the data = NO. YES = full points; NO or unclear = 0."
+      "description": "YES/NO: Are budget and unit math coherent for the stated unit target in six months, with inventory, pay, and transport costs plausible relative to the provided rate cards? Answer YES only if the numbers add up against the starter CSVs and stay within (or explicitly justify trade-offs on) the stated budget / unit-target frame from the brief. Incoherent totals, ignored budget/target, or rates that contradict the data = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Go-to-market and logistics",
       "weight": 25,
-      "description": "YES/NO: Does the plan describe a credible path from the Mbeya hub to Nankanga and a selling motion suited to the community (agents, market days, demos) rather than generic marketing copy? Answer YES only if both logistics into the community and a grounded selling approach are present. Generic sales theory with no last-mile path, or logistics with no selling motion = NO. YES = full points; NO or unclear = 0."
+      "description": "YES/NO: Does the plan describe a credible path from the Mbeya hub to the stated target community and a selling motion suited to that community (agents, market days, demos) rather than generic marketing copy? Answer YES only if both logistics into the community and a grounded selling approach are present. Generic sales theory with no last-mile path, or logistics with no selling motion = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Team and operations design",
@@ -88,18 +88,159 @@
     "invariants": [
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (written last-mile sales plan using provided data/tools)",
+      "Keep Tanzania / Mbeya regional hub framing and a six-month campaign window",
+      "Keep portable-solar last-mile retail planning — not a different industry or software build",
       "Do not change workspace files that are not listed under variation.files",
-      "Do not turn the challenge into software engineering, CRM implementation, or pure spreadsheet formula tests"
+      "Do not turn the challenge into software engineering, CRM implementation, or pure spreadsheet formula tests",
+      "Keep isomorphic difficulty: unit_target roughly 400–700; budget_usd roughly 8000–14000; rural Mbeya-area community; primary SKU a portable solar lantern"
     ],
-    "shared_axes": [],
+    "shared_axes": [
+      "community_name",
+      "community_lat",
+      "community_lon",
+      "primary_product_name",
+      "primary_sku_code",
+      "unit_target",
+      "budget_usd"
+    ],
     "problem_statement": {
-      "mode": "locked",
+      "mode": "paraphrase",
       "constraints": [
-        "This challenge uses a shared problem statement for every candidate",
-        "Do not paraphrase or rewrite outcomes, constraints, or deliverables per instance"
+        "Apply shared_axes literals (community_name, GPS, primary product/SKU, unit_target, budget_usd) consistently in title, summary, and constraints",
+        "Keep the same outcomes shape and deliverable kind (written operating plan grounded in starter CSVs)",
+        "Stay within Mbeya hub / Tanzania / six-month last-mile solar campaign framing",
+        "Do not invent a new skill demand, a different primary geography outside Mbeya-area, or a non-lantern primary product line"
       ],
-      "sync_with": []
+      "sync_with": [
+        "community_profile.csv",
+        "product_catalog.csv",
+        "labor_rates.csv",
+        "transport_costs.csv",
+        "territory_points.csv",
+        "sales_log_sample.csv",
+        "budget_template.csv"
+      ]
     },
-    "files": []
+    "files": [
+      {
+        "path": "community_profile.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep the same CSV header and single data-row shape",
+          "Set community_name, lat/lon-aligned notes from shared_axes; keep region Mbeya and country Tanzania",
+          "Keep population/households and electrification in a similar rural band to the skeleton"
+        ],
+        "sync_with": [
+          "product_catalog.csv",
+          "labor_rates.csv",
+          "transport_costs.csv",
+          "territory_points.csv",
+          "sales_log_sample.csv",
+          "budget_template.csv"
+        ]
+      },
+      {
+        "path": "product_catalog.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep three rows: primary campaign SKU, one upsell kit, one accessory",
+          "Primary row must use primary_sku_code and primary_product_name; category portable_solar_lantern",
+          "Keep wholesale/retail in a similar price band so unit economics difficulty stays isomorphic"
+        ],
+        "sync_with": [
+          "community_profile.csv",
+          "labor_rates.csv",
+          "transport_costs.csv",
+          "territory_points.csv",
+          "sales_log_sample.csv",
+          "budget_template.csv"
+        ]
+      },
+      {
+        "path": "labor_rates.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep the same role rows and column schema",
+          "Resample typical rates/commissions within plausible East-Africa field bands; notes may mention Mbeya hub",
+          "Do not add or remove roles"
+        ],
+        "sync_with": [
+          "community_profile.csv",
+          "product_catalog.csv",
+          "transport_costs.csv",
+          "territory_points.csv",
+          "sales_log_sample.csv",
+          "budget_template.csv"
+        ]
+      },
+      {
+        "path": "transport_costs.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep four route rows and the same column schema",
+          "Align to/from labels with Mbeya hub and the new community_name; costs/capacity in a similar band",
+          "Preserve a trunk leg, last-mile leg, optional direct hire, and in-community restock pattern"
+        ],
+        "sync_with": [
+          "community_profile.csv",
+          "product_catalog.csv",
+          "labor_rates.csv",
+          "territory_points.csv",
+          "sales_log_sample.csv",
+          "budget_template.csv"
+        ]
+      },
+      {
+        "path": "territory_points.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep six points and the same column schema",
+          "Target community point uses community_name, community_lat, community_lon",
+          "Nearby villages cluster around the new community; Mbeya hub warehouse coordinates stay in Mbeya city"
+        ],
+        "sync_with": [
+          "community_profile.csv",
+          "product_catalog.csv",
+          "labor_rates.csv",
+          "transport_costs.csv",
+          "sales_log_sample.csv",
+          "budget_template.csv"
+        ]
+      },
+      {
+        "path": "sales_log_sample.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep the same columns and roughly 10–14 sample transactions",
+          "Use community_name and primary_sku_code; include a mix of normal sales and fraud-flag patterns (high_cash_volume, price_mismatch, phantom_risk, etc.)",
+          "Amounts should be coherent with product_catalog retail prices"
+        ],
+        "sync_with": [
+          "community_profile.csv",
+          "product_catalog.csv",
+          "labor_rates.csv",
+          "transport_costs.csv",
+          "territory_points.csv",
+          "budget_template.csv"
+        ]
+      },
+      {
+        "path": "budget_template.csv",
+        "mode": "resample",
+        "constraints": [
+          "Keep the same line_id rows and column schema",
+          "campaign_budget_cap planned_usd must equal budget_usd; notes should reference primary product and unit_target",
+          "Do not invent extra budget lines"
+        ],
+        "sync_with": [
+          "community_profile.csv",
+          "product_catalog.csv",
+          "labor_rates.csv",
+          "transport_costs.csv",
+          "territory_points.csv",
+          "sales_log_sample.csv"
+        ]
+      }
+    ]
   }
 }

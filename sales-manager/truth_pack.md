@@ -2,11 +2,11 @@
 
 ## Correctness summary
 
-Candidate produces a thorough written operating plan to sell about 500 Sunking Pico Plus units in Nankanga (Mbeya, Tanzania) within six months on a ~$10,000 budget. The plan should cover hiring/pay/training, logistics from hub to community, selling motion, fraud mitigation, and field reporting tools, and should be consistent with the starter CSVs (rates, product economics, community scale, transport). There is no single correct org chart; success is a coherent, operable plan with plausible numbers.
+Candidate produces a thorough written operating plan to sell about the stated unit target of the primary campaign product in the stated target community (Mbeya region, Tanzania) within six months on the stated budget. The plan should cover hiring/pay/training, logistics from hub to community, selling motion, fraud mitigation, and field reporting tools, and should be consistent with the starter CSVs (rates, product economics, community scale, transport). There is no single correct org chart; success is a coherent, operable plan with plausible numbers.
 
 ## Method notes
 
-Read the candidate plan end-to-end. Cross-check claimed headcount and pay against labor_rates.csv and remaining budget after inventory/transport. Sanity-check unit economics using product_catalog.csv wholesale/retail. Check whether transport plan could move enough stock using transport_costs.csv capacity and trips. Look for use of community_profile / territory_points (market day, electrification, map context). Prefer depth of reasoning over short bullet lists. Optional spreadsheets or QGIS screenshots are supporting evidence, not required if the prose is complete.
+Read the candidate plan end-to-end. Cross-check claimed headcount and pay against labor_rates.csv and remaining budget after inventory/transport. Sanity-check unit economics using product_catalog.csv wholesale/retail. Check whether transport plan could move enough stock using transport_costs.csv capacity and trips. Look for use of community_profile / territory_points (market day, electrification, map context). Prefer depth of reasoning over short bullet lists. Optional spreadsheets or QGIS screenshots are supporting evidence, not required if the prose is complete. Judge against the instance’s stated community, product, unit target, and budget — not a fixed skeleton geography.
 
 ## Expected artifacts
 

@@ -8,7 +8,7 @@ Canonical Skillflare challenge package for a **field sales manager** last-mile p
 | `truth_pack.md` | Grader mark scheme (required `##` headings) |
 | `workspace/` | Candidate starter CSVs (import into Sheets / use with QGIS) |
 
-This package keeps a **shared** instance for every candidate: `shared_axes: []`, `problem_statement.mode: "locked"`, empty `sync_with` / `files`. Candidates use the starter CSVs plus desktop tools (spreadsheets, maps); no solved plan is shipped under `workspace/`.
+The skeleton instance uses Nankanga / Sunking Pico Plus / 500 units / $10,000. With **variations enabled** at challenge create, publish generates isomorphic instances from `variation.shared_axes` and resamples the workspace CSVs (`mode: "resample"`) so each candidate gets coherent but distinct community, product, budget, and unit-target data.
 
 ```bash
 node challenges/validate-challenge.mjs challenges/sales-manager
