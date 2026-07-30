@@ -85,162 +85,568 @@
     }
   ],
   "variation": {
+    "strategy": "combinatorial",
     "invariants": [
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (written last-mile sales plan using provided data/tools)",
       "Keep Tanzania / Mbeya regional hub framing and a six-month campaign window",
       "Keep portable-solar last-mile retail planning — not a different industry or software build",
-      "Do not change workspace files that are not listed under variation.files",
       "Do not turn the challenge into software engineering, CRM implementation, or pure spreadsheet formula tests",
-      "Keep isomorphic difficulty: unit_target roughly 400–700; budget_usd roughly 8000–14000; rural Mbeya-area community; primary SKU a portable solar lantern"
+      "Keep isomorphic difficulty via ratio_range on budget_usd / unit_target and vetted community/product option bundles"
     ],
-    "shared_axes": [
-      "community_name",
-      "community_lat",
-      "community_lon",
-      "primary_product_name",
-      "primary_sku_code",
-      "unit_target",
-      "budget_usd"
-    ],
+    "shared_axes": [],
     "problem_statement": {
-      "mode": "paraphrase",
+      "mode": "locked",
       "constraints": [
-        "Apply shared_axes literals (community_name, GPS, primary product/SKU, unit_target, budget_usd) consistently in title, summary, and constraints",
-        "Keep the same outcomes shape and deliverable kind (written operating plan grounded in starter CSVs)",
-        "Stay within Mbeya hub / Tanzania / six-month last-mile solar campaign framing",
-        "Do not invent a new skill demand, a different primary geography outside Mbeya-area, or a non-lantern primary product line"
+        "Default skeleton brief matches Nankanga / Sunking Pico Plus / 500 / $10000; combinatorial apply renders instance briefs"
       ],
-      "sync_with": [
-        "community_profile.csv",
-        "product_catalog.csv",
-        "labor_rates.csv",
-        "transport_costs.csv",
-        "territory_points.csv",
-        "sales_log_sample.csv",
-        "budget_template.csv"
-      ]
+      "sync_with": []
     },
-    "files": [
+    "files": [],
+    "factors": [
       {
-        "path": "community_profile.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep the same CSV header and single data-row shape",
-          "Set community_name, lat/lon-aligned notes from shared_axes; keep region Mbeya and country Tanzania",
-          "Keep population/households and electrification in a similar rural band to the skeleton"
-        ],
-        "sync_with": [
-          "product_catalog.csv",
-          "labor_rates.csv",
-          "transport_costs.csv",
-          "territory_points.csv",
-          "sales_log_sample.csv",
-          "budget_template.csv"
+        "id": "community",
+        "options": [
+          {
+            "id": "nankanga",
+            "values": {
+              "community_id": "NKG-01",
+              "community_name": "Nankanga",
+              "community_lat": "-8.255937980286378",
+              "community_lon": "32.05191394550532",
+              "district": "Chunya",
+              "population": "4200",
+              "households": "780",
+              "avg_household_size": "5.4",
+              "electrification_pct": "18",
+              "pct_hh_under_2usd_day": "62",
+              "market_day": "Saturday",
+              "hub_distance_km": "48",
+              "community_notes": "Target community for this campaign; sparse grid; strong Saturday market",
+              "nearby_a": "Mbuyuni",
+              "nearby_b": "Luwilo",
+              "market_lat": "-8.2548",
+              "market_lon": "32.0531",
+              "nearby_a_lat": "-8.2712",
+              "nearby_a_lon": "32.0315",
+              "nearby_b_lat": "-8.2410",
+              "nearby_b_lon": "32.0718"
+            }
+          },
+          {
+            "id": "mabadaga",
+            "values": {
+              "community_id": "MBD-02",
+              "community_name": "Mabadaga",
+              "community_lat": "-8.3012",
+              "community_lon": "32.0945",
+              "district": "Chunya",
+              "population": "3800",
+              "households": "710",
+              "avg_household_size": "5.4",
+              "electrification_pct": "18",
+              "pct_hh_under_2usd_day": "62",
+              "market_day": "Thursday",
+              "hub_distance_km": "52",
+              "community_notes": "Target community for this campaign; feeder road access; Thursday livestock market",
+              "nearby_a": "Isangati",
+              "nearby_b": "Mbugani",
+              "market_lat": "-8.3001",
+              "market_lon": "32.0957",
+              "nearby_a_lat": "-8.3165",
+              "nearby_a_lon": "32.0741",
+              "nearby_b_lat": "-8.2863",
+              "nearby_b_lon": "32.1144"
+            }
+          },
+          {
+            "id": "makongolosi",
+            "values": {
+              "community_id": "MKG-03",
+              "community_name": "Makongolosi",
+              "community_lat": "-8.4015",
+              "community_lon": "32.1620",
+              "district": "Chunya",
+              "population": "5100",
+              "households": "940",
+              "avg_household_size": "5.4",
+              "electrification_pct": "18",
+              "pct_hh_under_2usd_day": "62",
+              "market_day": "Monday",
+              "hub_distance_km": "61",
+              "community_notes": "Target community for this campaign; mining-adjacent demand; Monday open market",
+              "nearby_a": "Matunduru",
+              "nearby_b": "Kapalala",
+              "market_lat": "-8.4004",
+              "market_lon": "32.1632",
+              "nearby_a_lat": "-8.4168",
+              "nearby_a_lon": "32.1416",
+              "nearby_b_lat": "-8.3866",
+              "nearby_b_lon": "32.1819"
+            }
+          },
+          {
+            "id": "galula",
+            "values": {
+              "community_id": "GAL-04",
+              "community_name": "Galula",
+              "community_lat": "-8.1920",
+              "community_lon": "31.9680",
+              "district": "Chunya",
+              "population": "3500",
+              "households": "650",
+              "avg_household_size": "5.4",
+              "electrification_pct": "18",
+              "pct_hh_under_2usd_day": "62",
+              "market_day": "Friday",
+              "hub_distance_km": "55",
+              "community_notes": "Target community for this campaign; farming belt; Friday grain market",
+              "nearby_a": "Mwambani",
+              "nearby_b": "Sangambi",
+              "market_lat": "-8.1909",
+              "market_lon": "31.9692",
+              "nearby_a_lat": "-8.2073",
+              "nearby_a_lon": "31.9476",
+              "nearby_b_lat": "-8.1771",
+              "nearby_b_lon": "31.9879"
+            }
+          },
+          {
+            "id": "iwalanje",
+            "values": {
+              "community_id": "IWL-06",
+              "community_name": "Iwalanje",
+              "community_lat": "-8.7625",
+              "community_lon": "33.1850",
+              "district": "Mbeya Rural",
+              "population": "4600",
+              "households": "860",
+              "avg_household_size": "5.4",
+              "electrification_pct": "18",
+              "pct_hh_under_2usd_day": "62",
+              "market_day": "Wednesday",
+              "hub_distance_km": "28",
+              "community_notes": "Target community for this campaign; closer to hub; Wednesday produce market",
+              "nearby_a": "Iduda",
+              "nearby_b": "Iyunga",
+              "market_lat": "-8.7614",
+              "market_lon": "33.1862",
+              "nearby_a_lat": "-8.7778",
+              "nearby_a_lon": "33.1646",
+              "nearby_b_lat": "-8.7476",
+              "nearby_b_lon": "33.2049"
+            }
+          },
+          {
+            "id": "utengule",
+            "values": {
+              "community_id": "UTG-07",
+              "community_name": "Utengule",
+              "community_lat": "-8.8410",
+              "community_lon": "33.3125",
+              "district": "Mbeya Rural",
+              "population": "3900",
+              "households": "720",
+              "avg_household_size": "5.4",
+              "electrification_pct": "18",
+              "pct_hh_under_2usd_day": "62",
+              "market_day": "Tuesday",
+              "hub_distance_km": "22",
+              "community_notes": "Target community for this campaign; peri-rural; Tuesday trading day",
+              "nearby_a": "Mbalizi",
+              "nearby_b": "Inyala",
+              "market_lat": "-8.8399",
+              "market_lon": "33.3137",
+              "nearby_a_lat": "-8.8563",
+              "nearby_a_lon": "33.2921",
+              "nearby_b_lat": "-8.8261",
+              "nearby_b_lon": "33.3324"
+            }
+          },
+          {
+            "id": "isuto",
+            "values": {
+              "community_id": "IST-08",
+              "community_name": "Isuto",
+              "community_lat": "-9.0850",
+              "community_lon": "33.5200",
+              "district": "Rungwe",
+              "population": "4400",
+              "households": "820",
+              "avg_household_size": "5.4",
+              "electrification_pct": "18",
+              "pct_hh_under_2usd_day": "62",
+              "market_day": "Sunday",
+              "hub_distance_km": "58",
+              "community_notes": "Target community for this campaign; highland villages; Sunday church-market overlap",
+              "nearby_a": "Kiwira",
+              "nearby_b": "Tukuyu outskirts",
+              "market_lat": "-9.0839",
+              "market_lon": "33.5212",
+              "nearby_a_lat": "-9.1003",
+              "nearby_a_lon": "33.4996",
+              "nearby_b_lat": "-9.0701",
+              "nearby_b_lon": "33.5399"
+            }
+          },
+          {
+            "id": "mapogoro",
+            "values": {
+              "community_id": "MPG-05",
+              "community_name": "Mapogoro",
+              "community_lat": "-8.5480",
+              "community_lon": "32.8800",
+              "district": "Mbarali",
+              "population": "4800",
+              "households": "900",
+              "avg_household_size": "5.4",
+              "electrification_pct": "18",
+              "pct_hh_under_2usd_day": "62",
+              "market_day": "Saturday",
+              "hub_distance_km": "72",
+              "community_notes": "Target community for this campaign; rice-growing area; busy Saturday market",
+              "nearby_a": "Rujewa",
+              "nearby_b": "Madibira",
+              "market_lat": "-8.5469",
+              "market_lon": "32.8812",
+              "nearby_a_lat": "-8.5633",
+              "nearby_a_lon": "32.8596",
+              "nearby_b_lat": "-8.5331",
+              "nearby_b_lon": "32.8999"
+            }
+          }
         ]
       },
       {
-        "path": "product_catalog.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep three rows: primary campaign SKU, one upsell kit, one accessory",
-          "Primary row must use primary_sku_code and primary_product_name; category portable_solar_lantern",
-          "Keep wholesale/retail in a similar price band so unit economics difficulty stays isomorphic"
-        ],
-        "sync_with": [
-          "community_profile.csv",
-          "labor_rates.csv",
-          "transport_costs.csv",
-          "territory_points.csv",
-          "sales_log_sample.csv",
-          "budget_template.csv"
+        "id": "product",
+        "options": [
+          {
+            "id": "sunking_pico",
+            "values": {
+              "primary_sku_code": "SK-PP-01",
+              "primary_product_name": "Sunking Pico Plus",
+              "wholesale_usd": "12.50",
+              "retail_usd": "18.00",
+              "warranty_months": "24",
+              "units_per_carton": "20",
+              "weight_kg": "0.35",
+              "primary_notes": "Primary campaign SKU; phone charging capable",
+              "upsell_sku_code": "SK-HM-02",
+              "upsell_product_name": "Sunking Home 60",
+              "upsell_wholesale_usd": "48.00",
+              "upsell_retail_usd": "72.00",
+              "upsell_warranty_months": "24",
+              "upsell_units_per_carton": "4",
+              "upsell_weight_kg": "2.10",
+              "upsell_notes": "Upsell only; not the campaign target",
+              "accessory_sku_code": "SK-BL-03",
+              "accessory_product_name": "Sunking Bulb Duo",
+              "accessory_wholesale_usd": "3.20",
+              "accessory_retail_usd": "5.00",
+              "accessory_warranty_months": "12",
+              "accessory_units_per_carton": "50",
+              "accessory_weight_kg": "0.15",
+              "accessory_notes": "Accessory attach; optional",
+              "amount_1x": "18.00",
+              "amount_2x": "36.00",
+              "amount_3x": "54.00",
+              "amount_5x": "90.00",
+              "amount_6x": "108.00",
+              "amount_8x": "144.00",
+              "amount_10x": "180.00",
+              "amount_mismatch": "40.00",
+              "amount_accessory_4x": "20.00",
+              "amount_upsell_1x": "72.00"
+            }
+          },
+          {
+            "id": "dlight_s300",
+            "values": {
+              "primary_sku_code": "DL-S300",
+              "primary_product_name": "d.light S300",
+              "wholesale_usd": "11.00",
+              "retail_usd": "16.50",
+              "warranty_months": "24",
+              "units_per_carton": "20",
+              "weight_kg": "0.35",
+              "primary_notes": "Primary campaign SKU; portable lantern with USB charge",
+              "upsell_sku_code": "DL-D1000",
+              "upsell_product_name": "d.light D1000",
+              "upsell_wholesale_usd": "45.00",
+              "upsell_retail_usd": "68.00",
+              "upsell_warranty_months": "24",
+              "upsell_units_per_carton": "4",
+              "upsell_weight_kg": "2.10",
+              "upsell_notes": "Upsell only; not the campaign target",
+              "accessory_sku_code": "DL-BULB",
+              "accessory_product_name": "d.light Spare Bulb Pack",
+              "accessory_wholesale_usd": "2.80",
+              "accessory_retail_usd": "4.50",
+              "accessory_warranty_months": "12",
+              "accessory_units_per_carton": "50",
+              "accessory_weight_kg": "0.15",
+              "accessory_notes": "Accessory attach; optional",
+              "amount_1x": "16.50",
+              "amount_2x": "33.00",
+              "amount_3x": "49.50",
+              "amount_5x": "82.50",
+              "amount_6x": "99.00",
+              "amount_8x": "132.00",
+              "amount_10x": "165.00",
+              "amount_mismatch": "37.00",
+              "amount_accessory_4x": "18.00",
+              "amount_upsell_1x": "68.00"
+            }
+          },
+          {
+            "id": "biolite_lantern",
+            "values": {
+              "primary_sku_code": "BL-PL-01",
+              "primary_product_name": "BioLite SolarLantern",
+              "wholesale_usd": "13.00",
+              "retail_usd": "19.50",
+              "warranty_months": "24",
+              "units_per_carton": "20",
+              "weight_kg": "0.35",
+              "primary_notes": "Primary campaign SKU; rugged lantern for field agents",
+              "upsell_sku_code": "BL-SHS-40",
+              "upsell_product_name": "BioLite SolarHome 40",
+              "upsell_wholesale_usd": "52.00",
+              "upsell_retail_usd": "78.00",
+              "upsell_warranty_months": "24",
+              "upsell_units_per_carton": "4",
+              "upsell_weight_kg": "2.10",
+              "upsell_notes": "Upsell only; not the campaign target",
+              "accessory_sku_code": "BL-CABLE",
+              "accessory_product_name": "BioLite Charge Cable Kit",
+              "accessory_wholesale_usd": "3.50",
+              "accessory_retail_usd": "5.50",
+              "accessory_warranty_months": "12",
+              "accessory_units_per_carton": "50",
+              "accessory_weight_kg": "0.15",
+              "accessory_notes": "Accessory attach; optional",
+              "amount_1x": "19.50",
+              "amount_2x": "39.00",
+              "amount_3x": "58.50",
+              "amount_5x": "97.50",
+              "amount_6x": "117.00",
+              "amount_8x": "156.00",
+              "amount_10x": "195.00",
+              "amount_mismatch": "43.00",
+              "amount_accessory_4x": "22.00",
+              "amount_upsell_1x": "78.00"
+            }
+          },
+          {
+            "id": "greenlight_p1",
+            "values": {
+              "primary_sku_code": "GL-P1",
+              "primary_product_name": "Greenlight Planet Pico",
+              "wholesale_usd": "10.50",
+              "retail_usd": "15.75",
+              "warranty_months": "24",
+              "units_per_carton": "20",
+              "weight_kg": "0.35",
+              "primary_notes": "Primary campaign SKU; entry lantern with phone charge",
+              "upsell_sku_code": "GL-SHS",
+              "upsell_product_name": "Greenlight Sun King Home",
+              "upsell_wholesale_usd": "46.00",
+              "upsell_retail_usd": "69.00",
+              "upsell_warranty_months": "24",
+              "upsell_units_per_carton": "4",
+              "upsell_weight_kg": "2.10",
+              "upsell_notes": "Upsell only; not the campaign target",
+              "accessory_sku_code": "GL-BULB2",
+              "accessory_product_name": "Greenlight Bulb Twin",
+              "accessory_wholesale_usd": "3.00",
+              "accessory_retail_usd": "4.75",
+              "accessory_warranty_months": "12",
+              "accessory_units_per_carton": "50",
+              "accessory_weight_kg": "0.15",
+              "accessory_notes": "Accessory attach; optional",
+              "amount_1x": "15.75",
+              "amount_2x": "31.50",
+              "amount_3x": "47.25",
+              "amount_5x": "78.75",
+              "amount_6x": "94.50",
+              "amount_8x": "126.00",
+              "amount_10x": "157.50",
+              "amount_mismatch": "35.50",
+              "amount_accessory_4x": "19.00",
+              "amount_upsell_1x": "69.00"
+            }
+          },
+          {
+            "id": "littledude_go",
+            "values": {
+              "primary_sku_code": "LD-GO",
+              "primary_product_name": "Little Dude Go",
+              "wholesale_usd": "14.00",
+              "retail_usd": "21.00",
+              "warranty_months": "24",
+              "units_per_carton": "20",
+              "weight_kg": "0.35",
+              "primary_notes": "Primary campaign SKU; bright portable lantern",
+              "upsell_sku_code": "LD-HOME",
+              "upsell_product_name": "Little Dude Home Kit",
+              "upsell_wholesale_usd": "50.00",
+              "upsell_retail_usd": "75.00",
+              "upsell_warranty_months": "24",
+              "upsell_units_per_carton": "4",
+              "upsell_weight_kg": "2.10",
+              "upsell_notes": "Upsell only; not the campaign target",
+              "accessory_sku_code": "LD-BULB",
+              "accessory_product_name": "Little Dude Bulb Pack",
+              "accessory_wholesale_usd": "3.40",
+              "accessory_retail_usd": "5.25",
+              "accessory_warranty_months": "12",
+              "accessory_units_per_carton": "50",
+              "accessory_weight_kg": "0.15",
+              "accessory_notes": "Accessory attach; optional",
+              "amount_1x": "21.00",
+              "amount_2x": "42.00",
+              "amount_3x": "63.00",
+              "amount_5x": "105.00",
+              "amount_6x": "126.00",
+              "amount_8x": "168.00",
+              "amount_10x": "210.00",
+              "amount_mismatch": "46.00",
+              "amount_accessory_4x": "21.00",
+              "amount_upsell_1x": "75.00"
+            }
+          },
+          {
+            "id": "omnivoltaic_ov",
+            "values": {
+              "primary_sku_code": "OV-L20",
+              "primary_product_name": "Omnivoltaic OV20",
+              "wholesale_usd": "12.00",
+              "retail_usd": "17.50",
+              "warranty_months": "24",
+              "units_per_carton": "20",
+              "weight_kg": "0.35",
+              "primary_notes": "Primary campaign SKU; durable last-mile lantern",
+              "upsell_sku_code": "OV-H60",
+              "upsell_product_name": "Omnivoltaic Home 60",
+              "upsell_wholesale_usd": "47.00",
+              "upsell_retail_usd": "70.00",
+              "upsell_warranty_months": "24",
+              "upsell_units_per_carton": "4",
+              "upsell_weight_kg": "2.10",
+              "upsell_notes": "Upsell only; not the campaign target",
+              "accessory_sku_code": "OV-BLB",
+              "accessory_product_name": "Omnivoltaic Bulb Duo",
+              "accessory_wholesale_usd": "3.10",
+              "accessory_retail_usd": "4.90",
+              "accessory_warranty_months": "12",
+              "accessory_units_per_carton": "50",
+              "accessory_weight_kg": "0.15",
+              "accessory_notes": "Accessory attach; optional",
+              "amount_1x": "17.50",
+              "amount_2x": "35.00",
+              "amount_3x": "52.50",
+              "amount_5x": "87.50",
+              "amount_6x": "105.00",
+              "amount_8x": "140.00",
+              "amount_10x": "175.00",
+              "amount_mismatch": "39.00",
+              "amount_accessory_4x": "19.60",
+              "amount_upsell_1x": "70.00"
+            }
+          }
         ]
       },
       {
-        "path": "labor_rates.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep the same role rows and column schema",
-          "Resample typical rates/commissions within plausible East-Africa field bands; notes may mention Mbeya hub",
-          "Do not add or remove roles"
-        ],
-        "sync_with": [
-          "community_profile.csv",
-          "product_catalog.csv",
-          "transport_costs.csv",
-          "territory_points.csv",
-          "sales_log_sample.csv",
-          "budget_template.csv"
+        "id": "unit_target",
+        "options": [
+          {
+            "id": "400",
+            "values": {
+              "unit_target": "400"
+            }
+          },
+          {
+            "id": "450",
+            "values": {
+              "unit_target": "450"
+            }
+          },
+          {
+            "id": "500",
+            "values": {
+              "unit_target": "500"
+            }
+          },
+          {
+            "id": "600",
+            "values": {
+              "unit_target": "600"
+            }
+          },
+          {
+            "id": "700",
+            "values": {
+              "unit_target": "700"
+            }
+          }
         ]
       },
       {
-        "path": "transport_costs.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep four route rows and the same column schema",
-          "Align to/from labels with Mbeya hub and the new community_name; costs/capacity in a similar band",
-          "Preserve a trunk leg, last-mile leg, optional direct hire, and in-community restock pattern"
-        ],
-        "sync_with": [
-          "community_profile.csv",
-          "product_catalog.csv",
-          "labor_rates.csv",
-          "territory_points.csv",
-          "sales_log_sample.csv",
-          "budget_template.csv"
-        ]
-      },
-      {
-        "path": "territory_points.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep six points and the same column schema",
-          "Target community point uses community_name, community_lat, community_lon",
-          "Nearby villages cluster around the new community; Mbeya hub warehouse coordinates stay in Mbeya city"
-        ],
-        "sync_with": [
-          "community_profile.csv",
-          "product_catalog.csv",
-          "labor_rates.csv",
-          "transport_costs.csv",
-          "sales_log_sample.csv",
-          "budget_template.csv"
-        ]
-      },
-      {
-        "path": "sales_log_sample.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep the same columns and roughly 10–14 sample transactions",
-          "Use community_name and primary_sku_code; include a mix of normal sales and fraud-flag patterns (high_cash_volume, price_mismatch, phantom_risk, etc.)",
-          "Amounts should be coherent with product_catalog retail prices"
-        ],
-        "sync_with": [
-          "community_profile.csv",
-          "product_catalog.csv",
-          "labor_rates.csv",
-          "transport_costs.csv",
-          "territory_points.csv",
-          "budget_template.csv"
-        ]
-      },
-      {
-        "path": "budget_template.csv",
-        "mode": "resample",
-        "constraints": [
-          "Keep the same line_id rows and column schema",
-          "campaign_budget_cap planned_usd must equal budget_usd; notes should reference primary product and unit_target",
-          "Do not invent extra budget lines"
-        ],
-        "sync_with": [
-          "community_profile.csv",
-          "product_catalog.csv",
-          "labor_rates.csv",
-          "transport_costs.csv",
-          "territory_points.csv",
-          "sales_log_sample.csv"
+        "id": "budget_usd",
+        "options": [
+          {
+            "id": "8000",
+            "values": {
+              "budget_usd": "8000"
+            }
+          },
+          {
+            "id": "9000",
+            "values": {
+              "budget_usd": "9000"
+            }
+          },
+          {
+            "id": "10000",
+            "values": {
+              "budget_usd": "10000"
+            }
+          },
+          {
+            "id": "12000",
+            "values": {
+              "budget_usd": "12000"
+            }
+          },
+          {
+            "id": "14000",
+            "values": {
+              "budget_usd": "14000"
+            }
+          }
         ]
       }
-    ]
+    ],
+    "constraints": [
+      {
+        "type": "ratio_range",
+        "numerator": "budget_usd",
+        "denominator": "unit_target",
+        "min": 15,
+        "max": 28
+      }
+    ],
+    "apply": {
+      "candidate_brief": "## Sell {{unit_target}} {{primary_product_name}} units in {{community_name}}\n\nYou are a sales manager covering the Mbeya region, Tanzania. You have a ${{budget_usd}} budget to sell {{unit_target}} units of the {{primary_product_name}} ({{primary_sku_code}}) in six months in the {{community_name}} community (GPS: {{community_lat}}, {{community_lon}}). Starter CSVs on the desktop give community, product, transport, labor, sample sales, and map context — use them. Write a thorough plan covering as many operating aspects as you can; the more complete and spoken-through your reasoning, the stronger the result.\n\n### Outcomes\n- Produce a written operating plan for hitting the unit target within budget and timeline.\n- Address hiring (how many people, pay, training), logistics into the community, how units/connections are sold, fraud mitigation, and how sales managers/agents report back.\n- Ground the plan in the provided CSVs and, where useful, spreadsheets or QGIS on the desktop.\n\n### Constraints\n- Stay within the stated budget (${{budget_usd}}), unit target ({{unit_target}}), product ({{primary_product_name}}), community ({{community_name}}), and six-month window unless you explicitly justify a trade-off.\n- Do not invent a different product line or geography as the primary plan.\n- Prefer concrete numbers (headcount, pay, trips, stock) over slogans; show how they fit the budget.\n- Talk through your reasoning in depth — sparse bullet lists without justification are weak.\n\n### Deliverables\nA clear written plan (document or long-form notes) that a reviewer can follow: team design, economics, logistics, selling approach, fraud controls, and reporting tools. Optionally include spreadsheet working files or map screenshots that support the numbers — not required if the written plan is complete and consistent with the data.\n",
+      "files": {
+        "community_profile.csv": "community_id,community_name,region,district,country,population,households,avg_household_size,electrification_pct,pct_hh_under_2usd_day,primary_livelihood,market_day,nearest_hub,hub_distance_km,notes\n{{community_id}},{{community_name}},Mbeya,{{district}},Tanzania,{{population}},{{households}},{{avg_household_size}},{{electrification_pct}},{{pct_hh_under_2usd_day}},smallholder_farming,{{market_day}},Mbeya city,{{hub_distance_km}},{{community_notes}}\n",
+        "product_catalog.csv": "sku_code,product_name,category,wholesale_usd,suggested_retail_usd,warranty_months,units_per_carton,weight_kg,notes\n{{primary_sku_code}},{{primary_product_name}},portable_solar_lantern,{{wholesale_usd}},{{retail_usd}},{{warranty_months}},{{units_per_carton}},{{weight_kg}},{{primary_notes}}\n{{upsell_sku_code}},{{upsell_product_name}},solar_home_kit,{{upsell_wholesale_usd}},{{upsell_retail_usd}},{{upsell_warranty_months}},{{upsell_units_per_carton}},{{upsell_weight_kg}},{{upsell_notes}}\n{{accessory_sku_code}},{{accessory_product_name}},replacement_bulb_pack,{{accessory_wholesale_usd}},{{accessory_retail_usd}},{{accessory_warranty_months}},{{accessory_units_per_carton}},{{accessory_weight_kg}},{{accessory_notes}}\n",
+        "labor_rates.csv": "role,pay_type,typical_monthly_usd,typical_daily_usd,commission_per_unit_usd,training_days,max_span_of_control,notes\nvillage_sales_agent,hybrid,0,3.50,1.00,3,1,Base day rate on active days + commission; many are part-time\nteam_lead,hybrid,90,0,0.25,5,8,Oversees agents; small override on team units\nwarehouse_clerk_hub,salary,110,0,0,2,1,Mbeya hub stock and dispatch\ncasual_porter,daily,0,4.00,0,0,1,Loading days only\nsales_manager_self,salary,0,0,0,0,3,\"Your role is in-scope budget-wise only if you allocate a stipend; otherwise treat as given\"\n",
+        "transport_costs.csv": "route_id,from_location,to_location,mode,cost_per_trip_usd,max_units_per_trip,one_way_hours,runs_per_week_available,notes\nTR-01,Mbeya hub warehouse,Igoma junction,pickup_truck,55,400,1.5,5,Main trunk leg; book 48h ahead in rainy season\nTR-02,Igoma junction,{{community_name}},moto_with_trailer,18,60,1.2,10,Last-mile; two trips may be needed per truck unload\nTR-03,Mbeya hub warehouse,{{community_name}},hired_pickup_direct,85,350,2.5,3,Direct hire; useful for launch stock dump\nTR-04,{{community_name}},nearby villages (avg),boda_boda,4,15,0.5,20,Agent restock within territory\n",
+        "territory_points.csv": "point_id,name,place_type,lat,lon,notes\nP-01,{{community_name}} centre,community,{{community_lat}},{{community_lon}},Campaign target community\nP-02,{{community_name}} {{market_day}} market,market,{{market_lat}},{{market_lon}},Primary weekly market\nP-03,Igoma junction,transit_hub,-8.3125,32.1204,Transfer point from Mbeya road\nP-04,{{nearby_a}},community,{{nearby_a_lat}},{{nearby_a_lon}},Nearby village; optional expansion\nP-05,{{nearby_b}},community,{{nearby_b_lat}},{{nearby_b_lon}},Nearby village along feeder road\nP-06,Mbeya hub warehouse,warehouse,-8.9095,33.4608,Regional stock point\n",
+        "sales_log_sample.csv": "txn_id,txn_date,agent_id,community_name,sku_code,qty,payment_method,amount_usd,stock_out_before,flag,notes\nT-1001,2025-11-03,AG-12,{{community_name}},{{primary_sku_code}},2,mobile_money,{{amount_2x}},no,,Normal market-day sale\nT-1002,2025-11-03,AG-12,{{community_name}},{{primary_sku_code}},1,cash,{{amount_1x}},no,,\nT-1003,2025-11-04,AG-07,{{community_name}},{{primary_sku_code}},8,cash,{{amount_8x}},no,high_cash_volume,Unusually large cash bundle for this agent\nT-1004,2025-11-05,AG-07,{{community_name}},{{primary_sku_code}},6,cash,{{amount_6x}},no,high_cash_volume,Second large cash day in a row\nT-1005,2025-11-06,AG-19,Igoma,{{primary_sku_code}},1,mobile_money,{{amount_1x}},no,,\nT-1006,2025-11-07,AG-03,{{community_name}},{{primary_sku_code}},3,mobile_money,{{amount_mismatch}},yes,price_mismatch,Amount below 3x retail; possible under-ring\nT-1007,2025-11-08,AG-12,{{community_name}},{{accessory_sku_code}},4,cash,{{amount_accessory_4x}},no,,Accessory attach\nT-1008,2025-11-10,AG-21,{{community_name}},{{primary_sku_code}},5,credit_promise,0.00,no,uncollected_credit,No collection recorded after 14 days\nT-1009,2025-11-12,AG-07,{{community_name}},{{primary_sku_code}},10,cash,{{amount_10x}},no,phantom_risk,Qty not matched in hub dispatch that week\nT-1010,2025-11-14,AG-19,{{nearby_a}},{{primary_sku_code}},2,mobile_money,{{amount_2x}},no,,\nT-1011,2025-11-15,AG-03,{{community_name}},{{primary_sku_code}},1,mobile_money,{{amount_1x}},no,,\nT-1012,2025-11-17,AG-12,{{community_name}},{{upsell_sku_code}},1,mobile_money,{{amount_upsell_1x}},no,,Upsell; ok if stocked\n",
+        "budget_template.csv": "line_id,category,subcategory,planned_usd,notes\nB-01,inventory,{{primary_product_name}} wholesale,,Fill using product_catalog wholesale x unit_target (and buffer)\nB-02,inventory,accessories buffer,,Optional bulbs/kits; keep small\nB-03,transport,hub_to_community trips,,Use transport_costs capacity and trip counts\nB-04,transport,in_community restock,,Boda/agent restock\nB-05,labor,village_sales_agents,,Days active x rate + commissions\nB-06,labor,team_lead,,Salary and/or override\nB-07,labor,hub_clerk_or_porters,,Only if needed for dispatch peaks\nB-08,training,agent_onboarding,,Training days x people x daily cost\nB-09,working_capital,cash_float,,Agent floats; fraud-sensitive\nB-10,misc,marketing_demos_airtime,,Keep modest\nB-11,contingency,reserve,,Recommend leaving a small reserve inside the {{budget_usd}} budget\nB-12,total,campaign_budget_cap,{{budget_usd}},Do not exceed budget_usd without explicit justification; unit_target={{unit_target}}\n"
+      }
+    }
   }
 }
