@@ -64,9 +64,14 @@
       "description": "YES/NO: Does the deliverable correctly identify saturated vapor at the stated Tev (useful superheat 0 K), compressor inlet with the stated suction superheat at evaporator pressure, saturated liquid at the stated Tcond, and isenthalpic expansion (h4 = h3)? Answer YES only if all four state/expansion conventions are visible and consistent with the instance parameters. Collapsed useful/suction superheat into one state, wrong condenser phase, or non-isenthalpic expansion = NO. YES = full points; NO or unclear = 0."
     },
     {
-      "name": "EER and COP calculation",
-      "weight": 30,
-      "description": "YES/NO: Are refrigerating effect and compressor work enthalpy-coherent, with the stated η_comp applied as W = W_isentropic / η_comp (not inverted); cooling EER reported as q_evap / w_comp (W/W); and heat-pump COP reported as q_cond / w_comp (or equivalently EER + 1) consistent with energy balance? Answer YES only if q/w, η_comp application, EER, and COP are all present and consistent in SI W/W. Inverted η_comp, missing EER, missing COP, or incoherent energy balances = NO. US BTU/(W·h) conversion is not required. YES = full points; NO or unclear = 0."
+      "name": "Cooling EER",
+      "weight": 15,
+      "description": "YES/NO: Are refrigerating effect and compressor work enthalpy-coherent, with the stated η_comp applied as W = W_isentropic / η_comp (not inverted), and cooling EER reported as q_evap / w_comp in SI W/W? Answer YES only if q_evap, w_comp, η_comp application, and EER are all present and consistent. Inverted η_comp, missing EER, or incoherent energy balances = NO. US BTU/(W·h) conversion is not required. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Heat-pump COP",
+      "weight": 15,
+      "description": "YES/NO: Is heat-pump COP reported as q_cond / w_comp (or equivalently EER + 1) in SI W/W and consistent with energy balance (q_cond ≈ q_evap + w_comp)? Answer YES only if COP is present and coherent with the cycle energy balance. Missing COP or incoherent q_cond / w_comp = NO. US BTU/(W·h) conversion is not required. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Carnot reference cycle",
