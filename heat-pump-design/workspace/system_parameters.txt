@@ -1,0 +1,25 @@
+R1233zd(E) industrial high-temperature heat pump — design data
+================================================================
+
+Evaporating temperature (Tev):     +35 °C
+Useful superheat:                    6 K
+Suction superheat:                  6 K
+Condensing temperature (Tcond):    +100 °C
+Refrigerant:                       R1233zd(E)
+Compression efficiency (η_comp):   0.76
+
+External boundaries (Carnot reference):
+  Waste-heat source water (T_L):   40 °C
+  Process delivery water (T_H):    95 °C
+
+Notes:
+  - Useful superheat 6 K means the evaporator outlet is 6 K above
+    saturation at evaporator pressure.
+  - Suction superheat 6 K means the compressor inlet is 6 K above
+    saturation at evaporator pressure (compressor inlet temperature = +41 °C).
+  - When useful SH = suction SH, evaporator outlet and compressor inlet coincide.
+  - Obtain R1233zd(E) thermodynamic properties from any source you choose
+    (tables, CoolProp/REFPROP, online tools, etc.) and document the source.
+  - Deliverable must include heating COP in W/W: COP = q_cond / w_comp.
+    Cooling EER is not required. Compare to reverse Carnot COP using T_L and T_H
+    (external water temperatures), not Tev/Tcond.

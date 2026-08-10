@@ -1,0 +1,29 @@
+R744 transcritical CO2 chiller — vineyard wine storage design data
+===================================================================
+
+Evaporating temperature (Tev):       −2 °C
+Useful superheat:                      5 K
+Suction superheat:                    5 K
+Gas-cooler exit temperature:         +35 °C
+High-side pressure (gas cooler):     9.0 MPa
+Refrigerant:                         R744 (CO2)
+Compression efficiency (η_comp):     0.70
+Volumetric efficiency (η_vol):       0.85
+Design cooling load (Q_design):      18 kW
+
+External boundaries (Carnot reference):
+  Cellar air (T_L):                  13 °C
+  Outdoor ambient (T_H):             32 °C
+
+Notes:
+  - Useful / suction superheat 5 K means the compressor inlet is
+    5 K above saturation at evaporator pressure
+    (compressor inlet temperature = +3 °C).
+  - When useful SH = suction SH, evaporator outlet and compressor inlet coincide.
+  - Heat rejection is via a gas cooler at controlled high-side pressure
+    9.0 MPa — not a subcritical condenser.
+  - Obtain R744 thermodynamic properties from any source you choose
+    (tables, CoolProp/REFPROP, online tools, etc.) and document the source.
+  - Deliverable must include cooling EER = q_evap / w_comp (W/W),
+    Carnot comparison using T_L / T_H, mass flow ṁ = Q_design / q_evap,
+    and displacement V̇_disp = ṁ · v1 / η_vol.
