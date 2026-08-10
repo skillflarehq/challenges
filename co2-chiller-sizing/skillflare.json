@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "title": "Size a transcritical CO2 chiller for vineyard wine storage",
+  "slug": "co2-chiller-sizing-wine-r744",
+  "version": 1,
+  "image": "refrigeration",
+  "duration_minutes": 45,
+  "skills_assessed": [
+    "Transcritical R744 vapor-compression cycle analysis",
+    "Gas-cooler state definition and refrigerant property lookup",
+    "Cooling EER calculation with non-ideal compression",
+    "Chiller capacity sizing (mass flow and compressor displacement) for a design cooling load",
+    "Comparison to an inverse Carnot refrigerator from external cellar and ambient temperatures"
+  ],
+  "role": {
+    "title": "Mechanical / refrigeration engineer (winery systems)",
+    "seniority": "Junior to mid",
+    "company_context": "Natural-refrigerant HVAC/R contractor serving vineyards and wineries. Engineers size single-stage transcritical CO2 (R744) chillers for wine-cellar and tank-room cooling in warm climates where ambient often exceeds CO2’s critical temperature, document cooling EER in SI W/W, and translate a given design cooling load into refrigerant mass flow and compressor displacement for equipment selection.",
+    "day_to_day": [
+      "Build thermodynamic state-point tables for transcritical R744 cycles including gas-cooler exit at controlled high-side pressure",
+      "Look up CO2 properties from tables, software, or online tools and document the source",
+      "Calculate refrigerating effect, compressor work, and cooling EER including compression efficiency",
+      "Size refrigerant mass flow and compressor displacement for a stated cellar design cooling load",
+      "Compare cycle performance to an inverse Carnot refrigerator based on cellar air and outdoor ambient temperatures",
+      "Write clear calculation notes a senior engineer can review without guessing assumptions"
+    ],
+    "required_skills": [
+      "Can define evaporator, compressor, gas-cooler exit, and expansion states for a single-stage transcritical CO2 cycle",
+      "Comfortable reading R744 thermodynamic properties from tables or property software (including supercritical gas-cooler states)",
+      "Can apply isentropic and actual compression work with a given compression efficiency",
+      "Can size mass flow ṁ = Q_design / q_evap and displacement from suction specific volume and volumetric efficiency",
+      "Understands cooling EER (q_evap / w_comp, W/W) and the inverse Carnot refrigerator benchmark from external temperatures"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with CoolProp, REFPROP, or manufacturer CO2 property software",
+      "Experience with p-h diagrams in the transcritical region and high-side pressure optimization",
+      "Prior wine-cellar, cold-room, or commercial CO2 refrigeration design work"
+    ],
+    "constraints": [
+      "Assessment is a thermodynamics calculation and capacity-sizing work sample — not building production software",
+      "Design cooling load is given; do not require a free-form building heat-gain study",
+      "Candidates may use any tools they like for refrigerant properties and arithmetic",
+      "Do not require paid licensed software beyond what is freely available on the desktop or online",
+      "Starter files on the desktop are shared scenery (parameters and a blank calculation template), not a solved answer"
+    ]
+  },
+  "problem_statement": {
+    "title": "Calculate EER and size a transcritical R744 chiller for wine storage",
+    "summary": "You are sizing a single-stage transcritical carbon dioxide (R744) chiller for a vineyard wine cellar. Peak summer ambient exceeds CO2’s critical temperature, so heat rejection is through a gas cooler at a controlled high-side pressure rather than a conventional condenser. Design data are fixed below. Produce a clear calculation of cooling EER (q_evap / w_comp, W/W), compare it to an inverse Carnot refrigerator based on cellar air and outdoor ambient temperatures, then size the refrigerant mass flow and compressor displacement needed for the stated design cooling load. You are free to use any tools you like (spreadsheets, calculators, CoolProp/REFPROP, ASHRAE or manufacturer tables, online property tools, etc.) to obtain R744 properties — document which source you used.",
+    "outcomes": [
+      "Build a state-point table covering at least evaporator outlet / compressor inlet, isentropic and actual discharge at the stated high-side pressure, gas-cooler exit, and expansion-valve inlet.",
+      "Calculate refrigerating effect, compressor work (using the given compression efficiency), and cooling EER (q_evap / w_comp) in W/W.",
+      "Calculate the EER of the inverse Carnot refrigerator from the stated cellar and ambient temperatures, and the efficiency of the actual cycle relative to that Carnot EER.",
+      "Size refrigerant mass flow ṁ = Q_design / q_evap and compressor displacement V̇_disp = ṁ · v1 / η_vol for the stated design cooling load and volumetric efficiency."
+    ],
+    "constraints": [
+      "Use the fixed design data: Tev = −2 °C; suction superheat = 5 K; useful superheat = 5 K; gas-cooler exit = +35 °C; high-side pressure = 9.0 MPa; refrigerant R744; compression efficiency η_comp = 0.70; volumetric efficiency η_vol = 0.85; design cooling load Q_design = 18 kW.",
+      "Interpret useful superheat 5 K and suction superheat 5 K as compressor inlet 5 K above saturation at evaporator pressure (here useful SH = suction SH, so evaporator outlet and compressor inlet coincide at +3 °C).",
+      "Treat heat rejection as a gas cooler at the stated high-side pressure — not as condensation at a saturation temperature. High-side pressure is an independent design input.",
+      "For the Carnot reference, use external temperatures: T_L = cellar air = 13 °C and T_H = outdoor ambient = 32 °C. Do not use Tev or gas-cooler exit temperature as the Carnot boundaries.",
+      "Report cooling EER = q_evap / w_comp in SI W/W. Heating COP is not required.",
+      "State your assumptions and the property data source. Prefer concrete numbers and a readable state table over slogans."
+    ],
+    "deliverables": "A written calculation (document, notes, or spreadsheet) that a reviewer can follow: state-point table with enthalpies (and specific volume at compressor inlet), energy balances for q_evap and w_comp, cooling EER, Carnot EER, η_Carnot = EER / EER_Carnot, refrigerant mass flow ṁ, and compressor displacement V̇_disp. Optionally attach working files from property software — not required if the written calculation is complete and consistent."
+  },
+  "rubric": [
+    {
+      "name": "Transcritical state-point analysis",
+      "weight": 25,
+      "description": "YES/NO: Does the deliverable correctly identify compressor inlet with the stated suction/useful superheat at evaporator pressure, compression to the stated high-side pressure (not a saturation condenser pressure), gas-cooler exit at the stated T and P, and isenthalpic expansion (h4 = h3)? Answer YES only if all four conventions are visible and consistent with the instance parameters. Treating the high side as a subcritical condenser at ambient, wrong gas-cooler state, or non-isenthalpic expansion = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Cooling EER",
+      "weight": 20,
+      "description": "YES/NO: Are refrigerating effect and compressor work enthalpy-coherent, with the stated η_comp applied as W = W_isentropic / η_comp (not inverted), and cooling EER reported as q_evap / w_comp in SI W/W? Answer YES only if q_evap, w_comp, η_comp application, and EER are all present and consistent. Inverted η_comp, missing EER, or incoherent energy balances = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Capacity sizing",
+      "weight": 20,
+      "description": "YES/NO: Is refrigerant mass flow computed as ṁ = Q_design / q_evap using the instance design load, and is compressor displacement computed as V̇_disp = ṁ · v1 / η_vol with suction specific volume and the stated volumetric efficiency? Answer YES only if both ṁ and V̇_disp are present and coherent with the candidate’s q_evap and v1. Missing sizing, wrong formula (e.g. using q_cond), or ignoring η_vol = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Carnot / second-law reference",
+      "weight": 20,
+      "description": "YES/NO: Does the deliverable use the stated external cellar and ambient temperatures as T_L and T_H, apply EER_Carnot = T_L / (T_H − T_L) with absolute temperatures, and compute η_Carnot = EER / EER_Carnot consistently? Answer YES only if all three are correct for the instance external temps. Using Tev/gas-cooler exit as Carnot boundaries, °C instead of kelvin, heat-engine Carnot, or missing relative efficiency = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Assumptions and data sourcing",
+      "weight": 5,
+      "description": "YES/NO: Does the deliverable state the refrigerant property source and visible cycle assumptions (e.g. negligible pressure drops, isenthalpic throttling, gas cooler at controlled high-side pressure)? Answer YES only if both a property source and key assumptions are explicit. Numbers with no source and no stated assumptions = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverable",
+      "weight": 10,
+      "description": "YES/NO: Is there a readable state table and final numbers a reviewer can follow without guessing intermediate steps or units? Answer YES if the calculation path is auditable end-to-end. Opaque scrap numbers or missing table/finals that force guessing = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (written transcritical R744 calculation with cooling EER, external Carnot comparison, and capacity sizing for a given Q_design)",
+      "Keep refrigerant R744 for all instances (truth pack is skeleton-scoped; do not swap refrigerants)",
+      "Keep single-stage transcritical architecture with gas cooler (do not convert instances to subcritical cascade)",
+      "Keep isomorphic difficulty via vetted warm-climate bundles (high-side pressure above critical, gas-cooler exit above ambient approach)",
+      "Do not turn the challenge into software engineering, containerization, or a free-form building heat-gain study"
+    ],
+    "factors": [
+      {
+        "id": "cycle",
+        "options": [
+          {
+            "id": "tev_m2_pgc_9_tgc_35_sh_5",
+            "values": {
+              "tev_c": "-2",
+              "tev_display": "−2 °C",
+              "useful_sh_k": "5",
+              "suction_sh_k": "5",
+              "compressor_inlet_c": "3",
+              "compressor_inlet_display": "+3 °C",
+              "p_gc_mpa": "9.0",
+              "p_gc_display": "9.0 MPa",
+              "t_gc_exit_c": "35",
+              "t_gc_exit_display": "+35 °C",
+              "t_cellar_c": "13",
+              "t_cellar_display": "13 °C",
+              "t_ambient_c": "32",
+              "t_ambient_display": "32 °C",
+              "eta_vol": "0.85"
+            }
+          },
+          {
+            "id": "tev_m4_pgc_9_tgc_36_sh_5",
+            "values": {
+              "tev_c": "-4",
+              "tev_display": "−4 °C",
+              "useful_sh_k": "5",
+              "suction_sh_k": "5",
+              "compressor_inlet_c": "1",
+              "compressor_inlet_display": "+1 °C",
+              "p_gc_mpa": "9.0",
+              "p_gc_display": "9.0 MPa",
+              "t_gc_exit_c": "36",
+              "t_gc_exit_display": "+36 °C",
+              "t_cellar_c": "12",
+              "t_cellar_display": "12 °C",
+              "t_ambient_c": "33",
+              "t_ambient_display": "33 °C",
+              "eta_vol": "0.85"
+            }
+          },
+          {
+            "id": "tev_0_pgc_95_tgc_38_sh_5",
+            "values": {
+              "tev_c": "0",
+              "tev_display": "0 °C",
+              "useful_sh_k": "5",
+              "suction_sh_k": "5",
+              "compressor_inlet_c": "5",
+              "compressor_inlet_display": "+5 °C",
+              "p_gc_mpa": "9.5",
+              "p_gc_display": "9.5 MPa",
+              "t_gc_exit_c": "38",
+              "t_gc_exit_display": "+38 °C",
+              "t_cellar_c": "14",
+              "t_cellar_display": "14 °C",
+              "t_ambient_c": "35",
+              "t_ambient_display": "35 °C",
+              "eta_vol": "0.85"
+            }
+          },
+          {
+            "id": "tev_m2_pgc_85_tgc_34_sh_4",
+            "values": {
+              "tev_c": "-2",
+              "tev_display": "−2 °C",
+              "useful_sh_k": "4",
+              "suction_sh_k": "4",
+              "compressor_inlet_c": "2",
+              "compressor_inlet_display": "+2 °C",
+              "p_gc_mpa": "8.5",
+              "p_gc_display": "8.5 MPa",
+              "t_gc_exit_c": "34",
+              "t_gc_exit_display": "+34 °C",
+              "t_cellar_c": "13",
+              "t_cellar_display": "13 °C",
+              "t_ambient_c": "30",
+              "t_ambient_display": "30 °C",
+              "eta_vol": "0.85"
+            }
+          },
+          {
+            "id": "tev_m5_pgc_10_tgc_37_sh_6",
+            "values": {
+              "tev_c": "-5",
+              "tev_display": "−5 °C",
+              "useful_sh_k": "6",
+              "suction_sh_k": "6",
+              "compressor_inlet_c": "1",
+              "compressor_inlet_display": "+1 °C",
+              "p_gc_mpa": "10.0",
+              "p_gc_display": "10.0 MPa",
+              "t_gc_exit_c": "37",
+              "t_gc_exit_display": "+37 °C",
+              "t_cellar_c": "12",
+              "t_cellar_display": "12 °C",
+              "t_ambient_c": "34",
+              "t_ambient_display": "34 °C",
+              "eta_vol": "0.85"
+            }
+          },
+          {
+            "id": "tev_m1_pgc_9_tgc_35_sh_5",
+            "values": {
+              "tev_c": "-1",
+              "tev_display": "−1 °C",
+              "useful_sh_k": "5",
+              "suction_sh_k": "5",
+              "compressor_inlet_c": "4",
+              "compressor_inlet_display": "+4 °C",
+              "p_gc_mpa": "9.0",
+              "p_gc_display": "9.0 MPa",
+              "t_gc_exit_c": "35",
+              "t_gc_exit_display": "+35 °C",
+              "t_cellar_c": "15",
+              "t_cellar_display": "15 °C",
+              "t_ambient_c": "32",
+              "t_ambient_display": "32 °C",
+              "eta_vol": "0.85"
+            }
+          }
+        ]
+      },
+      {
+        "id": "eta_comp",
+        "options": [
+          {
+            "id": "0_65",
+            "values": {
+              "eta_comp": "0.65"
+            }
+          },
+          {
+            "id": "0_70",
+            "values": {
+              "eta_comp": "0.70"
+            }
+          },
+          {
+            "id": "0_75",
+            "values": {
+              "eta_comp": "0.75"
+            }
+          }
+        ]
+      },
+      {
+        "id": "load",
+        "options": [
+          {
+            "id": "12_kw",
+            "values": {
+              "q_design_kw": "12",
+              "q_design_display": "12 kW"
+            }
+          },
+          {
+            "id": "18_kw",
+            "values": {
+              "q_design_kw": "18",
+              "q_design_display": "18 kW"
+            }
+          },
+          {
+            "id": "25_kw",
+            "values": {
+              "q_design_kw": "25",
+              "q_design_display": "25 kW"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Calculate EER and size a transcritical R744 chiller for wine storage\n\nYou are sizing a single-stage transcritical carbon dioxide (R744) chiller for a vineyard wine cellar. Peak summer ambient exceeds CO2’s critical temperature, so heat rejection is through a gas cooler at a controlled high-side pressure rather than a conventional condenser. Design data are fixed below. Produce a clear calculation of cooling EER (q_evap / w_comp, W/W), compare it to an inverse Carnot refrigerator based on cellar air and outdoor ambient temperatures, then size the refrigerant mass flow and compressor displacement needed for the stated design cooling load. You are free to use any tools you like (spreadsheets, calculators, CoolProp/REFPROP, ASHRAE or manufacturer tables, online property tools, etc.) to obtain R744 properties — document which source you used.\n\n### Outcomes\n- Build a state-point table covering at least evaporator outlet / compressor inlet, isentropic and actual discharge at the stated high-side pressure, gas-cooler exit, and expansion-valve inlet.\n- Calculate refrigerating effect, compressor work (using the given compression efficiency), and cooling EER (q_evap / w_comp) in W/W.\n- Calculate the EER of the inverse Carnot refrigerator from the stated cellar and ambient temperatures, and the efficiency of the actual cycle relative to that Carnot EER.\n- Size refrigerant mass flow ṁ = Q_design / q_evap and compressor displacement V̇_disp = ṁ · v1 / η_vol for the stated design cooling load and volumetric efficiency.\n\n### Constraints\n- Use the fixed design data: Tev = {{tev_display}}; suction superheat = {{suction_sh_k}} K; useful superheat = {{useful_sh_k}} K; gas-cooler exit = {{t_gc_exit_display}}; high-side pressure = {{p_gc_display}}; refrigerant R744; compression efficiency η_comp = {{eta_comp}}; volumetric efficiency η_vol = {{eta_vol}}; design cooling load Q_design = {{q_design_display}}.\n- Interpret useful superheat {{useful_sh_k}} K and suction superheat {{suction_sh_k}} K as compressor inlet {{suction_sh_k}} K above saturation at evaporator pressure (compressor inlet temperature = {{compressor_inlet_display}}). When useful SH = suction SH, evaporator outlet and compressor inlet coincide.\n- Treat heat rejection as a gas cooler at the stated high-side pressure — not as condensation at a saturation temperature. High-side pressure is an independent design input.\n- For the Carnot reference, use external temperatures: T_L = cellar air = {{t_cellar_display}} and T_H = outdoor ambient = {{t_ambient_display}}. Do not use Tev or gas-cooler exit temperature as the Carnot boundaries.\n- Report cooling EER = q_evap / w_comp in SI W/W. Heating COP is not required.\n- State your assumptions and the property data source. Prefer concrete numbers and a readable state table over slogans.\n\n### Deliverables\nA written calculation (document, notes, or spreadsheet) that a reviewer can follow: state-point table with enthalpies (and specific volume at compressor inlet), energy balances for q_evap and w_comp, cooling EER, Carnot EER, η_Carnot = EER / EER_Carnot, refrigerant mass flow ṁ, and compressor displacement V̇_disp. Optionally attach working files from property software — not required if the written calculation is complete and consistent.\n",
+      "files": {
+        "system_parameters.txt": "R744 transcritical CO2 chiller — vineyard wine storage design data\n===================================================================\n\nEvaporating temperature (Tev):       {{tev_display}}\nUseful superheat:                      {{useful_sh_k}} K\nSuction superheat:                    {{suction_sh_k}} K\nGas-cooler exit temperature:         {{t_gc_exit_display}}\nHigh-side pressure (gas cooler):     {{p_gc_display}}\nRefrigerant:                         R744 (CO2)\nCompression efficiency (η_comp):     {{eta_comp}}\nVolumetric efficiency (η_vol):       {{eta_vol}}\nDesign cooling load (Q_design):      {{q_design_display}}\n\nExternal boundaries (Carnot reference):\n  Cellar air (T_L):                  {{t_cellar_display}}\n  Outdoor ambient (T_H):             {{t_ambient_display}}\n\nNotes:\n  - Useful / suction superheat {{suction_sh_k}} K means the compressor inlet is\n    {{suction_sh_k}} K above saturation at evaporator pressure\n    (compressor inlet temperature = {{compressor_inlet_display}}).\n  - When useful SH = suction SH, evaporator outlet and compressor inlet coincide.\n  - Heat rejection is via a gas cooler at controlled high-side pressure\n    {{p_gc_display}} — not a subcritical condenser.\n  - Obtain R744 thermodynamic properties from any source you choose\n    (tables, CoolProp/REFPROP, online tools, etc.) and document the source.\n  - Deliverable must include cooling EER = q_evap / w_comp (W/W),\n    Carnot comparison using T_L / T_H, mass flow ṁ = Q_design / q_evap,\n    and displacement V̇_disp = ṁ · v1 / η_vol.\n",
+        "calculation_template.md": "# R744 transcritical wine-cellar chiller calculation\n\nFill in this template (or an equivalent spreadsheet). Do not leave critical steps implied.\n\n**Cooling EER** = `q_evap / w_comp` (W/W). Heat rejection is a **gas cooler** at controlled high-side pressure. Size ṁ and compressor displacement for Q_design.\n\n## Given data\n\n- Tev = {{tev_display}}\n- Useful superheat = {{useful_sh_k}} K\n- Suction superheat = {{suction_sh_k}} K\n- Gas-cooler exit = {{t_gc_exit_display}}\n- High-side pressure = {{p_gc_display}}\n- Refrigerant = R744\n- η_comp = {{eta_comp}}\n- η_vol = {{eta_vol}}\n- Q_design = {{q_design_display}}\n- T_L (cellar air) = {{t_cellar_display}}\n- T_H (outdoor ambient) = {{t_ambient_display}}\n- Property data source =\n\n## Assumptions\n\n-\n\n## State-point table\n\n| Point | Description | T (°C) | P (MPa) | h (kJ/kg) | s (kJ/kg·K) | v (m³/kg) | Phase / notes |\n|-------|-------------|--------|---------|-----------|-------------|-----------|---------------|\n| 1 Compressor inlet | SH = {{suction_sh_k}} K ({{compressor_inlet_display}}) | | | | | | |\n| 2s Isentropic discharge | s = s1, P = {{p_gc_display}} | | | | | | supercritical |\n| 2 Actual discharge | η_comp applied | | | | | | |\n| 3 Gas-cooler exit | {{t_gc_exit_display}} @ {{p_gc_display}} | | | | | | |\n| 4 Expansion / evap inlet | h4 = h3 | | | | | | |\n\nOptional ASCII p-h sketch (transcritical):\n\n```\n  P\n  ^\n  |   2s / 2 ----* 3 (gas cooler)\n  |      /        |\n  |     /         |\n  |    1          |\n  |     \\         |\n  |      *--------* 4\n  |     (evap)\n  +----------------> h\n```\n\n## Energy balance\n\n- w_isentropic =\n- w_comp =\n- q_evap = h1 − h4 =\n- EER = q_evap / w_comp =\n\n## Carnot reference (external T_L / T_H)\n\n- T_L = {{t_cellar_display}} → (K) =\n- T_H = {{t_ambient_display}} → (K) =\n- EER_Carnot = T_L / (T_H − T_L) =\n- η_Carnot = EER / EER_Carnot =\n\n## Capacity sizing\n\n- ṁ = Q_design / q_evap =\n- v1 (suction specific volume) =\n- V̇_disp = ṁ · v1 / η_vol =\n\n## Results summary\n\n| Result | Value | Units |\n|--------|-------|-------|\n| EER | | W/W |\n| EER_Carnot | | W/W |\n| η_Carnot | | — |\n| ṁ | | kg/s |\n| V̇_disp | | m³/s |\n"
+      }
+    }
+  }
+}

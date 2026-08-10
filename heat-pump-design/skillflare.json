@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "title": "Calculate heating COP for an industrial R1233zd(E) heat pump",
+  "slug": "heat-pump-design-industrial-r1233zd",
+  "version": 1,
+  "image": "refrigeration",
+  "duration_minutes": 45,
+  "skills_assessed": [
+    "Industrial vapor-compression heat-pump cycle analysis",
+    "Refrigerant property lookup and state-point definition for R1233zd(E)",
+    "Heating COP calculation with non-ideal compression",
+    "Comparison to an external reverse Carnot heat-pump benchmark"
+  ],
+  "role": {
+    "title": "Thermal systems / industrial heat-pump engineer",
+    "seniority": "Junior to mid",
+    "company_context": "Industrial decarbonization consultancy. Engineers design high-temperature heat pumps that upgrade waste heat from refrigeration plant cooling towers into pressurized hot water for food-processing pasteurization and CIP, document heating COP in SI W/W, and compare real machines to an ideal reverse Carnot heat-pump benchmark for design reviews and client reports.",
+    "day_to_day": [
+      "Build thermodynamic state-point tables for industrial vapor-compression heat pumps from design temperatures and refrigerant data",
+      "Look up refrigerant properties from tables, software, or online tools and document the source",
+      "Calculate heating effect, compressor work, and heating COP including compression efficiency",
+      "Compare cycle performance to a reverse Carnot heat pump based on external source and delivery water temperatures",
+      "Write clear calculation notes a senior engineer can review without guessing assumptions"
+    ],
+    "required_skills": [
+      "Can define evaporator, compressor, condenser, and expansion states for a simple vapor-compression heat-pump cycle",
+      "Comfortable reading R1233zd(E) (or similar HCFO) thermodynamic properties from tables or property software",
+      "Can apply isentropic and actual compression work with a given compression efficiency",
+      "Understands heating COP (q_cond / w_comp, W/W) and the reverse Carnot heat-pump benchmark from external fluid temperatures"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with CoolProp, REFPROP, or manufacturer property software",
+      "Experience with p-h diagrams and suction-line superheat conventions",
+      "Prior industrial heat-pump or process-heat recovery design work"
+    ],
+    "constraints": [
+      "Assessment is a thermodynamics calculation work sample — not building production software",
+      "Candidates may use any tools they like for refrigerant properties and arithmetic",
+      "Do not require paid licensed software beyond what is freely available on the desktop or online",
+      "Starter files on the desktop are shared scenery (parameters and a blank calculation template), not a solved answer"
+    ]
+  },
+  "problem_statement": {
+    "title": "Calculate heating COP and Carnot-relative efficiency for an industrial R1233zd(E) heat pump",
+    "summary": "You are checking the thermodynamic performance of an industrial high-temperature heat pump using R1233zd(E). The machine upgrades waste heat from a refrigeration plant cooling-tower loop into pressurized process hot water. Design data are fixed below. Produce a clear calculation of heating COP (q_cond / w_comp, W/W), then compare that COP to an ideal reverse Carnot heat pump based on the external waste-heat source water temperature and the process delivery water temperature. You are free to use any tools you like (spreadsheets, calculators, CoolProp/REFPROP, ASHRAE or manufacturer tables, online property tools, etc.) to obtain R1233zd(E) properties — document which source you used.",
+    "outcomes": [
+      "Build a state-point table covering at least evaporator outlet, compressor inlet, compressor discharge, condenser outlet, and expansion-valve inlet.",
+      "Calculate heating effect, compressor work (using the given compression efficiency), and heating COP (q_cond / w_comp) of the actual cycle in W/W.",
+      "Calculate the COP of the reverse Carnot heat pump from the stated external source and delivery water temperatures, and the efficiency of the actual cycle relative to that Carnot COP."
+    ],
+    "constraints": [
+      "Use the fixed design data: Tev = +35 °C; suction superheat = 6 K; useful superheat = 6 K; Tcond = +100 °C; refrigerant R1233zd(E); compression efficiency η_comp = 0.76.",
+      "Interpret useful superheat 6 K as evaporator outlet 6 K above saturation at evaporator pressure; interpret suction superheat 6 K as compressor inlet 6 K above saturation at evaporator pressure (here useful SH = suction SH, so evaporator outlet and compressor inlet coincide).",
+      "For the Carnot reference, use the external fluid temperatures: T_L = waste-heat source water = 40 °C and T_H = process delivery water = 95 °C. Do not use Tev/Tcond directly as the Carnot boundaries.",
+      "Report heating COP = q_cond / w_comp in SI W/W. Cooling EER is not required.",
+      "State your assumptions and the property data source. Prefer concrete numbers and a readable state table over slogans."
+    ],
+    "deliverables": "A written calculation (document, notes, or spreadsheet) that a reviewer can follow: state-point table with enthalpies (and other properties as needed), energy balances for q_cond and w_comp, heating COP = q_cond / w_comp, Carnot heating COP, and Carnot-relative efficiency η_Carnot = COP / COP_Carnot. Optionally attach working files from property software — not required if the written calculation is complete and consistent."
+  },
+  "rubric": [
+    {
+      "name": "Cycle state-point analysis",
+      "weight": 25,
+      "description": "YES/NO: Does the deliverable correctly identify evaporator outlet with the stated useful superheat at evaporator pressure, compressor inlet with the stated suction superheat at evaporator pressure, saturated liquid at the stated Tcond (unless subcooling is justified), and isenthalpic expansion (h4 = h3)? Answer YES only if all four state/expansion conventions are visible and consistent with the instance parameters. Collapsed or contradictory superheat states, wrong condenser phase, or non-isenthalpic expansion = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Heating COP",
+      "weight": 25,
+      "description": "YES/NO: Are heating effect and compressor work enthalpy-coherent, with the stated η_comp applied as W = W_isentropic / η_comp (not inverted), and heating COP reported as q_cond / w_comp in SI W/W? Answer YES only if q_cond, w_comp, η_comp application, and COP are all present and consistent (q_cond ≈ h2 − h3 or q_evap + w_comp). Inverted η_comp, missing COP, or incoherent energy balances = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Carnot heating reference",
+      "weight": 25,
+      "description": "YES/NO: Does the deliverable use the stated external source and delivery water temperatures as T_L and T_H, apply COP_Carnot = T_H / (T_H − T_L) with absolute temperatures, and compute η_Carnot = COP / COP_Carnot consistently? Answer YES only if all three are correct for the instance external temps. Using Tev/Tcond as Carnot boundaries, °C instead of kelvin, refrigerator EER_Carnot = T_L/(T_H−T_L) without the heating form, or missing relative efficiency = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Assumptions and data sourcing",
+      "weight": 10,
+      "description": "YES/NO: Does the deliverable state the refrigerant property source and visible cycle assumptions (e.g. negligible pressure drops, saturated liquid leaving the condenser, isenthalpic throttling)? Answer YES only if both a property source and key assumptions are explicit. Numbers with no source and no stated assumptions = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverable",
+      "weight": 15,
+      "description": "YES/NO: Is there a readable state table and final numbers a reviewer can follow without guessing intermediate steps or units? Answer YES if the calculation path is auditable end-to-end. Opaque scrap numbers or missing table/finals that force guessing = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (written thermodynamics calculation with heating COP and external Carnot comparison in SI W/W)",
+      "Keep refrigerant R1233zd(E) for all instances (truth pack is skeleton-scoped; do not swap refrigerants)",
+      "Keep isomorphic difficulty via vetted cycle bundles with temperature lift ≈ 60–70 K and ≈ 5 K approach on both heat-exchanger sides",
+      "Do not turn the challenge into software engineering, containerization, or a multi-refrigerant parametric study"
+    ],
+    "factors": [
+      {
+        "id": "cycle",
+        "options": [
+          {
+            "id": "tev_35_tcond_100_sh_6",
+            "values": {
+              "tev_c": "35",
+              "tev_display": "+35 °C",
+              "tcond_c": "100",
+              "tcond_display": "+100 °C",
+              "useful_sh_k": "6",
+              "suction_sh_k": "6",
+              "compressor_inlet_c": "41",
+              "compressor_inlet_display": "+41 °C",
+              "t_source_c": "40",
+              "t_source_display": "40 °C",
+              "t_delivery_c": "95",
+              "t_delivery_display": "95 °C",
+              "lift_k": "65"
+            }
+          },
+          {
+            "id": "tev_30_tcond_95_sh_5",
+            "values": {
+              "tev_c": "30",
+              "tev_display": "+30 °C",
+              "tcond_c": "95",
+              "tcond_display": "+95 °C",
+              "useful_sh_k": "5",
+              "suction_sh_k": "5",
+              "compressor_inlet_c": "35",
+              "compressor_inlet_display": "+35 °C",
+              "t_source_c": "35",
+              "t_source_display": "35 °C",
+              "t_delivery_c": "90",
+              "t_delivery_display": "90 °C",
+              "lift_k": "65"
+            }
+          },
+          {
+            "id": "tev_40_tcond_105_sh_6",
+            "values": {
+              "tev_c": "40",
+              "tev_display": "+40 °C",
+              "tcond_c": "105",
+              "tcond_display": "+105 °C",
+              "useful_sh_k": "6",
+              "suction_sh_k": "6",
+              "compressor_inlet_c": "46",
+              "compressor_inlet_display": "+46 °C",
+              "t_source_c": "45",
+              "t_source_display": "45 °C",
+              "t_delivery_c": "100",
+              "t_delivery_display": "100 °C",
+              "lift_k": "65"
+            }
+          },
+          {
+            "id": "tev_35_tcond_105_sh_8",
+            "values": {
+              "tev_c": "35",
+              "tev_display": "+35 °C",
+              "tcond_c": "105",
+              "tcond_display": "+105 °C",
+              "useful_sh_k": "8",
+              "suction_sh_k": "8",
+              "compressor_inlet_c": "43",
+              "compressor_inlet_display": "+43 °C",
+              "t_source_c": "40",
+              "t_source_display": "40 °C",
+              "t_delivery_c": "100",
+              "t_delivery_display": "100 °C",
+              "lift_k": "70"
+            }
+          },
+          {
+            "id": "tev_32_tcond_98_sh_6",
+            "values": {
+              "tev_c": "32",
+              "tev_display": "+32 °C",
+              "tcond_c": "98",
+              "tcond_display": "+98 °C",
+              "useful_sh_k": "6",
+              "suction_sh_k": "6",
+              "compressor_inlet_c": "38",
+              "compressor_inlet_display": "+38 °C",
+              "t_source_c": "37",
+              "t_source_display": "37 °C",
+              "t_delivery_c": "93",
+              "t_delivery_display": "93 °C",
+              "lift_k": "66"
+            }
+          },
+          {
+            "id": "tev_38_tcond_100_sh_4",
+            "values": {
+              "tev_c": "38",
+              "tev_display": "+38 °C",
+              "tcond_c": "100",
+              "tcond_display": "+100 °C",
+              "useful_sh_k": "4",
+              "suction_sh_k": "4",
+              "compressor_inlet_c": "42",
+              "compressor_inlet_display": "+42 °C",
+              "t_source_c": "43",
+              "t_source_display": "43 °C",
+              "t_delivery_c": "95",
+              "t_delivery_display": "95 °C",
+              "lift_k": "62"
+            }
+          }
+        ]
+      },
+      {
+        "id": "eta_comp",
+        "options": [
+          {
+            "id": "0_70",
+            "values": {
+              "eta_comp": "0.70"
+            }
+          },
+          {
+            "id": "0_76",
+            "values": {
+              "eta_comp": "0.76"
+            }
+          },
+          {
+            "id": "0_80",
+            "values": {
+              "eta_comp": "0.80"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Calculate heating COP and Carnot-relative efficiency for an industrial R1233zd(E) heat pump\n\nYou are checking the thermodynamic performance of an industrial high-temperature heat pump using R1233zd(E). The machine upgrades waste heat from a refrigeration plant cooling-tower loop into pressurized process hot water. Design data are fixed below. Produce a clear calculation of heating COP (q_cond / w_comp, W/W), then compare that COP to an ideal reverse Carnot heat pump based on the external waste-heat source water temperature and the process delivery water temperature. You are free to use any tools you like (spreadsheets, calculators, CoolProp/REFPROP, ASHRAE or manufacturer tables, online property tools, etc.) to obtain R1233zd(E) properties — document which source you used.\n\n### Outcomes\n- Build a state-point table covering at least evaporator outlet, compressor inlet, compressor discharge, condenser outlet, and expansion-valve inlet.\n- Calculate heating effect, compressor work (using the given compression efficiency), and heating COP (q_cond / w_comp) of the actual cycle in W/W.\n- Calculate the COP of the reverse Carnot heat pump from the stated external source and delivery water temperatures, and the efficiency of the actual cycle relative to that Carnot COP.\n\n### Constraints\n- Use the fixed design data: Tev = {{tev_display}}; suction superheat = {{suction_sh_k}} K; useful superheat = {{useful_sh_k}} K; Tcond = {{tcond_display}}; refrigerant R1233zd(E); compression efficiency η_comp = {{eta_comp}}.\n- Interpret useful superheat {{useful_sh_k}} K as evaporator outlet {{useful_sh_k}} K above saturation at evaporator pressure; interpret suction superheat {{suction_sh_k}} K as compressor inlet {{suction_sh_k}} K above saturation at evaporator pressure (compressor inlet temperature = {{compressor_inlet_display}}). When useful SH = suction SH, evaporator outlet and compressor inlet coincide.\n- For the Carnot reference, use the external fluid temperatures: T_L = waste-heat source water = {{t_source_display}} and T_H = process delivery water = {{t_delivery_display}}. Do not use Tev/Tcond directly as the Carnot boundaries.\n- Report heating COP = q_cond / w_comp in SI W/W. Cooling EER is not required.\n- State your assumptions and the property data source. Prefer concrete numbers and a readable state table over slogans.\n\n### Deliverables\nA written calculation (document, notes, or spreadsheet) that a reviewer can follow: state-point table with enthalpies (and other properties as needed), energy balances for q_cond and w_comp, heating COP = q_cond / w_comp, Carnot heating COP, and Carnot-relative efficiency η_Carnot = COP / COP_Carnot. Optionally attach working files from property software — not required if the written calculation is complete and consistent.\n",
+      "files": {
+        "system_parameters.txt": "R1233zd(E) industrial high-temperature heat pump — design data\n================================================================\n\nEvaporating temperature (Tev):     {{tev_display}}\nUseful superheat:                    {{useful_sh_k}} K\nSuction superheat:                  {{suction_sh_k}} K\nCondensing temperature (Tcond):    {{tcond_display}}\nRefrigerant:                       R1233zd(E)\nCompression efficiency (η_comp):   {{eta_comp}}\n\nExternal boundaries (Carnot reference):\n  Waste-heat source water (T_L):   {{t_source_display}}\n  Process delivery water (T_H):    {{t_delivery_display}}\n\nNotes:\n  - Useful superheat {{useful_sh_k}} K means the evaporator outlet is {{useful_sh_k}} K above\n    saturation at evaporator pressure.\n  - Suction superheat {{suction_sh_k}} K means the compressor inlet is {{suction_sh_k}} K above\n    saturation at evaporator pressure (compressor inlet temperature = {{compressor_inlet_display}}).\n  - When useful SH = suction SH, evaporator outlet and compressor inlet coincide.\n  - Obtain R1233zd(E) thermodynamic properties from any source you choose\n    (tables, CoolProp/REFPROP, online tools, etc.) and document the source.\n  - Deliverable must include heating COP in W/W: COP = q_cond / w_comp.\n    Cooling EER is not required. Compare to reverse Carnot COP using T_L and T_H\n    (external water temperatures), not Tev/Tcond.\n",
+        "calculation_template.md": "# R1233zd(E) industrial heat-pump calculation\n\nFill in this template (or an equivalent spreadsheet). Do not leave critical steps implied.\n\n**Heating COP** = `q_cond / w_comp` (W/W). Cooling EER is not required. Carnot reference uses external water temperatures T_L and T_H.\n\n## Given data\n\n- Tev = {{tev_display}}\n- Useful superheat = {{useful_sh_k}} K\n- Suction superheat = {{suction_sh_k}} K\n- Tcond = {{tcond_display}}\n- Refrigerant = R1233zd(E)\n- η_comp = {{eta_comp}}\n- T_L (waste-heat source water) = {{t_source_display}}\n- T_H (process delivery water) = {{t_delivery_display}}\n- Property data source =\n\n## Assumptions\n\n-\n\n## State-point table\n\n| Point | Description | T (°C) | P (kPa) | h (kJ/kg) | s (kJ/kg·K) | Phase / notes |\n|-------|-------------|--------|---------|-----------|-------------|---------------|\n| Evap outlet | Useful SH = {{useful_sh_k}} K | | | | | |\n| 1 Compressor inlet | Suction SH = {{suction_sh_k}} K ({{compressor_inlet_display}}) | | | | | |\n| 2s Isentropic discharge | s = s1 | | | | | |\n| 2 Actual discharge | η_comp applied | | | | | |\n| 3 Condenser outlet | | | | | | |\n| 4 Expansion inlet / evap inlet | h4 = h3 | | | | | |\n\nOptional ASCII p-h sketch:\n\n```\n  P\n  ^\n  |     2s / 2\n  |      *----* 3\n  |     /      |\n  |    /       |\n  |   1        |\n  |    \\       |\n  |     *------* 4\n  |    (evap)\n  +----------------> h\n```\n\n## Energy balance\n\n- w_isentropic =\n- w_comp =\n- q_cond = h2 − h3 (or q_evap + w_comp) =\n- COP = q_cond / w_comp =\n\n## Carnot reference (external T_L / T_H)\n\n- T_L = {{t_source_display}} → (K) =\n- T_H = {{t_delivery_display}} → (K) =\n- COP_Carnot = T_H / (T_H − T_L) =\n- η_Carnot = COP / COP_Carnot =\n\n## Results summary\n\n| Result | Value | Units |\n|--------|-------|-------|\n| COP | | W/W |\n| COP_Carnot | | W/W |\n| η_Carnot | | — |\n"
+      }
+    }
+  }
+}
