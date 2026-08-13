@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "title": "Plan a DigitalOcean managed Postgres with OpenTofu",
+  "slug": "opentofu-digitalocean-managed-postgres",
+  "version": 1,
+  "image": "opentofu",
+  "duration_minutes": 60,
+  "skills_assessed": [
+    "OpenTofu provider and module setup",
+    "DigitalOcean managed database (Postgres) IaC",
+    "Secrets hygiene for cloud credentials",
+    "tofu plan as dry-run validation"
+  ],
+  "role": {
+    "title": "Platform / DevOps engineer",
+    "seniority": "Mid",
+    "company_context": "Product-led SaaS company moving shared data stores onto managed cloud databases. A small platform team owns OpenTofu modules so feature teams can request Postgres without clicking through the DigitalOcean UI. Hiring to strengthen day-to-day IaC for managed databases and safe plan-before-apply habits.",
+    "day_to_day": [
+      "Author and review OpenTofu for DigitalOcean managed databases and related cloud resources",
+      "Keep provider versions and variables clear so others can init and plan the same stack",
+      "Validate changes with tofu plan before anyone applies to shared accounts",
+      "Pair with backend engineers on “what would this create?” reviews of database sizing and region choices",
+      "Improve shared templates and conventions for managed Postgres on DigitalOcean"
+    ],
+    "required_skills": [
+      "Comfortable writing OpenTofu (or Terraform-compatible) HCL with required_providers and provider blocks",
+      "Can declare a DigitalOcean managed Postgres cluster (digitalocean_database_cluster with engine pg)",
+      "Can pass a DigitalOcean API token via variable or environment without committing secrets",
+      "Can run tofu init and tofu plan and interpret a create plan"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with DigitalOcean database size slugs and regions",
+      "Experience with remote state backends and workspaces",
+      "Prior work on internal platform or developer-experience IaC modules",
+      "Knowledge of database firewalls, replicas, or connection pooling on DigitalOcean"
+    ],
+    "constraints": [
+      "Assessment focuses on OpenTofu that would create a managed Postgres cluster — not applying it live or operating an existing cluster",
+      "Do not test Kubernetes, multi-cloud sprawl, or full VPC networking in this challenge",
+      "Candidate works in a desktop environment with Terminal and OpenTofu available; they bring their own DigitalOcean API token",
+      "Requirements on the desktop are shared scenery; do not replace the target with a different cloud or database product"
+    ]
+  },
+  "problem_statement": {
+    "title": "Dry-run a managed Postgres cluster with OpenTofu",
+    "summary": "Platform needs an OpenTofu root module that would create a DigitalOcean managed PostgreSQL cluster. Requirements for name, region, size, Postgres version, and node count are on your desktop. Write the configuration, authenticate with your own DigitalOcean API token, and prove it with a successful tofu plan. Do not apply.",
+    "outcomes": [
+      "Author OpenTofu that configures the DigitalOcean provider and a digitalocean_database_cluster with engine pg matching the desktop requirements.",
+      "Initialize the module (tofu init) and run a successful dry-run (tofu plan) using your own DigitalOcean API token.",
+      "Keep credentials out of committed files (use an environment variable and/or a sensitive variable / local tfvars that is not left as a secret dump)."
+    ],
+    "constraints": [
+      "Do not run tofu apply or otherwise create the live cluster as the completion path — dry-run only.",
+      "Match the cluster name, region, size slug, Postgres version, and node count from the desktop requirements.",
+      "Use OpenTofu (tofu) and the DigitalOcean provider; do not substitute another cloud or a self-managed Postgres on a droplet.",
+      "Starter requirements on the desktop stay as shared scenery — treat them as the target spec; do not invent a different stack."
+    ],
+    "deliverables": "Leave OpenTofu (.tf) files on the desktop that a reviewer can init and plan against DigitalOcean without guessing layout. Show a successful tofu plan for creating the managed Postgres cluster. Do not leave API tokens hardcoded in those files."
+  },
+  "rubric": [
+    {
+      "name": "Successful dry-run",
+      "weight": 40,
+      "description": "YES/NO: Did the candidate demonstrate a successful tofu plan (exit success) for their OpenTofu config that plans creation of a DigitalOcean managed Postgres cluster? Answer YES only if video or narrative shows plan completing successfully (create planned for the database cluster). Plan failure, apply-as-completion, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct Postgres cluster config",
+      "weight": 30,
+      "description": "YES/NO: Does the deliverable declare digitalocean_database_cluster (or equivalent DO managed DB resource) with engine pg and name, region, size, version, and node_count matching the instance requirements on the desktop? Answer YES only if engine is Postgres and the required parameters match the scenery. Wrong engine, wrong cloud, or mismatched required params = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Secrets and dry-run discipline",
+      "weight": 20,
+      "description": "YES/NO: Is the DigitalOcean token supplied via environment variable and/or a sensitive variable / non-committed tfvars pattern (not hardcoded in .tf left on the desktop), and is completion path plan-only (no evidence that apply / live cluster creation was required to finish)? Answer YES only if both secrets hygiene and plan-only discipline hold. Hardcoded token in deliverable files or apply treated as the required finish = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "description": "YES/NO: Are OpenTofu .tf files left on the desktop that a reviewer could init and plan without guessing paths or undocumented steps? Answer YES if the primary module is present and self-explanatory enough to dry-run; optional notes must be accurate if present. No .tf / cannot plan from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (OpenTofu root module + successful tofu plan for DO managed Postgres)",
+      "Keep engine pg, digitalocean provider, and plan-only (no apply) expectations",
+      "Do not introduce Kubernetes, another cloud, or self-managed Postgres on droplets as the target",
+      "Do not put solution .tf files under workspace/"
+    ],
+    "factors": [
+      {
+        "id": "cluster",
+        "options": [
+          {
+            "id": "acme_analytics",
+            "values": {
+              "cluster_name": "acme-analytics-pg",
+              "cluster_label": "Acme analytics Postgres",
+              "service_context": "analytics warehouse staging"
+            }
+          },
+          {
+            "id": "orders_core",
+            "values": {
+              "cluster_name": "orders-core-pg",
+              "cluster_label": "Orders core Postgres",
+              "service_context": "orders service primary store"
+            }
+          },
+          {
+            "id": "billing_ledger",
+            "values": {
+              "cluster_name": "billing-ledger-pg",
+              "cluster_label": "Billing ledger Postgres",
+              "service_context": "billing ledger staging"
+            }
+          },
+          {
+            "id": "inventory_read",
+            "values": {
+              "cluster_name": "inventory-read-pg",
+              "cluster_label": "Inventory read Postgres",
+              "service_context": "inventory read replica candidate"
+            }
+          },
+          {
+            "id": "notify_events",
+            "values": {
+              "cluster_name": "notify-events-pg",
+              "cluster_label": "Notify events Postgres",
+              "service_context": "notification events store"
+            }
+          },
+          {
+            "id": "catalog_search",
+            "values": {
+              "cluster_name": "catalog-search-pg",
+              "cluster_label": "Catalog search Postgres",
+              "service_context": "catalog search metadata"
+            }
+          }
+        ]
+      },
+      {
+        "id": "region",
+        "options": [
+          {
+            "id": "nyc3",
+            "values": {
+              "do_region": "nyc3"
+            }
+          },
+          {
+            "id": "fra1",
+            "values": {
+              "do_region": "fra1"
+            }
+          },
+          {
+            "id": "sgp1",
+            "values": {
+              "do_region": "sgp1"
+            }
+          },
+          {
+            "id": "ams3",
+            "values": {
+              "do_region": "ams3"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pg_version",
+        "options": [
+          {
+            "id": "15",
+            "values": {
+              "pg_version": "15"
+            }
+          },
+          {
+            "id": "16",
+            "values": {
+              "pg_version": "16"
+            }
+          },
+          {
+            "id": "17",
+            "values": {
+              "pg_version": "17"
+            }
+          }
+        ]
+      },
+      {
+        "id": "size",
+        "options": [
+          {
+            "id": "db_s_1vcpu_1gb",
+            "values": {
+              "db_size": "db-s-1vcpu-1gb"
+            }
+          },
+          {
+            "id": "db_s_1vcpu_2gb",
+            "values": {
+              "db_size": "db-s-1vcpu-2gb"
+            }
+          }
+        ]
+      },
+      {
+        "id": "node_count",
+        "options": [
+          {
+            "id": "one",
+            "values": {
+              "node_count": "1"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Dry-run {{cluster_label}} with OpenTofu\n\nPlatform needs an OpenTofu root module that would create a DigitalOcean managed PostgreSQL cluster for {{service_context}}. Requirements for name, region, size, Postgres version, and node count are on your desktop (`requirements.md`). Write the configuration, authenticate with your own DigitalOcean API token, and prove it with a successful `tofu plan`. Do not apply.\n\n### Outcomes\n- Author OpenTofu that configures the DigitalOcean provider and a `digitalocean_database_cluster` with `engine = \"pg\"` matching the desktop requirements.\n- Initialize the module (`tofu init`) and run a successful dry-run (`tofu plan`) using your own DigitalOcean API token.\n- Keep credentials out of committed files (use an environment variable and/or a sensitive variable / local tfvars that is not left as a secret dump).\n\n### Constraints\n- Do not run `tofu apply` or otherwise create the live cluster as the completion path — dry-run only.\n- Match the cluster name (`{{cluster_name}}`), region (`{{do_region}}`), size slug (`{{db_size}}`), Postgres version (`{{pg_version}}`), and node count (`{{node_count}}`) from the desktop requirements.\n- Use OpenTofu (`tofu`) and the DigitalOcean provider; do not substitute another cloud or a self-managed Postgres on a droplet.\n- Starter requirements on the desktop stay as shared scenery — treat them as the target spec; do not invent a different stack.\n\n### Deliverables\nLeave OpenTofu (`.tf`) files on the desktop that a reviewer can `init` and `plan` against DigitalOcean without guessing layout. Show a successful `tofu plan` for creating the managed Postgres cluster. Do not leave API tokens hardcoded in those files.\n",
+      "files": {
+        "requirements.md": "# Managed Postgres requirements\n\nTarget: {{cluster_label}} ({{service_context}})\n\n| Parameter | Value |\n|-----------|-------|\n| Cluster name | `{{cluster_name}}` |\n| Engine | `pg` (PostgreSQL) |\n| Postgres version | `{{pg_version}}` |\n| Region | `{{do_region}}` |\n| Size slug | `{{db_size}}` |\n| Node count | `{{node_count}}` |\n\nUse OpenTofu with the DigitalOcean provider. Authenticate with your own API token (for example `DIGITALOCEAN_TOKEN` or a sensitive variable). Run `tofu init` and `tofu plan` only — do not apply.\n"
+      }
+    }
+  }
+}

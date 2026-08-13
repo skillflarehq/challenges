@@ -41,16 +41,16 @@
     ]
   },
   "problem_statement": {
-    "title": "Ship a passenger booking MVP for Kenya intercity buses",
-    "summary": "You are building a small digital ticketing product for intercity buses in Kenya. There are no starter files on the desktop — design and implement everything yourself. Use Supabase for the backend (Postgres, Auth, RLS) and Vue for the frontend that points at it. Seed enough realistic Kenya routes/trips (prices in KES) that a reviewer can search, pick a trip, and complete a booking as a signed-in passenger. Payments are out of scope: a successful booking should persist a confirmed or held ticket without a real payment provider.",
+    "title": "Ship a passenger booking MVP for Safari Coach ticketing",
+    "summary": "You are building Safari Coach, a small digital ticketing product for intercity buses in Kenya. There are no starter files on the desktop — design and implement everything yourself. Use Supabase for the backend (Postgres, Auth, RLS) and Vue for the frontend that points at it. Seed enough realistic Kenya routes/trips (prices in KES) that a reviewer can search the Nairobi–Mombasa corridor (example fare around 2500 KES) and at least one secondary corridor such as Nairobi–Kisumu, pick a trip, and complete a booking as a signed-in passenger. Payments are out of scope: a successful booking should persist a confirmed or held ticket without a real payment provider.",
     "outcomes": [
       "Stand up a Supabase project with Auth and a schema covering routes (or equivalent), trips, seat/capacity inventory, and bookings.",
       "Apply RLS so booking and user-owned data are protected appropriately (anonymous users must not freely write or read other people’s bookings).",
-      "Build a Vue app that searches available trips, selects a seat or ticket allocation, and completes a booking against that Supabase backend.",
+      "Build a Vue app that searches available trips (including Nairobi–Mombasa), selects a seat or ticket allocation, and completes a booking against that Supabase backend.",
       "Leave short run notes so a reviewer can reproduce the demo (local Supabase CLI and/or hosted project setup without guessing)."
     ],
     "constraints": [
-      "Geography and currency: Kenya corridors and KES pricing.",
+      "Geography and currency: Kenya corridors and KES pricing (skeleton primary corridor Nairobi–Mombasa).",
       "UI stack: Vue. Backend stack: Supabase (Postgres + Auth + RLS). A separate custom API is optional, not required.",
       "No real payment gateway, PSP SDK, or card capture — booking creates a confirmed or held record only.",
       "Do not commit service-role keys, passwords, or other secrets into the deliverable; document how env vars are set instead.",
@@ -86,12 +86,124 @@
     }
   ],
   "variation": {
+    "strategy": "combinatorial",
     "invariants": [
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (greenfield Vue + Supabase passenger booking MVP)",
       "Do not replace Vue as the primary UI or Supabase as the primary backend",
       "Do not add starter scaffolds, seed solutions, or answer keys under workspace/",
-      "No combinatorial variation catalog yet — every candidate gets the same locked brief and empty workspace"
-    ]
+      "Keep Kenya geography and KES pricing; no real payment gateway",
+      "Keep isomorphic difficulty: search → auth → book → persisted booking with RLS and oversell mitigation"
+    ],
+    "factors": [
+      {
+        "id": "product",
+        "options": [
+          {
+            "id": "safari_coach",
+            "values": {
+              "product_name": "Safari Coach",
+              "product_label": "Safari Coach ticketing",
+              "company_short": "Safari Coach"
+            }
+          },
+          {
+            "id": "rift_liner",
+            "values": {
+              "product_name": "Rift Liner",
+              "product_label": "Rift Liner ticketing",
+              "company_short": "Rift Liner"
+            }
+          },
+          {
+            "id": "coast_express",
+            "values": {
+              "product_name": "Coast Express",
+              "product_label": "Coast Express ticketing",
+              "company_short": "Coast Express"
+            }
+          },
+          {
+            "id": "highland_shuttle",
+            "values": {
+              "product_name": "Highland Shuttle",
+              "product_label": "Highland Shuttle ticketing",
+              "company_short": "Highland Shuttle"
+            }
+          },
+          {
+            "id": "lake_link",
+            "values": {
+              "product_name": "Lake Link",
+              "product_label": "Lake Link ticketing",
+              "company_short": "Lake Link"
+            }
+          },
+          {
+            "id": "metro_transit",
+            "values": {
+              "product_name": "Metro Transit KE",
+              "product_label": "Metro Transit KE ticketing",
+              "company_short": "Metro Transit"
+            }
+          }
+        ]
+      },
+      {
+        "id": "corridor",
+        "options": [
+          {
+            "id": "nairobi_mombasa",
+            "values": {
+              "primary_origin": "Nairobi",
+              "primary_destination": "Mombasa",
+              "primary_fare_kes": "2500",
+              "secondary_route_hint": "Nairobi–Kisumu"
+            }
+          },
+          {
+            "id": "nairobi_kisumu",
+            "values": {
+              "primary_origin": "Nairobi",
+              "primary_destination": "Kisumu",
+              "primary_fare_kes": "1800",
+              "secondary_route_hint": "Nairobi–Mombasa"
+            }
+          },
+          {
+            "id": "nairobi_nakuru",
+            "values": {
+              "primary_origin": "Nairobi",
+              "primary_destination": "Nakuru",
+              "primary_fare_kes": "900",
+              "secondary_route_hint": "Nairobi–Eldoret"
+            }
+          },
+          {
+            "id": "mombasa_malindi",
+            "values": {
+              "primary_origin": "Mombasa",
+              "primary_destination": "Malindi",
+              "primary_fare_kes": "1200",
+              "secondary_route_hint": "Mombasa–Nairobi"
+            }
+          },
+          {
+            "id": "nairobi_eldoret",
+            "values": {
+              "primary_origin": "Nairobi",
+              "primary_destination": "Eldoret",
+              "primary_fare_kes": "1500",
+              "secondary_route_hint": "Nairobi–Nakuru"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Ship a passenger booking MVP for {{product_label}}\n\nYou are building {{product_name}}, a small digital ticketing product for intercity buses in Kenya (branded as {{company_short}}). There are no starter files on the desktop — design and implement everything yourself. Use Supabase for the backend (Postgres, Auth, RLS) and Vue for the frontend that points at it. Seed enough realistic Kenya routes/trips (prices in KES) that a reviewer can search the {{primary_origin}}–{{primary_destination}} corridor (example fare around {{primary_fare_kes}} KES) and at least one secondary corridor such as {{secondary_route_hint}}, pick a trip, and complete a booking as a signed-in passenger. Payments are out of scope: a successful booking should persist a confirmed or held ticket without a real payment provider.\n\n### Outcomes\n- Stand up a Supabase project with Auth and a schema covering routes (or equivalent), trips, seat/capacity inventory, and bookings.\n- Apply RLS so booking and user-owned data are protected appropriately (anonymous users must not freely write or read other people’s bookings).\n- Build a Vue app that searches available trips (including {{primary_origin}}–{{primary_destination}}), selects a seat or ticket allocation, and completes a booking against that Supabase backend.\n- Leave short run notes so a reviewer can reproduce the demo (local Supabase CLI and/or hosted project setup without guessing).\n\n### Constraints\n- Geography and currency: Kenya corridors and KES pricing (primary corridor {{primary_origin}}–{{primary_destination}}).\n- UI stack: Vue. Backend stack: Supabase (Postgres + Auth + RLS). A separate custom API is optional, not required.\n- No real payment gateway, PSP SDK, or card capture — booking creates a confirmed or held record only.\n- Do not commit service-role keys, passwords, or other secrets into the deliverable; document how env vars are set instead.\n- Scope is passenger booking MVP only — not operator dispatch, live vehicle tracking, or a multi-operator marketplace.\n\n### Deliverables\nA working Vue frontend, Supabase schema/migrations (or equivalent SQL the reviewer can apply), and a README with how to run both sides (local `supabase start` and/or hosted project URL plus anon-key setup). A reviewer should be able to create a user, search trips, book, and see the booking persisted.\n",
+      "files": {}
+    }
   }
 }
