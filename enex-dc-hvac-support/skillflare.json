@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "title": "Diagnose Emicon CRAH under-capacity in a data hall",
+  "slug": "enex-dc-hvac-support-crac-performance",
+  "version": 1,
+  "image": "refrigeration",
+  "duration_minutes": 45,
+  "skills_assessed": [
+    "Data-centre CRAH / precision-cooling performance interpretation",
+    "Air-side cooling capacity calculation from measured airflow and temperatures",
+    "Fault diagnosis using BMS alarms and design-vs-measured gaps",
+    "Technical service reporting for customer and operations stakeholders"
+  ],
+  "role": {
+    "title": "Technical Support Engineer HVAC",
+    "seniority": "Junior to mid",
+    "company_context": "Enex Technologies supports Emicon precision HVAC deployed in data centres. Technical Support Engineers keep cooling infrastructure reliable: they diagnose CRAC/CRAH, chiller, and dry-cooler issues from site data and BMS alarms, restore capacity within service KPIs, and leave clear reports for customers and operations. Natural-refrigerant plant (for example CO₂ chillers feeding CRAH coils) is common; this assessment focuses on the white-space CRAH string the engineer is called to support.",
+    "day_to_day": [
+      "Perform preventative and corrective checks on Emicon data-centre HVAC (CRAH/CRAC, related plant)",
+      "Diagnose mechanical, airflow, and control faults from measurements and BMS/EMS alarms",
+      "Compare delivered cooling capacity to design and quantify shortfalls",
+      "Coordinate with data-centre operations on uptime, airflow management, and escalation",
+      "Write accurate service reports and explain issues to customers in plain language"
+    ],
+    "required_skills": [
+      "Can compute air-side sensible cooling capacity from airflow and supply/return temperatures (SI)",
+      "Can compare design vs measured performance and state the capacity gap clearly",
+      "Can use alarm/log evidence together with numbers to pick a primary fault class",
+      "Can produce a service report with root cause, corrective actions, and escalation judgment"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with CRAH vs CRAC, containment, and raised-floor airflow",
+      "Experience with BMS/EMS alarm triage in critical facilities",
+      "Background with natural-refrigerant or Emicon/Enex product lines"
+    ],
+    "constraints": [
+      "Assessment is a closed-world incident pack: calculation plus service write-up — not on-site travel or live BMS access",
+      "Candidates may use spreadsheets, calculators, and notes on the desktop",
+      "Do not require paid licensed software beyond what is freely available on the desktop",
+      "Starter files are shared scenery (parameters, alarm excerpt, blank templates), not a solved answer"
+    ]
+  },
+  "problem_statement": {
+    "title": "Quantify CRAH cooling shortfall and write the service report",
+    "summary": "You are the Technical Support Engineer on call for an Emicon CRAH serving a data-hall cold aisle. Operations reports rising IT inlet temperatures. Design data, measured operating points, and a short BMS alarm excerpt are in the workspace. Using SI units, calculate the measured sensible cooling capacity, compare it to design, quantify the gap, identify the most likely primary fault class consistent with the numbers and alarms, and write a service report suitable for the customer and data-centre operations (root cause, corrective actions, urgency).",
+    "outcomes": [
+      "Compute measured air-side sensible cooling capacity Q_meas from the stated airflow and supply/return temperatures, and compare it to Q_design.",
+      "Report the capacity shortfall (kW and % of design) and a simple performance ratio Q/P using the stated unit electrical input.",
+      "Select the most likely primary fault class (for this skeleton: low airflow / restricted air path) and justify it with both calculations and alarm evidence.",
+      "Complete a service report: situation summary, findings, root cause, corrective actions, escalation/safety notes, and a short customer-facing explanation."
+    ],
+    "constraints": [
+      "Use the fixed design and measured data in the workspace / brief (skeleton: Q_design = 80 kW; design supply/return 18/28 °C; design airflow 24000 m³/h; measured supply/return 20.0/29.5 °C; measured airflow 16500 m³/h; unit electrical input P_meas = 24 kW).",
+      "Use air-side sensible capacity Q (kW) = ρ × V̇ × c_p × ΔT with ρ = 1.20 kg/m³, c_p = 1.005 kJ/(kg·K), V̇ in m³/s, ΔT = T_return − T_supply in K (convert m³/h ÷ 3600).",
+      "Treat the BMS excerpt as authoritative for this incident; do not invent extra alarms.",
+      "Pick one primary fault class; secondary contributors may be mentioned but must not contradict the primary.",
+      "State assumptions. Prefer auditable arithmetic and a clear report over slogans."
+    ],
+    "deliverables": "A written calculation (notes or spreadsheet) showing Q_meas, shortfall, and Q/P, plus a completed service report covering findings, root cause, corrective actions, urgency/escalation, and a brief customer-facing summary. Optional ASCII airflow sketch — not required if the numbers and report are complete."
+  },
+  "rubric": [
+    {
+      "name": "Air-side capacity math",
+      "weight": 25,
+      "description": "YES/NO: Does the deliverable correctly convert airflow to m³/s, apply Q = 1.20 × V̇ × 1.005 × (T_return − T_supply), and report Q_meas coherent with the instance measured data? Answer YES only if the method and result are consistent (±3% on Q_meas). Wrong ΔT direction, forgetting /3600, or incoherent Q = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Design comparison and shortfall",
+      "weight": 20,
+      "description": "YES/NO: Is Q_meas compared to Q_design with an explicit shortfall in kW and as a percentage of design? Answer YES only if both the absolute and relative gap are present and consistent with the instance. Missing % or comparing to the wrong design capacity = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Fault diagnosis coherence",
+      "weight": 25,
+      "description": "YES/NO: Is the primary fault class consistent with both the capacity/airflow/temperature evidence and the BMS alarms for this instance? For the skeleton (and low-airflow scenarios): low airflow / restricted air path as primary when V̇ is well below design and LOW_AIRFLOW is active, not condenser approach as primary when CW/dry-cooler approach is normal. Answer YES only if diagnosis matches the evidence. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Evidence use (params and alarms)",
+      "weight": 10,
+      "description": "YES/NO: Does the write-up explicitly use both quantitative measurements and the alarm excerpt (not measurements alone or alarms alone)? Answer YES only if both appear in the reasoning. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Service report completeness",
+      "weight": 15,
+      "description": "YES/NO: Does the service report include situation summary, findings/numbers, root cause, corrective actions, and a customer-facing explanation? Answer YES only if all five are present and usable by operations. Vague report with no actions = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Urgency, safety, and clarity",
+      "weight": 5,
+      "description": "YES/NO: Is urgency/escalation appropriate to a data-hall cooling shortfall (uptime-aware), with clear SI units and no invented hazards? Answer YES if a reviewer can act without guessing. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds (capacity calculation + service report) and difficulty band",
+      "Keep Emicon CRAH air-side diagnosis in a data-hall context; do not turn the task into software engineering",
+      "Keep ρ = 1.20 kg/m³ and c_p = 1.005 kJ/(kg·K) for air-side Q",
+      "Each scenario bundle must keep a single coherent primary fault (measured data + alarms + CW note aligned)",
+      "Keep isomorphic difficulty: measured Q roughly 60–75% of design for low-airflow bundles",
+      "Do not require live BMS access or proprietary Emicon software"
+    ],
+    "factors": [
+      {
+        "id": "scenario",
+        "options": [
+          {
+            "id": "hall_a_low_airflow",
+            "values": {
+              "q_design_kw": "80",
+              "t_sa_design_c": "18",
+              "t_ra_design_c": "28",
+              "v_design_m3h": "24000",
+              "t_sa_meas_c": "20.0",
+              "t_ra_meas_c": "29.5",
+              "v_meas_m3h": "16500",
+              "p_meas_kw": "24",
+              "unit_tag": "CRAH-A3",
+              "hall_name": "Hall A / cold aisle 3",
+              "fault_id": "low_airflow",
+              "alarm_1": "LOW_AIRFLOW",
+              "alarm_2": "RETURN_AIR_HIGH",
+              "cw_approach_note": "Chilled-water / dry-cooler approach within design band (no heat-rejection alarm).",
+              "q_meas_ref_kw": "52.5",
+              "shortfall_ref_kw": "27.5",
+              "shortfall_ref_pct": "34"
+            }
+          },
+          {
+            "id": "hall_b_low_airflow",
+            "values": {
+              "q_design_kw": "100",
+              "t_sa_design_c": "20",
+              "t_ra_design_c": "30",
+              "v_design_m3h": "30000",
+              "t_sa_meas_c": "22.0",
+              "t_ra_meas_c": "31.0",
+              "v_meas_m3h": "21000",
+              "p_meas_kw": "30",
+              "unit_tag": "CRAH-B1",
+              "hall_name": "Hall B / cold aisle 1",
+              "fault_id": "low_airflow",
+              "alarm_1": "LOW_AIRFLOW",
+              "alarm_2": "RETURN_AIR_HIGH",
+              "cw_approach_note": "Chilled-water / dry-cooler approach within design band (no heat-rejection alarm).",
+              "q_meas_ref_kw": "63.3",
+              "shortfall_ref_kw": "36.7",
+              "shortfall_ref_pct": "37"
+            }
+          },
+          {
+            "id": "hall_c_low_airflow",
+            "values": {
+              "q_design_kw": "60",
+              "t_sa_design_c": "18",
+              "t_ra_design_c": "27",
+              "v_design_m3h": "20000",
+              "t_sa_meas_c": "19.5",
+              "t_ra_meas_c": "28.0",
+              "v_meas_m3h": "14000",
+              "p_meas_kw": "18",
+              "unit_tag": "CRAH-C2",
+              "hall_name": "Hall C / cold aisle 2",
+              "fault_id": "low_airflow",
+              "alarm_1": "LOW_AIRFLOW",
+              "alarm_2": "FILTER_DP_HIGH",
+              "cw_approach_note": "Chilled-water / dry-cooler approach within design band (no heat-rejection alarm).",
+              "q_meas_ref_kw": "39.9",
+              "shortfall_ref_kw": "20.1",
+              "shortfall_ref_pct": "34"
+            }
+          },
+          {
+            "id": "hall_a_heat_rejection",
+            "values": {
+              "q_design_kw": "80",
+              "t_sa_design_c": "18",
+              "t_ra_design_c": "28",
+              "v_design_m3h": "24000",
+              "t_sa_meas_c": "21.5",
+              "t_ra_meas_c": "30.5",
+              "v_meas_m3h": "23500",
+              "p_meas_kw": "26",
+              "unit_tag": "CRAH-A3",
+              "hall_name": "Hall A / cold aisle 3",
+              "fault_id": "heat_rejection",
+              "alarm_1": "HIGH_CW_APPROACH",
+              "alarm_2": "SUPPLY_AIR_HIGH",
+              "cw_approach_note": "Chilled-water approach elevated vs design; dry-cooler fans at 100% with high leaving CW temperature.",
+              "q_meas_ref_kw": "70.9",
+              "shortfall_ref_kw": "9.1",
+              "shortfall_ref_pct": "11"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sla_urgency",
+        "options": [
+          {
+            "id": "standard",
+            "values": {
+              "sla_label": "Standard response",
+              "sla_note": "IT inlet still within emergency envelope; restore capacity within the standard service KPI window."
+            }
+          },
+          {
+            "id": "critical",
+            "values": {
+              "sla_label": "Critical hall",
+              "sla_note": "Mission-critical hall: elevated IT inlets; treat as priority incident with clear escalation path to operations and on-call engineering."
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Quantify CRAH cooling shortfall and write the service report\n\nYou are the Technical Support Engineer on call for Emicon unit **{{unit_tag}}** serving **{{hall_name}}**. Operations reports rising IT inlet temperatures. Design data, measured operating points, and a short BMS alarm excerpt are in the workspace. Using SI units, calculate the measured sensible cooling capacity, compare it to design, quantify the gap, identify the most likely primary fault class consistent with the numbers and alarms, and write a service report suitable for the customer and data-centre operations.\n\n**Service priority:** {{sla_label}} — {{sla_note}}\n\n### Outcomes\n- Compute measured air-side sensible cooling capacity Q_meas from the stated airflow and supply/return temperatures, and compare it to Q_design = {{q_design_kw}} kW.\n- Report the capacity shortfall (kW and % of design) and a simple performance ratio Q/P using P_meas = {{p_meas_kw}} kW.\n- Select the most likely primary fault class and justify it with both calculations and alarm evidence.\n- Complete a service report: situation summary, findings, root cause, corrective actions, escalation/safety notes, and a short customer-facing explanation.\n\n### Constraints\n- Use the fixed design and measured data in the workspace (design supply/return {{t_sa_design_c}}/{{t_ra_design_c}} °C; design airflow {{v_design_m3h}} m³/h; measured supply/return {{t_sa_meas_c}}/{{t_ra_meas_c}} °C; measured airflow {{v_meas_m3h}} m³/h).\n- Use Q (kW) = 1.20 × V̇ × 1.005 × ΔT with V̇ in m³/s (m³/h ÷ 3600) and ΔT = T_return − T_supply in K.\n- Treat the BMS excerpt as authoritative; do not invent extra alarms.\n- Pick one primary fault class; secondary contributors may be mentioned but must not contradict the primary.\n- State assumptions. Prefer auditable arithmetic and a clear report over slogans.\n\n### Deliverables\nA written calculation (notes or spreadsheet) showing Q_meas, shortfall, and Q/P, plus a completed service report. Optional sketches — not required if numbers and report are complete.\n",
+      "files": {
+        "system_parameters.txt": "Emicon CRAH incident pack — {{unit_tag}} / {{hall_name}}\n================================================================\n\nCustomer context: Enex Technologies technical support for Emicon precision cooling\nPlant note: CRAH coil served by facility chilled water (natural-refrigerant chiller plant upstream)\n\nDESIGN\n------\nSensible cooling capacity Q_design:     {{q_design_kw}} kW\nSupply air temperature (design):      {{t_sa_design_c}} °C\nReturn air temperature (design):      {{t_ra_design_c}} °C\nAirflow (design):                     {{v_design_m3h}} m³/h\n\nMEASURED (this visit)\n---------------------\nSupply air temperature:               {{t_sa_meas_c}} °C\nReturn air temperature:               {{t_ra_meas_c}} °C\nAirflow (traverse / BMS):             {{v_meas_m3h}} m³/h\nUnit electrical input P_meas:         {{p_meas_kw}} kW\n\nHEAT REJECTION / CW\n-------------------\n{{cw_approach_note}}\n\nBMS ALARM EXCERPT (last 2 h)\n------------------------------\n[{{alarm_1}}] active — see unit {{unit_tag}}\n[{{alarm_2}}] active — see unit {{unit_tag}}\n\nSERVICE PRIORITY\n----------------\n{{sla_label}}: {{sla_note}}\n\nConstants for air-side sensible capacity (use these):\n  ρ = 1.20 kg/m³\n  c_p = 1.005 kJ/(kg·K)\n  Q (kW) = ρ × (V_m3h / 3600) × c_p × (T_return − T_supply)\n\nNotes:\n  - Deliverable = capacity calculation + service report (see templates).\n  - Do not invent alarms or measurements beyond this sheet.\n",
+        "calculation_template.md": "# CRAH capacity check — {{unit_tag}}\n\nFill in this template (or an equivalent spreadsheet). Do not leave critical steps implied.\n\n## Given data\n\n- Hall / unit: {{hall_name}} / {{unit_tag}}\n- Q_design = {{q_design_kw}} kW\n- Design T_supply / T_return = {{t_sa_design_c}} / {{t_ra_design_c}} °C\n- Design airflow = {{v_design_m3h}} m³/h\n- Measured T_supply / T_return = {{t_sa_meas_c}} / {{t_ra_meas_c}} °C\n- Measured airflow = {{v_meas_m3h}} m³/h\n- P_meas = {{p_meas_kw}} kW\n- Alarms: {{alarm_1}}, {{alarm_2}}\n- CW / heat-rejection note: {{cw_approach_note}}\n\n## Assumptions\n\n-\n\n## Capacity calculation\n\n- V̇_meas (m³/s) = {{v_meas_m3h}} / 3600 =\n- ΔT_meas (K) = T_return − T_supply =\n- Q_meas (kW) = 1.20 × V̇_meas × 1.005 × ΔT_meas =\n- Shortfall (kW) = Q_design − Q_meas =\n- Shortfall (%) = 100 × shortfall / Q_design =\n- Performance ratio Q_meas / P_meas =\n\nOptional design airflow check:\n- V̇_design (m³/s) =\n- Q_design restated from design airflow and design ΔT (should be ≈ {{q_design_kw}} kW) =\n\n## Diagnosis\n\nPrimary fault class:\n\nEvidence (numbers):\n\nEvidence (alarms / CW note):\n\nSecondary factors (optional):\n\n## Results summary\n\n| Result | Value | Units |\n|--------|-------|-------|\n| Q_meas | | kW |\n| Shortfall | | kW |\n| Shortfall | | % |\n| Q/P | | — |\n| Primary fault | | — |\n",
+        "service_report_template.md": "# Service report — {{unit_tag}} / {{hall_name}}\n\n**Priority:** {{sla_label}}\n\n## 1. Situation summary\n\n(What was reported? What is at risk for the hall?)\n\n## 2. Findings\n\n(Key measurements, Q_meas vs Q_design, alarms cited.)\n\n## 3. Root cause\n\n(Primary fault class and why.)\n\n## 4. Corrective actions\n\n(Immediate checks/repairs; who does what; verify steps after fix.)\n\n## 5. Escalation and safety\n\n(When to escalate to operations / engineering; any H&S or access notes — stay realistic for data-centre work.)\n\n## 6. Customer-facing explanation\n\n(Short plain-language summary for the customer contact.)\n"
+      }
+    }
+  }
+}
