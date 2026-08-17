@@ -3,7 +3,7 @@
   "title": "Summarize daily station weather in a spreadsheet",
   "slug": "weather-station-spreadsheet-summary",
   "version": 1,
-  "image": "webtop",
+  "image": "finance",
   "duration_minutes": 25,
   "skills_assessed": [
     "Opening CSV data in a spreadsheet",
