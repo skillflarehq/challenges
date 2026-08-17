@@ -1,0 +1,11 @@
+line_item,fy2022,fy2023,fy2024,notes
+cash,3507,4747,6376,USD thousands
+accounts_receivable,5178,5548,5918,Historical AR; forecast DSO in forecast_drivers.txt
+inventory,4350,4660,4892,Historical inventory; forecast DIO in forecast_drivers.txt
+net_ppe,18000,18500,19100,Gross PP&E less accumulated depreciation
+total_assets,31035,33455,36286,Must equal total liabilities and equity
+accounts_payable,2537,2718,2854,Historical AP; forecast DPO in forecast_drivers.txt
+debt,8000,7500,7000,Amortizing term debt
+common_stock,5000,5000,5000,No new equity issued in history
+retained_earnings,15498,18237,21432,Rollforward: prior RE + NI − dividends
+total_liabilities_and_equity,31035,33455,36286,Must equal total assets

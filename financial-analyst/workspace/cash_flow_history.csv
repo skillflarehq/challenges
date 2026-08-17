@@ -1,0 +1,13 @@
+line_item,fy2022,fy2023,fy2024,notes
+net_income,3330,3652,4260,USD thousands
+da,2100,2200,2400,Add-back
+change_in_operating_wc,-500,-499,-466,Cash impact of ΔAR + ΔInventory + ΔAP (increase in NWC = use of cash)
+cash_from_operations,4930,5353,6194,NI + DA + change_in_operating_wc
+capex,-2700,-2700,-3000,Purchase of PP&E
+cash_from_investing,-2700,-2700,-3000,USD thousands
+debt_draw_or_paydown,-500,-500,-500,Negative = repayment
+dividends,-832,-913,-1065,~25% of NI payout
+cash_from_financing,-1332,-1413,-1565,USD thousands
+net_change_in_cash,898,1240,1629,Must equal ending cash − beginning cash
+beginning_cash,2609,3507,4747,FY2022 beginning cash is FY2021 ending cash (provided for bridge)
+ending_cash,3507,4747,6376,Ties to balance sheet cash

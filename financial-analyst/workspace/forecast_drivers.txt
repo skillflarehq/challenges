@@ -1,0 +1,45 @@
+Northline Precision Components — forecast drivers (base growth)
+================================================================
+All figures USD thousands unless noted. Forecast years = FY2025–FY2029 (Y1–Y5).
+Base year for the forecast rollforward = FY2024.
+
+Revenue growth (YoY):
+  Y1 6%, Y2 6%, Y3 5%, Y4 5%, Y5 4%
+
+Gross margin (gross profit / revenue):
+  Y1 38.0%, Y2 38.0%, Y3 38.5%, Y4 38.5%, Y5 39.0%
+
+Operating expense excluding D&A (% of revenue):
+  Y1 20.0%, Y2 20.0%, Y3 19.5%, Y4 19.5%, Y5 19.0%
+
+Tax rate: 25% of EBT each year
+
+D&A policy:
+  D&A_t = 12.5% × beginning-of-year net PP&E
+  Net PP&E_t = beginning net PP&E + CapEx_t − D&A_t
+
+CapEx (% of that year’s revenue):
+  Y1 6.3%, Y2 5.6%, Y3 4.9%, Y4 4.5%, Y5 4.2%
+
+Net working capital days (year-end balances):
+  DSO (AR): 45 days → AR = revenue × 45 / 365
+  DIO (inventory): 60 days → Inventory = COGS × 60 / 365
+  DPO (AP): 35 days → AP = COGS × 35 / 365
+
+Interest expense (USD thousands):
+  Y1 560, Y2 540, Y3 520, Y4 500, Y5 480
+
+Debt:
+  Repay $500k principal each forecast year (no new draws)
+
+Dividends:
+  25% of that year’s net income
+
+Common stock:
+  Remains $5000k (no equity issuance)
+
+Cash:
+  Plug from the cash flow statement so the balance sheet balances
+  Ending cash must equal beginning cash + CFO + CFI + CFF
+
+Do not build a DCF or valuation. Focus on an integrated three-statement forecast.

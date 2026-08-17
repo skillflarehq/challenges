@@ -1,0 +1,11 @@
+line_item,fy2022,fy2023,fy2024,notes
+revenue,42000,45000,48000,USD thousands
+cogs,26460,28350,29760,USD thousands
+gross_profit,15540,16650,18240,Revenue minus COGS
+opex_ex_da,8400,9000,9600,SG&A and other opex excluding D&A
+da,2100,2200,2400,Depreciation and amortization
+ebit,5040,5450,6240,Operating income
+interest_expense,600,580,560,USD thousands
+ebt,4440,4870,5680,Earnings before tax
+tax,1110,1218,1420,Effective tax rate 25%
+net_income,3330,3652,4260,USD thousands
