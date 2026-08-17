@@ -11,6 +11,10 @@
     "Excluding missing values from statistics",
     "Efficient range selection and formula fill"
   ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "The station CSV and data notes are on the desktop; use the spreadsheet app in the workspace."
+  ],
   "role": {
     "title": "Operations analyst",
     "seniority": "Junior to mid",

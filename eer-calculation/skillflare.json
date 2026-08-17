@@ -11,6 +11,11 @@
     "Cooling EER and heat-pump COP calculation with non-ideal compression",
     "Comparison to an inverse Carnot reference cycle"
   ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "System parameters and a blank calculation template are on the desktop.",
+    "Any refrigerant property source is fine (CoolProp, REFPROP, ASHRAE tables, or an online calculator)."
+  ],
   "role": {
     "title": "HVAC / refrigeration engineer",
     "seniority": "Junior to mid",

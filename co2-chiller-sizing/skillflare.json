@@ -12,6 +12,11 @@
     "Chiller capacity sizing (mass flow and compressor displacement) for a design cooling load",
     "Comparison to an inverse Carnot refrigerator from external cellar and ambient temperatures"
   ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "System parameters and a blank calculation template are on the desktop.",
+    "Any refrigerant property source is fine (CoolProp, REFPROP, ASHRAE tables, or an online calculator)."
+  ],
   "role": {
     "title": "Mechanical / refrigeration engineer (winery systems)",
     "seniority": "Junior to mid",

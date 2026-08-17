@@ -12,6 +12,10 @@
     "Fraud and operational risk controls",
     "Data-informed planning with spreadsheets and maps"
   ],
+  "before_you_start": [
+    "No personal accounts or paid SaaS logins required.",
+    "Community, product, transport, labor, and map CSVs are on the desktop."
+  ],
   "role": {
     "title": "Field sales manager",
     "seniority": "Mid",

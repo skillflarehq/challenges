@@ -11,6 +11,10 @@
     "Secrets hygiene for cloud credentials",
     "tofu plan as dry-run validation"
   ],
+  "before_you_start": [
+    "A personal DigitalOcean account with an API token you can use in the session (plan-only; do not apply).",
+    "OpenTofu (`tofu`) is already on the desktop; cluster requirements are in `requirements.md`."
+  ],
   "role": {
     "title": "Platform / DevOps engineer",
     "seniority": "Mid",

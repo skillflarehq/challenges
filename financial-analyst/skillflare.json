@@ -12,6 +12,10 @@
     "Spreadsheet modeling and auditability",
     "Assumption documentation and sensitivity awareness"
   ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "Historical statements, forecast drivers, and a blank model checklist are on the desktop."
+  ],
   "role": {
     "title": "Financial analyst",
     "seniority": "Mid",

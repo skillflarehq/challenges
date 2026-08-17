@@ -11,6 +11,10 @@
     "Booking domain modeling",
     "End-to-end product demo"
   ],
+  "before_you_start": [
+    "A personal Supabase account ready so you can create a project (hosted and/or local CLI).",
+    "No starter app is provided on the desktop; you will build the Vue frontend and schema from scratch."
+  ],
   "role": {
     "title": "Full-stack engineer (Vue + Supabase)",
     "seniority": "Mid",

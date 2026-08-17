@@ -11,6 +11,11 @@
     "Heating COP calculation with non-ideal compression",
     "Comparison to an external reverse Carnot heat-pump benchmark"
   ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "System parameters and a blank calculation template are on the desktop.",
+    "Any refrigerant property source is fine (CoolProp, REFPROP, ASHRAE tables, or an online calculator)."
+  ],
   "role": {
     "title": "Thermal systems / industrial heat-pump engineer",
     "seniority": "Junior to mid",
