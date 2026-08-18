@@ -66,31 +66,37 @@
     {
       "name": "Cycle state-point analysis",
       "weight": 25,
+      "summary": "Identifies the four cycle states correctly, including suction superheat and isenthalpic expansion.",
       "description": "YES/NO: Does the deliverable correctly identify saturated vapor at the stated Tev (useful superheat 0 K), compressor inlet with the stated suction superheat at evaporator pressure, saturated liquid at the stated Tcond, and isenthalpic expansion (h4 = h3)? Answer YES only if all four state/expansion conventions are visible and consistent with the instance parameters. Collapsed useful/suction superheat into one state, wrong condenser phase, or non-isenthalpic expansion = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Cooling EER",
       "weight": 15,
+      "summary": "Computes cooling EER as refrigerating effect over compressor work, with compressor efficiency applied correctly.",
       "description": "YES/NO: Are refrigerating effect and compressor work enthalpy-coherent, with the stated η_comp applied as W = W_isentropic / η_comp (not inverted), and cooling EER reported as q_evap / w_comp in SI W/W? Answer YES only if q_evap, w_comp, η_comp application, and EER are all present and consistent. Inverted η_comp, missing EER, or incoherent energy balances = NO. US BTU/(W·h) conversion is not required. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Heat-pump COP",
       "weight": 15,
+      "summary": "Reports heat-pump COP consistent with the cycle energy balance.",
       "description": "YES/NO: Is heat-pump COP reported as q_cond / w_comp (or equivalently EER + 1) in SI W/W and consistent with energy balance (q_cond ≈ q_evap + w_comp)? Answer YES only if COP is present and coherent with the cycle energy balance. Missing COP or incoherent q_cond / w_comp = NO. US BTU/(W·h) conversion is not required. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Carnot reference cycle",
       "weight": 25,
+      "summary": "Compares actual EER to a Carnot reference that uses the stated temperature differences and absolute temperatures.",
       "description": "YES/NO: Does the deliverable use the stated ΔT at both evaporator and condenser for T_cold = Tev + ΔT and T_hot = Tcond − ΔT, apply EER_Carnot = T_cold / (T_hot − T_cold) with absolute temperatures, and compute η_Carnot = EER / EER_Carnot consistently? Answer YES only if all three are correct for the instance ΔT. Missing ΔT, °C instead of kelvin, heat-engine Carnot, or missing relative efficiency = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Assumptions and data sourcing",
       "weight": 10,
+      "summary": "States the refrigerant property source and the main cycle assumptions.",
       "description": "YES/NO: Does the deliverable state the refrigerant property source and visible cycle assumptions (e.g. negligible pressure drops, saturated liquid leaving the condenser, isenthalpic throttling)? Answer YES only if both a property source and key assumptions are explicit. Numbers with no source and no stated assumptions = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity of deliverable",
       "weight": 10,
+      "summary": "Leaves a readable state table and finals a reviewer can audit without guessing units or steps.",
       "description": "YES/NO: Is there a readable state table and final numbers a reviewer can follow without guessing intermediate steps or units? Answer YES if the calculation path is auditable end-to-end. Opaque scrap numbers or missing table/finals that force guessing = NO. YES = full points; NO or unclear = 0."
     }
   ],

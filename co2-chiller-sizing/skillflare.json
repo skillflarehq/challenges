@@ -72,31 +72,37 @@
     {
       "name": "Transcritical state-point analysis",
       "weight": 25,
+      "summary": "Treats the high side as transcritical (gas cooler at controlled pressure), with consistent compressor inlet, gas-cooler exit, and isenthalpic expansion.",
       "description": "YES/NO: Does the deliverable correctly identify compressor inlet with the stated suction/useful superheat at evaporator pressure, compression to the stated high-side pressure (not a saturation condenser pressure), gas-cooler exit at the stated T and P, and isenthalpic expansion (h4 = h3)? Answer YES only if all four conventions are visible and consistent with the instance parameters. Treating the high side as a subcritical condenser at ambient, wrong gas-cooler state, or non-isenthalpic expansion = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Cooling EER",
       "weight": 20,
+      "summary": "Computes cooling EER as refrigerating effect over compressor work, with compressor efficiency applied correctly.",
       "description": "YES/NO: Are refrigerating effect and compressor work enthalpy-coherent, with the stated η_comp applied as W = W_isentropic / η_comp (not inverted), and cooling EER reported as q_evap / w_comp in SI W/W? Answer YES only if q_evap, w_comp, η_comp application, and EER are all present and consistent. Inverted η_comp, missing EER, or incoherent energy balances = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Capacity sizing",
       "weight": 20,
+      "summary": "Sizes mass flow from the design load and compressor displacement from suction volume and volumetric efficiency.",
       "description": "YES/NO: Is refrigerant mass flow computed as ṁ = Q_design / q_evap using the instance design load, and is compressor displacement computed as V̇_disp = ṁ · v1 / η_vol with suction specific volume and the stated volumetric efficiency? Answer YES only if both ṁ and V̇_disp are present and coherent with the candidate’s q_evap and v1. Missing sizing, wrong formula (e.g. using q_cond), or ignoring η_vol = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Carnot / second-law reference",
       "weight": 20,
+      "summary": "Compares actual EER to a Carnot refrigerator using the stated cellar and ambient temperatures.",
       "description": "YES/NO: Does the deliverable use the stated external cellar and ambient temperatures as T_L and T_H, apply EER_Carnot = T_L / (T_H − T_L) with absolute temperatures, and compute η_Carnot = EER / EER_Carnot consistently? Answer YES only if all three are correct for the instance external temps. Using Tev/gas-cooler exit as Carnot boundaries, °C instead of kelvin, heat-engine Carnot, or missing relative efficiency = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Assumptions and data sourcing",
       "weight": 5,
+      "summary": "States the refrigerant property source and the main cycle assumptions.",
       "description": "YES/NO: Does the deliverable state the refrigerant property source and visible cycle assumptions (e.g. negligible pressure drops, isenthalpic throttling, gas cooler at controlled high-side pressure)? Answer YES only if both a property source and key assumptions are explicit. Numbers with no source and no stated assumptions = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity of deliverable",
       "weight": 10,
+      "summary": "Leaves a readable state table and finals a reviewer can audit without guessing units or steps.",
       "description": "YES/NO: Is there a readable state table and final numbers a reviewer can follow without guessing intermediate steps or units? Answer YES if the calculation path is auditable end-to-end. Opaque scrap numbers or missing table/finals that force guessing = NO. YES = full points; NO or unclear = 0."
     }
   ],

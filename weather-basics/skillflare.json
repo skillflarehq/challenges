@@ -66,71 +66,85 @@
     {
       "name": "Worked in a spreadsheet",
       "weight": 4,
+      "summary": "Completes the analysis in a spreadsheet rather than a text editor or script-only workflow.",
       "description": "YES/NO: Did the candidate open and work the extract in LibreOffice Calc or another spreadsheet (Excel-compatible), rather than only viewing the CSV in a text editor? Answer YES only if video or window events show spreadsheet work on the station file. Text-editor-only or terminal-only work = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "TMAX minimum",
       "weight": 7,
+      "summary": "Reports the correct TMAX minimum, excluding missing 9999 values.",
       "description": "YES/NO: Is the reported TMAX minimum the instance key (skeleton 2010: −244 in stored tenths °C), excluding 9999? Answer YES if the leftover summary, formula result, or clearly stated figure matches the instance TMAX min. Wrong column, included 9999, or no TMAX min shown = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "TMAX maximum",
       "weight": 7,
+      "summary": "Reports the correct TMAX maximum, excluding missing 9999 values.",
       "description": "YES/NO: Is the reported TMAX maximum the instance key (skeleton 2010: 339 in stored tenths °C), excluding 9999? Answer YES if the leftover summary, formula result, or clearly stated figure matches the instance TMAX max. Wrong column or no TMAX max shown = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "TMAX average",
       "weight": 8,
+      "summary": "Reports a TMAX average that excludes missing 9999 values.",
       "description": "YES/NO: Is the reported TMAX average within about 0.1 of the instance key (skeleton 2010: 98.17 in stored tenths °C), excluding 9999? Two decimal places are enough. Answer YES if a visible AVERAGE/AVERAGEIF (or equivalent) over the TMAX data would produce that mean, even when cell format rounds the display. Average that includes 9999, wrong column, or no TMAX average = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "TMIN minimum",
       "weight": 7,
+      "summary": "Reports the correct TMIN minimum, excluding missing 9999 values.",
       "description": "YES/NO: Is the reported TMIN minimum the instance key (skeleton 2010: −328 in stored tenths °C), excluding 9999? Answer YES if the leftover summary, formula result, or clearly stated figure matches the instance TMIN min. Wrong column or no TMIN min shown = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "TMIN maximum",
       "weight": 7,
+      "summary": "Reports the correct TMIN maximum, excluding missing 9999 values.",
       "description": "YES/NO: Is the reported TMIN maximum the instance key (skeleton 2010: 211 in stored tenths °C), excluding 9999? Answer YES if the leftover summary, formula result, or clearly stated figure matches the instance TMIN max. Wrong column or no TMIN max shown = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "TMIN average",
       "weight": 8,
+      "summary": "Reports a TMIN average that excludes missing 9999 values.",
       "description": "YES/NO: Is the reported TMIN average within about 0.1 of the instance key (skeleton 2010: −6.34 in stored tenths °C), excluding 9999? Two decimal places are enough. Answer YES if a visible AVERAGE/AVERAGEIF (or equivalent) over the TMIN data would produce that mean, even when cell format rounds the display. Average that includes 9999, wrong column, or no TMIN average = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "PRCP stats exclude missing",
       "weight": 8,
+      "summary": "Computes PRCP min, max, and average after excluding missing 9999 values.",
       "description": "YES/NO: Are PRCP minimum, maximum, and average all computed after excluding 9999 (skeleton 2010: min 0, max 381, average 14.73 in stored tenths mm)? Answer YES only if all three valid-precip stats match the instance keys (averages within about 0.1). Including 9999 in the average (nonsense mean in the hundreds) or omitting PRCP = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "MIN and MAX via functions",
       "weight": 10,
+      "summary": "Uses spreadsheet MIN and MAX functions rather than typing results by hand.",
       "description": "YES/NO: Do leftover cells or the formula bar show MIN and MAX (or AutoSum min/max / MINIFS) for the temperature and/or precipitation summary, rather than numbers typed by hand? Answer YES only if function-based min and max are visible in the workbook. Typed literals, sort-then-copy-paste of values, status-bar reading typed back, or Python-only answers = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "AVERAGE or AVERAGEIF via functions",
       "weight": 10,
+      "summary": "Uses a spreadsheet average function rather than typing a calculated mean.",
       "description": "YES/NO: Do leftover cells or the formula bar show AVERAGE, AVERAGEIF, AVERAGEIFS, or an equivalent spreadsheet average (including average of a filtered range) for the required columns? Answer YES only if an average function is visible. Calculator or Python result typed into cells, or no average formula = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Contiguous ranges",
       "weight": 8,
+      "summary": "Uses a contiguous column or named range in summary formulas instead of listing individual cells.",
       "description": "YES/NO: Do the summary formulas reference a contiguous column or block (for example TMAX as G2:G366 or G:G, a named range, or a filtered column) rather than listing hundreds of individual cells? Answer YES only if range-style references are visible in the formulas. One-cell-at-a-time clicks, comma-separated cell lists, or no formulas = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Efficient selection",
       "weight": 8,
+      "summary": "Selects data ranges efficiently (column click, keyboard shortcuts, or equivalent) rather than cell-by-cell highlighting.",
       "description": "YES/NO: Does video show an efficient way to take the data range — column-letter click, Ctrl+Shift+Arrow (or LibreOffice equivalent), Name Box, fill handle, AutoFilter, or status-bar range select — rather than clicking hundreds of cells? Answer YES only if that efficient selection is visible. Slow cell-by-cell highlighting of the year = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Formula reuse",
       "weight": 4,
+      "summary": "Reuses one summary formula pattern across metrics instead of rewriting each statistic from scratch.",
       "description": "YES/NO: Did the candidate reuse one summary pattern across metrics (fill handle, copy/paste formulas, or mixed references) rather than independently rewriting each of the nine statistics? Answer YES if fill/copy of formulas across the summary block is visible. Six or nine separately typed formulas with no reuse, or no formulas = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Labeled leftover summary",
       "weight": 4,
+      "summary": "Leaves a labeled Min / Max / Average block so a reviewer can find TMAX, TMIN, and PRCP results.",
       "description": "YES/NO: Is there a labeled Min / Max / Average block (or equivalent headings) left on the sheet or a second sheet so a reviewer can find TMAX, TMIN, and PRCP results without guessing which cells matter? Answer YES if labels and the nine stats are reviewable in the workbook. Unlabeled scrap numbers, results only spoken, or a cleared sheet = NO. YES = full points; NO or unclear = 0."
     }
   ],

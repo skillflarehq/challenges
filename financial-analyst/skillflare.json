@@ -66,26 +66,31 @@
     {
       "name": "Statement integration",
       "weight": 30,
+      "summary": "Keeps the three statements integrated: the balance sheet balances, retained earnings roll forward, and cash ties to the cash-flow bridge.",
       "description": "YES/NO: Does the deliverable show an integrated model where the balance sheet balances each forecast year, retained earnings roll forward from net income (less dividends), and ending cash ties to the cash flow bridge? Answer YES only if these integration checks are visible for the forecast (history checks strengthen but do not replace forecast integration). Broken BS, orphan NI, or cash that does not bridge = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Forecast driver application",
       "weight": 25,
+      "summary": "Applies the provided forecast drivers (growth, margins, tax, CapEx, D&A) instead of a freehand case.",
       "description": "YES/NO: Are revenue growth, gross margin, opex (ex-D&A), tax rate, CapEx (% of sales), and the stated D&A policy applied consistently with forecast_drivers.txt for the instance? Answer YES only if the forecast path clearly follows those drivers rather than freehand fiction. Ignoring drivers or inventing a different primary case without labeling it = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Working capital and manufacturing realism",
       "weight": 20,
+      "summary": "Sets working capital from DSO/DIO/DPO days and rolls PP&E with CapEx minus D&A.",
       "description": "YES/NO: Are AR, inventory, and AP (or equivalent NWC) set from the stated DSO/DIO/DPO days, and is net PP&E rolled with CapEx \u2212 D&A? Answer YES only if both NWC days and the PP&E rollforward are present and coherent. Flat WC with no policy, or CapEx/D&A that never touch PP&E = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Assumptions and sensitivity",
       "weight": 15,
+      "summary": "Documents key assumptions and calls out at least one material risk or sensitivity.",
       "description": "YES/NO: Does the candidate document key assumptions and call out at least one material risk or sensitivity (growth, margin, CapEx, WC days, or similar)? Answer YES only if both documentation and a concrete sensitivity/risk note are present. Numbers with no commentary, or generic caveats with no model link = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity of deliverable",
       "weight": 10,
+      "summary": "Leaves an auditable workbook a reviewer can follow from drivers to outputs.",
       "description": "YES/NO: Is there an auditable workbook or completed template a reviewer can follow without guessing units, years, or which driver set was used? Answer YES if the path from drivers to outputs is reviewable. Opaque scrap tabs or missing finals that force guessing = NO. YES = full points; NO or unclear = 0."
     }
   ],
