@@ -6,6 +6,8 @@ Candidate opens the instance GHCN daily extract in a spreadsheet and leaves a la
 
 A strong finish is formula-driven (`MIN` / `MAX` / `AVERAGE` or `AVERAGEIF`) over contiguous column ranges, with missing values excluded, and a leftover labeled block a reviewer can read. Status-bar or sort-based answers can earn **correctness** items; they do not earn **function** items unless formulas remain in the workbook. Python/`pandas` can corroborate numbers (correctness only) and does not replace the spreadsheet work sample.
 
+Score **numeric match** independently of **9999-exclusion method**. `MIN` over a range that still contains `9999` is usually still the correct minimum; `MAX` and `AVERAGE` are not. See Method notes.
+
 ### Per-extract keys (exclude 9999)
 
 Averages below are unrounded; accept about **±0.1** (two decimal places is enough). If a visible `AVERAGE` / `AVERAGEIF` over the correct range would produce the mean, treat the average criterion as YES even when cell format rounds the display.
@@ -28,13 +30,28 @@ Converted °C or mm (divide by 10) is acceptable **only if labeled**; the requir
 
 ## Method notes
 
-1. **Tool** — Confirm LibreOffice Calc (or equivalent spreadsheet) from video / window events. `soffice` opening the CSV counts. Viewing CSV only in a text editor or VS Code does not satisfy “worked in a spreadsheet.”
-2. **Ranges** — Data are columns G/H/I (`TMAX` / `TMIN` / `PRCP`) on rows 2–366 if the header is row 1 (365 daily rows). `G2:G366`, `G:G`, a named range, or a filtered column are all fine.
-3. **Missing** — `9999` is missing. Check with Autofilter, `MINIFS`/`MAXIFS`, `AVERAGEIF(range,"<>9999")`, `IF` wrappers, or filter-then-aggregate. `MIN`/`MAX`/`AVERAGE` over a range that still contains 9999 will distort **max** and **average** (min of temperatures is usually still correct because 9999 is large).
-4. **PRCP trap** — Averaging PRCP **including** 9999 yields a mean in the **tens to hundreds**, not ~14–16. That is a clear NO for the PRCP criterion.
-5. **Formulas vs typed values** — Full method credit needs leftover `MIN`/`MAX`/`AVERAGE` (or `AVERAGEIF`) in the formula bar. Status-bar Autocalculate, sorting the column and reading the first/last cell, or a Python printout can support correctness only.
-6. **Efficient selection** — Look for column-letter click, Ctrl+Shift+Arrow (Linux webtop / Calc equivalent), Name Box, fill handle, or AutoFilter — not clicking hundreds of cells.
-7. **Reuse** — One summary row filled or copied across TMAX/TMIN/PRCP (or min/max/avg filled across) is YES for formula reuse.
+Score each rubric item independently. 2010 numbers in the rubric are examples; use this table for the brief year. If a leftover cell cannot be read, zero **that item only**.
+
+### Correctness (number match; formula bar not required)
+
+1. **TMAX minimum / TMIN minimum** — YES iff the reported min equals the instance min key. Do **not** require `<>9999` / `MINIFS` on these items. `=MIN(G2:G366)` (or H) that still contains 9999 is YES — 9999 cannot be the temperature minimum. Fail for wrong column, missing min, unlabeled conversion (e.g. −24.4 vs −244), or a value that is not the key (including 9999).
+2. **TMAX maximum / TMIN maximum** — YES iff the reported max equals the instance max key. Do **not** also require seeing `<>9999` / `MAXIFS` if the number already matches. A leftover `MAX` of **9999** is the fail. Unlabeled conversion or missing max = NO.
+3. **TMAX average / TMIN average** — YES iff within **±0.1** of the instance average key. Display rounding is OK if a visible `AVERAGE` / `AVERAGEIF` would produce the mean. The table column “Failure: average including 9999” is an automatic NO for that average item.
+4. **PRCP stats exclude missing** — Partial: **3** min + **3** max + **2** average against the PRCP row of the instance table (2010: 0 / 381 / 14.73). Including 9999 in the average (mean in the tens-to-hundreds, not ~14–16) zeros **only the average slice**, not min if min is still 0. A leftover `MAX` of 9999 zeros only the max slice. Omit PRCP entirely = 0.
+
+### Method (leftover formulas)
+
+5. **Worked in a spreadsheet** — Confirm LibreOffice Calc (or equivalent) from video / window events. `soffice` opening the CSV counts. Viewing CSV only in a text editor or VS Code does not satisfy this item.
+6. **MIN and MAX via functions** — Leftover `MIN`/`MAX`/`MINIFS`/`MAXIFS` (or AutoSum min/max) for **at least one** required column. Do not require all six min/max cells. Partial **5** if only MIN or only MAX remains. Typed literals / sort-copy / Python-only = 0.
+7. **AVERAGE or AVERAGEIF via functions** — Leftover `AVERAGE` / `AVERAGEIF` / `AVERAGEIFS` (or filtered-range average) for **at least one** required column. Typed calculator/Python means = 0.
+8. **Contiguous ranges** — Leftover formulas use a block (`G2:G366`, `G:G`, named range, filtered column). Data are columns G/H/I (`TMAX` / `TMIN` / `PRCP`) on rows 2–366 if the header is row 1. Individual cell lists or no formulas = 0.
+9. **Efficient selection** — If leftover formulas already use contiguous ranges, that **is** sufficient evidence; do not require a Ctrl+Shift+Arrow clip. Also YES for column-letter click, Ctrl+Shift+Arrow (Linux webtop / Calc equivalent), Name Box, fill handle, or AutoFilter. NO only if leftover formulas list individual cells **or** video shows hundreds of cells clicked as the way the summary was built.
+10. **Formula reuse** — Fill/copy visible **or** leftover formulas are the same pattern with a shifted column (G vs H vs I). Nine separately typed but isomorphic formulas still count. Typed literals or a different method per statistic = 0.
+11. **Labeled leftover summary** — Labeled Min / Max / Average block (or equivalent headings) a reviewer can find. Do **not** require all nine correctness keys here; missing numbers are scored on correctness items. Unlabeled scrap, spoken-only results, or a cleared sheet = 0.
+
+### Missing-value mechanics (why MIN ≠ MAX / AVERAGE)
+
+`9999` is missing. Autofilter, `MINIFS`/`MAXIFS`, `AVERAGEIF(range,"<>9999")`, `IF` wrappers, or filter-then-aggregate all count as exclusion **when the leftover result matches**. `MIN`/`MAX`/`AVERAGE` over a range that still contains 9999 will distort **max** and **average**; min of temperatures is usually still correct because 9999 is large.
 
 ## Expected artifacts
 
@@ -58,7 +75,7 @@ Converted °C or mm (divide by 10) is acceptable **only if labeled**; the requir
 ## Failure signals
 
 - Never opens a spreadsheet (CSV stays in an editor or only Python is used for the whole task)
-- PRCP average in the hundreds because 9999 was included
+- PRCP average in the hundreds because 9999 was included (zeros the PRCP **average** slice only; min can still score if it is 0)
 - TMAX/TMIN max equal to 9999
 - Nine numbers typed from a calculator or from sorting, with no leftover formulas (correctness may still apply; method items are NO)
 - Clicking or listing hundreds of individual cells in formulas
