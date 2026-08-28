@@ -5,7 +5,7 @@
   "version": 1,
   "image": "npm",
   "tools": ["Node.js", "npm", "VS Code", "Continue"],
-  "duration_minutes": 60,
+  "duration_minutes": 20,
   "skills_assessed": [
     "Dockerfile authoring",
     "Multi-stage builds",

@@ -4,7 +4,7 @@
   "slug": "eer-calculation-refrigeration-r22",
   "version": 1,
   "image": "refrigeration",
-  "duration_minutes": 45,
+  "duration_minutes": 20,
   "skills_assessed": [
     "Vapor-compression refrigeration cycle analysis",
     "Refrigerant property lookup and state-point definition",
