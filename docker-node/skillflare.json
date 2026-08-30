@@ -4,11 +4,16 @@
   "slug": "docker-backend-developer-fastify",
   "version": 1,
   "image": "npm",
-  "duration_minutes": 60,
+  "tools": ["Node.js", "npm", "VS Code", "Continue"],
+  "duration_minutes": 20,
   "skills_assessed": [
     "Dockerfile authoring",
     "Multi-stage builds",
     "Container networking basics"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "Node.js, npm, Docker, and the starter Fastify app are on the desktop."
   ],
   "role": {
     "title": "Backend / DevOps engineer",
@@ -60,21 +65,25 @@
     {
       "name": "Working container",
       "weight": 40,
+      "summary": "Demonstrates a running container that serves the app through a published host port.",
       "description": "YES/NO: Did the candidate demonstrate a running container that serves the starter Fastify routes (GET / and/or GET /health) through a published host port mapped to the app’s documented default listen port (see starter index.js / brief)? Answer YES only if video or narrative shows a successful check (browser or curl) against the mapped port. Build-only, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Dockerfile quality",
       "weight": 30,
+      "summary": "Uses a lockfile-based install and a lean runtime image in the Dockerfile.",
       "description": "YES/NO: Does the final Dockerfile use a reproducible lockfile install (npm ci or equivalent) and a lean final runtime (multi-stage or alpine/slim Node base, not an unexplained full OS image)? Answer YES only if both are visible in the deliverable Dockerfile. Missing lockfile-based install or a heavyweight unjustified base = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Runtime hygiene",
       "weight": 20,
+      "summary": "Runs the app as a non-root user and documents the container port to publish.",
       "description": "YES/NO: Does the final image configuration run the app as a non-root user (USER or equivalent) and expose/document a container port suitable for publishing (e.g. EXPOSE matching the app default listen port)? Answer YES only if both appear in the final Dockerfile (or equivalent compose). Missing non-root USER or no port exposure/documentation = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity of deliverables",
       "weight": 10,
+      "summary": "Leaves a rebuildable Dockerfile on the desktop that a reviewer can follow without guessing steps.",
       "description": "YES/NO: Is there a Dockerfile (or equivalent) left on the desktop that a reviewer could use to rebuild the image without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional compose/notes must be accurate if present. No Dockerfile / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
     }
   ],

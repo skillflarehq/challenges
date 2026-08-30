@@ -11,6 +11,10 @@
     "Secrets hygiene for cloud credentials",
     "tofu plan as dry-run validation"
   ],
+  "before_you_start": [
+    "A personal DigitalOcean account with an API token you can use in the session (plan-only; do not apply).",
+    "OpenTofu (`tofu`) is already on the desktop; cluster requirements are in `requirements.md`."
+  ],
   "role": {
     "title": "Platform / DevOps engineer",
     "seniority": "Mid",
@@ -61,21 +65,25 @@
     {
       "name": "Successful dry-run",
       "weight": 40,
+      "summary": "Shows a successful tofu plan that would create the managed Postgres cluster.",
       "description": "YES/NO: Did the candidate demonstrate a successful tofu plan (exit success) for their OpenTofu config that plans creation of a DigitalOcean managed Postgres cluster? Answer YES only if video or narrative shows plan completing successfully (create planned for the database cluster). Plan failure, apply-as-completion, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Correct Postgres cluster config",
       "weight": 30,
+      "summary": "Declares a DigitalOcean managed Postgres cluster with engine, size, region, version, and node count matching the spec.",
       "description": "YES/NO: Does the deliverable declare digitalocean_database_cluster (or equivalent DO managed DB resource) with engine pg and name, region, size, version, and node_count matching the instance requirements on the desktop? Answer YES only if engine is Postgres and the required parameters match the scenery. Wrong engine, wrong cloud, or mismatched required params = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Secrets and dry-run discipline",
       "weight": 20,
+      "summary": "Supplies the API token via environment or sensitive vars, and finishes with plan only—no live apply.",
       "description": "YES/NO: Is the DigitalOcean token supplied via environment variable and/or a sensitive variable / non-committed tfvars pattern (not hardcoded in .tf left on the desktop), and is completion path plan-only (no evidence that apply / live cluster creation was required to finish)? Answer YES only if both secrets hygiene and plan-only discipline hold. Hardcoded token in deliverable files or apply treated as the required finish = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity of deliverables",
       "weight": 10,
+      "summary": "Leaves OpenTofu files a reviewer can init and plan without guessing layout or undocumented steps.",
       "description": "YES/NO: Are OpenTofu .tf files left on the desktop that a reviewer could init and plan without guessing paths or undocumented steps? Answer YES if the primary module is present and self-explanatory enough to dry-run; optional notes must be accurate if present. No .tf / cannot plan from the workspace = NO. YES = full points; NO or unclear = 0."
     }
   ],

@@ -11,6 +11,8 @@ This repository holds **example Skillflare challenges**: timed, role-shaped work
 | [`heat-pump-design`](heat-pump-design/) | Industrial heat-pump heating COP work sample (R1233zd(E)) |
 | [`co2-chiller-sizing`](co2-chiller-sizing/) | Transcritical R744 wine-cellar chiller sizing work sample |
 | [`sales-manager`](sales-manager/) | Field sales planning work sample |
+| [`financial-analyst`](financial-analyst/) | Manufacturing three-statement forecast work sample |
+| [`weather-basics`](weather-basics/) | Spreadsheet screen: min / max / average on GHCN daily weather |
 | [`docker-node`](docker-node/) | Docker/Node example package layout |
 | [`opentofu`](opentofu/) | OpenTofu dry-run for DigitalOcean managed Postgres |
 | [`supabase-bus-ticketing`](supabase-bus-ticketing/) | Vue + Supabase Kenya bus ticketing work sample |

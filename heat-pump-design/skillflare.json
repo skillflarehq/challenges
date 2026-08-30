@@ -11,6 +11,11 @@
     "Heating COP calculation with non-ideal compression",
     "Comparison to an external reverse Carnot heat-pump benchmark"
   ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "System parameters and a blank calculation template are on the desktop.",
+    "Any refrigerant property source is fine (CoolProp, REFPROP, ASHRAE tables, or an online calculator)."
+  ],
   "role": {
     "title": "Thermal systems / industrial heat-pump engineer",
     "seniority": "Junior to mid",
@@ -61,26 +66,31 @@
     {
       "name": "Cycle state-point analysis",
       "weight": 25,
+      "summary": "Identifies evaporator, suction, condenser, and expansion states consistent with the instance superheat and isenthalpic throttle.",
       "description": "YES/NO: Does the deliverable correctly identify evaporator outlet with the stated useful superheat at evaporator pressure, compressor inlet with the stated suction superheat at evaporator pressure, saturated liquid at the stated Tcond (unless subcooling is justified), and isenthalpic expansion (h4 = h3)? Answer YES only if all four state/expansion conventions are visible and consistent with the instance parameters. Collapsed or contradictory superheat states, wrong condenser phase, or non-isenthalpic expansion = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Heating COP",
       "weight": 25,
+      "summary": "Computes heating COP as condenser heat over compressor work, with compressor efficiency applied correctly.",
       "description": "YES/NO: Are heating effect and compressor work enthalpy-coherent, with the stated η_comp applied as W = W_isentropic / η_comp (not inverted), and heating COP reported as q_cond / w_comp in SI W/W? Answer YES only if q_cond, w_comp, η_comp application, and COP are all present and consistent (q_cond ≈ h2 − h3 or q_evap + w_comp). Inverted η_comp, missing COP, or incoherent energy balances = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Carnot heating reference",
       "weight": 25,
+      "summary": "Compares actual COP to a heating Carnot reference using the stated external temperatures.",
       "description": "YES/NO: Does the deliverable use the stated external source and delivery water temperatures as T_L and T_H, apply COP_Carnot = T_H / (T_H − T_L) with absolute temperatures, and compute η_Carnot = COP / COP_Carnot consistently? Answer YES only if all three are correct for the instance external temps. Using Tev/Tcond as Carnot boundaries, °C instead of kelvin, refrigerator EER_Carnot = T_L/(T_H−T_L) without the heating form, or missing relative efficiency = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Assumptions and data sourcing",
       "weight": 10,
+      "summary": "States the refrigerant property source and the main cycle assumptions.",
       "description": "YES/NO: Does the deliverable state the refrigerant property source and visible cycle assumptions (e.g. negligible pressure drops, saturated liquid leaving the condenser, isenthalpic throttling)? Answer YES only if both a property source and key assumptions are explicit. Numbers with no source and no stated assumptions = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity of deliverable",
       "weight": 15,
+      "summary": "Leaves a readable state table and finals a reviewer can audit without guessing units or steps.",
       "description": "YES/NO: Is there a readable state table and final numbers a reviewer can follow without guessing intermediate steps or units? Answer YES if the calculation path is auditable end-to-end. Opaque scrap numbers or missing table/finals that force guessing = NO. YES = full points; NO or unclear = 0."
     }
   ],
