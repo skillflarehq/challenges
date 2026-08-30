@@ -64,88 +64,28 @@
   },
   "rubric": [
     {
-      "name": "Worked in a spreadsheet",
-      "weight": 4,
-      "summary": "Completes the analysis in a spreadsheet rather than a text editor or script-only workflow.",
-      "description": "YES/NO: Did the candidate open and work the extract in LibreOffice Calc or another spreadsheet (Excel-compatible), rather than only viewing the CSV in a text editor? Answer YES only if video or window events show spreadsheet work on the station file. soffice opening the CSV counts. Text-editor-only or terminal-only work = NO. YES = 4; NO or unclear = 0."
+      "name": "Correct stats excluding missing",
+      "weight": 40,
+      "summary": "Reports min, max, and average for TMAX, TMIN, and PRCP in stored units, with 9999 excluded.",
+      "description": "Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). Award partial across the nine statistics: about 4 points per matching TMAX/TMIN min or max (exact key), about 5 per matching average (within ±0.1 of the instance key), and about 4/5/5 for PRCP min/max/average. Full 40 if all nine match. Formula bar is not required. 2010 examples only: TMAX −244 / 339 / 98.17; TMIN −328 / 211 / −6.34; PRCP 0 / 381 / 14.73 — do not fail a 2009/2013 run for not matching those. MIN over a range that still contains 9999 is YES for that min (9999 cannot be the temperature minimum). A leftover MAX of 9999 zeros only that max slice. The truth-pack including-9999 failure average zeros only that average slice. Unlabeled conversion (e.g. −24.4 instead of −244) zeros the affected stats. Omit a column entirely = 0 for that column’s slice (~13). If a cell cannot be read, 0 for that statistic only."
     },
     {
-      "name": "TMAX minimum",
-      "weight": 7,
-      "summary": "Reports the correct TMAX minimum (number match; 9999 still in the MIN range is OK).",
-      "description": "Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). 2010 example only: −244 stored tenths °C — do not fail a 2009/2013 run for not matching −244. YES (7) iff the leftover summary cell, formula result, or clearly stated figure equals the instance TMAX min key. Formula bar is not required. =MIN(G2:G366) (or equivalent) that still contains 9999 is YES — 9999 cannot be the temperature minimum. Do not require a visible <>9999 / MINIFS on this item. NO (0): wrong column, no TMAX min shown, unlabeled converted value (e.g. −24.4 instead of −244), or a value that is not the key (including 9999). If the cell cannot be read, 0 for this item only — do not infer other columns."
+      "name": "MIN, MAX, and AVERAGE via functions",
+      "weight": 30,
+      "summary": "Uses leftover MIN/MAX and AVERAGE (or AVERAGEIF) functions rather than typed results.",
+      "description": "YES (30) if leftover cells or the formula bar show MIN and MAX (or AutoSum min/max / MINIFS / MAXIFS) and AVERAGE, AVERAGEIF, AVERAGEIFS, or an equivalent spreadsheet average (including average of a filtered range) for at least one required column (TMAX, TMIN, or PRCP). Do not require all nine formula cells. Partial: 15 if leftover min/max functions but no average formula, or leftover average formula but no min/max functions; 10 if only MIN or only MAX remains. Typed literals, sort-then-copy-paste of values, status-bar reading typed back, calculator or Python results typed into cells, or no leftover functions = 0."
     },
     {
-      "name": "TMAX maximum",
-      "weight": 7,
-      "summary": "Reports the correct TMAX maximum (number match; leftover MAX of 9999 is NO).",
-      "description": "Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). 2010 example only: 339 stored tenths °C. YES (7) iff the leftover summary cell, formula result, or clearly stated figure equals the instance TMAX max key. Formula bar is not required. Do not also require seeing <>9999 / MAXIFS if the number already matches. A leftover MAX of 9999 is NO. NO (0): wrong column, no TMAX max shown, unlabeled conversion, or a value that is not the key. If the cell cannot be read, 0 for this item only."
+      "name": "Efficient range selection",
+      "weight": 20,
+      "summary": "Summary formulas use contiguous column ranges and reuse one pattern across metrics.",
+      "description": "YES (20) if leftover formulas reference a contiguous column or block (for example TMAX as G2:G366 or G:G, a named range, or a filtered column) rather than listing hundreds of individual cells, and the same formula pattern is reused across columns (fill handle / copy-paste, mixed references, or isomorphic G vs H vs I). Contiguous-range leftover formulas are sufficient evidence of efficient selection — do not require a Ctrl+Shift+Arrow clip. Also YES if video shows column-letter click, Ctrl+Shift+Arrow (or LibreOffice equivalent), Name Box, fill handle, or AutoFilter, and leftover formulas still use ranges. Nine separately typed but isomorphic formulas still count as reuse. Partial 10 if contiguous ranges exist for at least one column but formulas were not reused (a different method per statistic). NO (0) if leftover formulas list individual cells, video shows hundreds of cells clicked as the way the summary was built, typed literals only, or no leftover formulas. Missing video of the gesture is not a fail when range formulas remain."
     },
     {
-      "name": "TMAX average",
-      "weight": 8,
-      "summary": "Reports a TMAX average within ±0.1 of the instance key (including-9999 failure averages are NO).",
-      "description": "Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). 2010 example only: 98.17 stored tenths °C; including-9999 failure average ~179.6. YES (8) iff the reported TMAX average is within ±0.1 of the instance key. Two decimal places is enough. A visible AVERAGE/AVERAGEIF (or equivalent) over the TMAX data that would produce that mean is YES even when cell format rounds the display. Formula bar is not required for this correctness item. The truth-pack failure average (including 9999) is an automatic NO. NO (0): wrong column, no TMAX average, unlabeled conversion, or a mean matching the including-9999 failure value. If the cell cannot be read, 0 for this item only."
-    },
-    {
-      "name": "TMIN minimum",
-      "weight": 7,
-      "summary": "Reports the correct TMIN minimum (number match; 9999 still in the MIN range is OK).",
-      "description": "Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). 2010 example only: −328 stored tenths °C. YES (7) iff the leftover summary cell, formula result, or clearly stated figure equals the instance TMIN min key. Formula bar is not required. =MIN(H2:H366) (or equivalent) that still contains 9999 is YES — 9999 cannot be the temperature minimum. Do not require a visible <>9999 / MINIFS on this item. NO (0): wrong column, no TMIN min shown, unlabeled converted value, or a value that is not the key (including 9999). If the cell cannot be read, 0 for this item only."
-    },
-    {
-      "name": "TMIN maximum",
-      "weight": 7,
-      "summary": "Reports the correct TMIN maximum (number match; leftover MAX of 9999 is NO).",
-      "description": "Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). 2010 example only: 211 stored tenths °C. YES (7) iff the leftover summary cell, formula result, or clearly stated figure equals the instance TMIN max key. Formula bar is not required. Do not also require seeing <>9999 / MAXIFS if the number already matches. A leftover MAX of 9999 is NO. NO (0): wrong column, no TMIN max shown, unlabeled conversion, or a value that is not the key. If the cell cannot be read, 0 for this item only."
-    },
-    {
-      "name": "TMIN average",
-      "weight": 8,
-      "summary": "Reports a TMIN average within ±0.1 of the instance key (including-9999 failure averages are NO).",
-      "description": "Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). 2010 example only: −6.34 stored tenths °C; including-9999 failure average ~213.0. YES (8) iff the reported TMIN average is within ±0.1 of the instance key. Two decimal places is enough. A visible AVERAGE/AVERAGEIF (or equivalent) over the TMIN data that would produce that mean is YES even when cell format rounds the display. Formula bar is not required for this correctness item. The truth-pack failure average (including 9999) is an automatic NO. NO (0): wrong column, no TMIN average, unlabeled conversion, or a mean matching the including-9999 failure value. If the cell cannot be read, 0 for this item only."
-    },
-    {
-      "name": "PRCP stats exclude missing",
-      "weight": 8,
-      "summary": "Scores PRCP min, max, and average against instance keys, with partial credit per statistic.",
-      "description": "Grade against the truth-pack PRCP row for the brief year (2010 / 2009 / 2013). 2010 example only: min 0, max 381, average 14.73 stored tenths mm (including-9999 failure average ~151.5). Award partial: 3 points if PRCP min equals the instance min key; 3 if PRCP max equals the instance max key; 2 if PRCP average is within ±0.1 of the instance average key. Full 8 if all three match. Formula bar is not required. Including 9999 in the average (mean in the tens-to-hundreds) zeros only the average slice (0 of 2), not min if min is still 0. A leftover MAX of 9999 zeros only the max slice. Omit PRCP entirely = 0. Unlabeled conversion = 0 for the affected slice. If a cell cannot be read, 0 for that slice only."
-    },
-    {
-      "name": "MIN and MAX via functions",
+      "name": "Labeled leftover spreadsheet",
       "weight": 10,
-      "summary": "Uses leftover MIN and MAX (or MINIFS/MAXIFS) functions rather than typed results.",
-      "description": "YES (10) if leftover cells or the formula bar show MIN and MAX (or AutoSum min/max / MINIFS / MAXIFS) for at least one required column (TMAX, TMIN, or PRCP). Do not require all six min/max cells. Partial: 5 if only MIN or only MAX remains. Typed literals, sort-then-copy-paste of values, status-bar reading typed back, or Python-only answers = 0. No leftover min/max functions = 0."
-    },
-    {
-      "name": "AVERAGE or AVERAGEIF via functions",
-      "weight": 10,
-      "summary": "Uses a leftover AVERAGE / AVERAGEIF (or equivalent) rather than a typed mean.",
-      "description": "YES (10) if leftover cells or the formula bar show AVERAGE, AVERAGEIF, AVERAGEIFS, or an equivalent spreadsheet average (including average of a filtered range) for at least one required column. Do not require all three columns. Calculator or Python result typed into cells, or no average formula = 0."
-    },
-    {
-      "name": "Contiguous ranges",
-      "weight": 8,
-      "summary": "Leftover summary formulas use a contiguous column or named range.",
-      "description": "YES (8) if leftover formulas reference a contiguous column or block (for example TMAX as G2:G366 or G:G, a named range, or a filtered column) rather than listing hundreds of individual cells. Range-style references in leftover formulas are sufficient evidence. One-cell-at-a-time comma-separated cell lists, or no formulas = 0."
-    },
-    {
-      "name": "Efficient selection",
-      "weight": 8,
-      "summary": "Builds summary ranges efficiently; leftover contiguous-range formulas count as evidence.",
-      "description": "YES (8) if leftover formulas already use contiguous ranges (G2:G366, G:G, named range, filtered column) — that is sufficient evidence; do not require a clear Ctrl+Shift+Arrow clip. Also YES if video shows column-letter click, Ctrl+Shift+Arrow (or LibreOffice equivalent), Name Box, fill handle, AutoFilter, or status-bar range select. NO (0) only if the leftover method is cell-by-cell lists or video shows hundreds of cells clicked as the way the summary was built. Missing video of the gesture is not a fail when range formulas remain."
-    },
-    {
-      "name": "Formula reuse",
-      "weight": 4,
-      "summary": "Reuses one summary formula pattern across metrics (fill, copy, or isomorphic formulas).",
-      "description": "YES (4) if fill handle / copy-paste of formulas is visible, or leftover formulas are the same pattern with a shifted column (G vs H vs I) or mixed references. Nine separately typed but isomorphic formulas still count. Typed literals or a different method per statistic = 0. No leftover formulas = 0."
-    },
-    {
-      "name": "Labeled leftover summary",
-      "weight": 4,
-      "summary": "Leaves a labeled Min / Max / Average block a reviewer can find.",
-      "description": "YES (4) if there is a labeled Min / Max / Average block (or equivalent headings) left on the sheet or a second sheet so a reviewer can find TMAX, TMIN, and PRCP results without guessing which cells matter. Labels plus a findable min/max/avg block are enough — do not require all nine correctness keys here; missing numbers are scored on correctness items. Unlabeled scrap numbers, results only spoken, or a cleared sheet = 0."
+      "summary": "Completes the analysis in a spreadsheet and leaves a labeled Min / Max / Average block.",
+      "description": "YES (10) if the candidate opened and worked the extract in LibreOffice Calc or another spreadsheet (Excel-compatible) and left a labeled Min / Max / Average block (or equivalent headings) on the sheet or a second sheet so a reviewer can find TMAX, TMIN, and PRCP results without guessing which cells matter. soffice opening the CSV counts. Labels plus a findable min/max/avg block are enough — do not require all nine correctness keys here; missing numbers are scored on the correctness item. Partial 5 if spreadsheet work is visible but the leftover summary is unlabeled scrap, or a labeled block exists but spreadsheet work is not shown. Text-editor-only, terminal-only, or Python-only work = 0. Results only spoken, or a cleared sheet = 0."
     }
   ],
   "variation": {
