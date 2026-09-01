@@ -14,6 +14,8 @@ This repository holds **example Skillflare challenges**: timed, role-shaped work
 | [`financial-analyst`](financial-analyst/) | Manufacturing three-statement forecast work sample |
 | [`weather-basics`](weather-basics/) | Spreadsheet screen: min / max / average on GHCN daily weather |
 | [`docker-node`](docker-node/) | Docker/Node example package layout |
+| [`cpp`](cpp/) | C++ CMake HTTP service (cpp-httplib handlers) |
+| [`java`](java/) | Java 21 Maven HTTP service (JDK HttpServer handlers) |
 | [`opentofu`](opentofu/) | OpenTofu dry-run for DigitalOcean managed Postgres |
 | [`supabase-bus-ticketing`](supabase-bus-ticketing/) | Vue + Supabase Kenya bus ticketing work sample |
 

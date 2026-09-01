@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "title": "Implement a C++ HTTP service",
+  "slug": "cpp-backend-http-service",
+  "version": 1,
+  "image": "cpp",
+  "tools": [
+    "g++",
+    "CMake",
+    "GDB",
+    "clangd",
+    "VS Code",
+    "Continue"
+  ],
+  "duration_minutes": 20,
+  "skills_assessed": [
+    "CMake C++ builds",
+    "HTTP handler implementation (cpp-httplib)",
+    "CSV aggregation and JSON responses"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "g++, CMake, and the starter C++ HTTP app are on the desktop."
+  ],
+  "role": {
+    "title": "C++ backend / systems engineer",
+    "seniority": "Mid",
+    "company_context": "Product-led SaaS company shipping internal C++ services. A small platform team owns HTTP tools that sit next to existing CMake code so feature teams can expose health and summary endpoints without pulling in a heavy framework. Hiring to strengthen day-to-day C++ service work on that team.",
+    "day_to_day": [
+      "Implement and review HTTP handlers in C++ CMake projects",
+      "Parse operational CSV extracts and return stable JSON summaries",
+      "Keep listen host, port, and health endpoints predictable for local and staging use",
+      "Pair with backend engineers on compile, link, and “works on my machine” issues",
+      "Improve shared CMake templates and handler conventions"
+    ],
+    "required_skills": [
+      "Comfortable building C++17 with CMake (configure, build, run)",
+      "Can implement HTTP GET handlers that return JSON",
+      "Can parse a simple CSV and aggregate numeric columns with defined skip/tie rules",
+      "Can validate a running process against expected HTTP behavior with curl or a browser"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with cpp-httplib or similar header-only HTTP libraries",
+      "Experience with clangd / CMake Tools in VS Code",
+      "Prior work on internal platform or developer-experience C++ services",
+      "Comfort debugging listen/bind issues with gdb when a process fails to start"
+    ],
+    "constraints": [
+      "Assessment focuses on completing the provided CMake + cpp-httplib service — not redesigning the stack or adding TLS",
+      "Do not test Kubernetes, cloud IaC, or containerization in this challenge",
+      "Candidate works in a desktop environment with Terminal, g++, and CMake available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different HTTP library"
+    ]
+  },
+  "problem_statement": {
+    "title": "Implement the C++ HTTP handlers",
+    "summary": "A small C++ HTTP service is on your desktop. The server already compiles and listens. Your job is to implement the stubbed handlers so GET /, GET /health, and GET /summary return the documented JSON.",
+    "outcomes": [
+      "Build the CMake project and run the server so it serves HTTP on the documented default port.",
+      "GET / and GET /health return HTTP 200 with the documented JSON payloads.",
+      "GET /summary returns HTTP 200 JSON computed from data/items.csv using the documented grouping, skip, and tie-break rules."
+    ],
+    "constraints": [
+      "Do not change the public paths: GET /, GET /health, and GET /summary must be the routes a reviewer curls.",
+      "Keep cpp-httplib and the CMake project; do not replace them with Boost, Crow, or a from-scratch socket server.",
+      "The process should listen on a port you can curl (default app port is 3000 unless you document otherwise). Prefer 0.0.0.0 as in the starter.",
+      "Starter files on the desktop stay as shared scenery — treat them as the application source you complete; do not change data/items.csv."
+    ],
+    "deliverables": "Leave a CMake project a reviewer can rebuild and run from this desktop without guessing. Demonstrate GET /, GET /health, and GET /summary with curl or a browser against the listen port."
+  },
+  "rubric": [
+    {
+      "name": "Working HTTP",
+      "weight": 40,
+      "summary": "Demonstrates a running server that serves GET / and GET /health with HTTP 200.",
+      "description": "YES/NO: Did the candidate demonstrate a running process that serves GET / and GET /health with HTTP 200 through the instance’s documented default listen port (see starter src/main.cpp / brief)? Answer YES only if video or narrative shows a successful check (browser or curl) against that port. HTTP 501, compile-only, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct payloads",
+      "weight": 30,
+      "summary": "Returns the instance greeting, health ok, and the CSV summary winner.",
+      "description": "YES/NO: Do GET / , GET /health, and GET /summary match the contract? GET / message must equal the instance greeting from the starter handlers comment / brief (not a leftover Fastify or generic hello). GET /health must be status ok. GET /summary must match the truth-pack algorithm on starter data/items.csv (group by category, sum numeric amount, skip empty category or non-numeric amount; max total, lexicographic tie-break). Extra JSON whitespace is fine; numeric total 65.5 and 65.50 both count. Wrong greeting, missing /summary, or a hardcoded summary that does not match the CSV algorithm = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Build and listen",
+      "weight": 20,
+      "summary": "Uses the CMake project and listens on 0.0.0.0 at the instance default port.",
+      "description": "YES/NO: Does the leftover project build with CMake (cmake -S . -B build or equivalent) rather than a one-off g++ that ignores CMakeLists.txt, and does the server listen on 0.0.0.0 (or HOST from the environment) at the instance default port from src/main.cpp? Answer YES only if both the CMake build path and a non-localhost-only listen are visible. Raw g++ of a single file, or listen bound only to 127.0.0.1 with no documented reason = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a rebuildable CMake project on the desktop that a reviewer can follow without guessing steps.",
+      "description": "YES/NO: Is there a CMakeLists.txt plus sources left on the desktop that a reviewer could cmake-configure, build, and run without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No CMake project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (CMake C++ HTTP service with stubbed handlers)",
+      "Keep cpp-httplib, GET /, GET /health, GET /summary, and the items.csv aggregation rules",
+      "Do not introduce Docker, Kubernetes, cloud IaC, or a different HTTP library",
+      "Do not rewrite include/httplib.h or data/items.csv; keep the same CSV across instances"
+    ],
+    "factors": [
+      {
+        "id": "service",
+        "options": [
+          {
+            "id": "test_app",
+            "values": {
+              "package_name": "test-app",
+              "greeting_message": "Hello from C++",
+              "service_label": "test-app C++ HTTP service",
+              "package_description": "Small C++ hello/health/summary HTTP service"
+            }
+          },
+          {
+            "id": "orders_api",
+            "values": {
+              "package_name": "orders-api",
+              "greeting_message": "Orders API ready",
+              "service_label": "orders-api C++ HTTP service",
+              "package_description": "Internal orders hello/health/summary C++ HTTP service"
+            }
+          },
+          {
+            "id": "inventory_svc",
+            "values": {
+              "package_name": "inventory-svc",
+              "greeting_message": "Inventory service online",
+              "service_label": "inventory-svc C++ HTTP service",
+              "package_description": "Inventory hello/health/summary C++ HTTP service"
+            }
+          },
+          {
+            "id": "billing_gateway",
+            "values": {
+              "package_name": "billing-gateway",
+              "greeting_message": "Billing gateway up",
+              "service_label": "billing-gateway C++ HTTP service",
+              "package_description": "Billing gateway hello/health/summary C++ HTTP service"
+            }
+          },
+          {
+            "id": "notify_hook",
+            "values": {
+              "package_name": "notify-hook",
+              "greeting_message": "Notify hook listening",
+              "service_label": "notify-hook C++ HTTP service",
+              "package_description": "Notification webhook hello/health/summary C++ HTTP service"
+            }
+          },
+          {
+            "id": "catalog_read",
+            "values": {
+              "package_name": "catalog-read",
+              "greeting_message": "Catalog read API",
+              "service_label": "catalog-read C++ HTTP service",
+              "package_description": "Catalog read hello/health/summary C++ HTTP service"
+            }
+          }
+        ]
+      },
+      {
+        "id": "port",
+        "options": [
+          {
+            "id": "3000",
+            "values": {
+              "default_port": "3000"
+            }
+          },
+          {
+            "id": "3080",
+            "values": {
+              "default_port": "3080"
+            }
+          },
+          {
+            "id": "4000",
+            "values": {
+              "default_port": "4000"
+            }
+          },
+          {
+            "id": "8080",
+            "values": {
+              "default_port": "8080"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Implement the {{service_label}}\n\nA small C++ HTTP service named `{{package_name}}` is on your desktop. The server already compiles, binds, and registers GET /, GET /health, and GET /summary. The handlers return HTTP 501. Implement those handlers so the documented JSON contracts work.\n\n### Outcomes\n- Build the CMake project and run the server so it listens on the documented default port.\n- Serve GET / and GET /health with HTTP 200 and the documented JSON payloads.\n- Serve GET /summary with HTTP 200 JSON computed from `data/items.csv` (group by category, sum numeric amount, skip malformed rows; winner is max total, ties go to the lexicographically smallest category).\n\n### Constraints\n- Keep the public paths GET /, GET /health, and GET /summary. Do not replace cpp-httplib or the CMake project with a different stack (no Boost, Crow, or raw sockets).\n- Listen on a port a reviewer can curl (default app port is {{default_port}} unless you document otherwise). Prefer HOST 0.0.0.0 as in the starter.\n- Starter files on the desktop stay as shared scenery — treat them as the application source you complete; do not change `data/items.csv`.\n\n### Deliverables\nLeave a CMake project a reviewer can rebuild (`cmake -S . -B build && cmake --build build`) and run without guessing. Demonstrate the three routes with curl or a browser against the listen port.\n",
+      "files": {
+        "CMakeLists.txt": "cmake_minimum_required(VERSION 3.16)\n\nproject({{package_name}} LANGUAGES CXX)\n\nset(CMAKE_CXX_STANDARD 17)\nset(CMAKE_CXX_STANDARD_REQUIRED ON)\n\nadd_executable(app\n  src/main.cpp\n  src/handlers.cpp\n)\n\ntarget_include_directories(app PRIVATE include src)\n\nfind_package(Threads REQUIRED)\ntarget_link_libraries(app PRIVATE Threads::Threads)\n",
+        "src/main.cpp": "#include \"httplib.h\"\n#include \"handlers.hpp\"\n\n#include <cstdlib>\n#include <iostream>\n#include <string>\n\nint main() {\n  const char *env_port = std::getenv(\"PORT\");\n  const int port = env_port ? std::atoi(env_port) : {{default_port}};\n  const char *env_host = std::getenv(\"HOST\");\n  const std::string host =\n      (env_host && env_host[0] != '\\0') ? env_host : \"0.0.0.0\";\n\n  httplib::Server svr;\n  svr.Get(\"/\", handle_root);\n  svr.Get(\"/health\", handle_health);\n  svr.Get(\"/summary\", handle_summary);\n\n  std::cout << \"Listening on \" << host << \":\" << port << std::endl;\n  if (!svr.listen(host, port)) {\n    std::cerr << \"Failed to listen on \" << host << \":\" << port << std::endl;\n    return 1;\n  }\n  return 0;\n}\n",
+        "src/handlers.cpp": "#include \"handlers.hpp\"\n\n// Implement these handlers. Do not change the public paths.\n//\n// GET /        -> HTTP 200, Content-Type application/json\n//                 {\"ok\":true,\"message\":\"{{greeting_message}}\"}\n// GET /health  -> HTTP 200, Content-Type application/json\n//                 {\"status\":\"ok\"}\n// GET /summary -> HTTP 200, Content-Type application/json\n//                 {\"group\":\"<name>\",\"total\":<number>,\"skipped\":<int>}\n//\n// For /summary, read data/items.csv from the process working directory\n// (workspace root). Skip the header row. Group by `category` and sum\n// numeric `amount`. Skip rows with an empty category or a non-numeric\n// amount. The winner is the category with the highest total; ties go to\n// the lexicographically smallest category name.\n\nvoid handle_root(const httplib::Request &, httplib::Response &res) {\n  res.status = 501;\n  res.set_content(\"{\\\"error\\\":\\\"not implemented\\\"}\", \"application/json\");\n}\n\nvoid handle_health(const httplib::Request &, httplib::Response &res) {\n  res.status = 501;\n  res.set_content(\"{\\\"error\\\":\\\"not implemented\\\"}\", \"application/json\");\n}\n\nvoid handle_summary(const httplib::Request &, httplib::Response &res) {\n  res.status = 501;\n  res.set_content(\"{\\\"error\\\":\\\"not implemented\\\"}\", \"application/json\");\n}\n"
+      }
+    }
+  }
+}

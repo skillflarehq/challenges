@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "title": "Containerize a Fastify app",
+  "slug": "docker-backend-developer-fastify",
+  "version": 1,
+  "image": "npm",
+  "tools": ["Node.js", "npm", "VS Code", "Continue"],
+  "duration_minutes": 20,
+  "skills_assessed": [
+    "Dockerfile authoring",
+    "Multi-stage builds",
+    "Container networking basics"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "Node.js, npm, Docker, and the starter Fastify app are on the desktop."
+  ],
+  "role": {
+    "title": "Backend / DevOps engineer",
+    "seniority": "Mid to senior",
+    "company_context": "Product-led SaaS company shipping Node services. A small platform team owns local-to-prod container patterns so feature teams can run and ship APIs without reinventing Docker each time. Hiring to strengthen day-to-day containerization and runtime hygiene on that team.",
+    "day_to_day": [
+      "Package and run internal Node/Fastify services in Docker for local and staging use",
+      "Keep images lean (multi-stage builds, sensible bases) and document how others rebuild them",
+      "Review Dockerfiles and Compose setups for port publishing, health checks, and non-root defaults",
+      "Pair with backend engineers on “works on my machine → works in a container” issues",
+      "Improve shared templates and conventions for service containerization"
+    ],
+    "required_skills": [
+      "Comfortable writing Dockerfiles for Node apps (including lockfile-based installs)",
+      "Solid grasp of container networking basics (published ports, listen host, health endpoints)",
+      "Can explain and apply multi-stage or otherwise lean image practices",
+      "Can validate a running container against expected HTTP behavior"
+    ],
+    "nice_to_have_skills": [
+      "Docker Compose for multi-service or proxy setups",
+      "Familiarity with Alpine/slim Node bases and non-root USER patterns",
+      "Experience reviewing PRs for container security and image size",
+      "Prior work on internal platform or developer-experience tooling"
+    ],
+    "constraints": [
+      "Assessment focuses on containerizing an existing Fastify app — not redesigning the service or swapping frameworks",
+      "Do not test Kubernetes, cloud IaC, or CI pipeline design in this challenge",
+      "Candidate works in a desktop environment with Terminal and Docker available",
+      "Starter app files in the workspace are shared scenery; do not require inventing a different stack"
+    ]
+  },
+  "problem_statement": {
+    "title": "Containerize the Fastify app",
+    "summary": "A small Node.js (Fastify) service is on your desktop. Your job is to package it so it runs reliably as a container.",
+    "outcomes": [
+      "Build an image that starts the app and serves its HTTP routes.",
+      "Expose the service so it can be reached from outside the container on a documented host port.",
+      "Keep the runtime image reasonably small and suitable for a production-like baseline (prefer a multi-stage build when dependencies are installed during the image build)."
+    ],
+    "constraints": [
+      "Do not change the app’s public behavior: GET / and GET /health must keep working as they do today.",
+      "The process inside the container should listen on a port you can map (default app port is 3000 unless you document otherwise).",
+      "Prefer running the app process as a non-root user in the final image when the base image supports it.",
+      "Starter files on the desktop stay as shared scenery — treat them as the application source you containerize; do not replace them with a different stack."
+    ],
+    "deliverables": "Produce whatever files and commands a reviewer needs to rebuild and run your image from this desktop (for example a Dockerfile, and optionally Compose). Leave clear enough structure that someone else can build and start the service without guessing."
+  },
+  "rubric": [
+    {
+      "name": "Working container",
+      "weight": 40,
+      "summary": "Demonstrates a running container that serves the app through a published host port.",
+      "description": "YES/NO: Did the candidate demonstrate a running container that serves the starter Fastify routes (GET / and/or GET /health) through a published host port mapped to the app’s documented default listen port (see starter index.js / brief)? Answer YES only if video or narrative shows a successful check (browser or curl) against the mapped port. Build-only, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Dockerfile quality",
+      "weight": 30,
+      "summary": "Uses a lockfile-based install and a lean runtime image in the Dockerfile.",
+      "description": "YES/NO: Does the final Dockerfile use a reproducible lockfile install (npm ci or equivalent) and a lean final runtime (multi-stage or alpine/slim Node base, not an unexplained full OS image)? Answer YES only if both are visible in the deliverable Dockerfile. Missing lockfile-based install or a heavyweight unjustified base = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Runtime hygiene",
+      "weight": 20,
+      "summary": "Runs the app as a non-root user and documents the container port to publish.",
+      "description": "YES/NO: Does the final image configuration run the app as a non-root user (USER or equivalent) and expose/document a container port suitable for publishing (e.g. EXPOSE matching the app default listen port)? Answer YES only if both appear in the final Dockerfile (or equivalent compose). Missing non-root USER or no port exposure/documentation = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a rebuildable Dockerfile on the desktop that a reviewer can follow without guessing steps.",
+      "description": "YES/NO: Is there a Dockerfile (or equivalent) left on the desktop that a reviewer could use to rebuild the image without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional compose/notes must be accurate if present. No Dockerfile / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (Dockerfile + running container for a small Fastify app)",
+      "Keep Fastify, GET / and GET /health public routes, and lockfile-based install expectations",
+      "Do not introduce Kubernetes, cloud IaC, or a different application stack",
+      "Do not rewrite package-lock.json; keep the same fastify dependency range across instances"
+    ],
+    "factors": [
+      {
+        "id": "service",
+        "options": [
+          {
+            "id": "test_app",
+            "values": {
+              "package_name": "test-app",
+              "greeting_message": "Hello from Fastify",
+              "service_label": "test-app Fastify service",
+              "package_description": "Small Fastify hello/health service for containerization practice"
+            }
+          },
+          {
+            "id": "orders_api",
+            "values": {
+              "package_name": "orders-api",
+              "greeting_message": "Orders API ready",
+              "service_label": "orders-api Fastify service",
+              "package_description": "Internal orders hello/health Fastify service"
+            }
+          },
+          {
+            "id": "inventory_svc",
+            "values": {
+              "package_name": "inventory-svc",
+              "greeting_message": "Inventory service online",
+              "service_label": "inventory-svc Fastify service",
+              "package_description": "Inventory hello/health Fastify service"
+            }
+          },
+          {
+            "id": "billing_gateway",
+            "values": {
+              "package_name": "billing-gateway",
+              "greeting_message": "Billing gateway up",
+              "service_label": "billing-gateway Fastify service",
+              "package_description": "Billing gateway hello/health Fastify service"
+            }
+          },
+          {
+            "id": "notify_hook",
+            "values": {
+              "package_name": "notify-hook",
+              "greeting_message": "Notify hook listening",
+              "service_label": "notify-hook Fastify service",
+              "package_description": "Notification webhook hello/health Fastify service"
+            }
+          },
+          {
+            "id": "catalog_read",
+            "values": {
+              "package_name": "catalog-read",
+              "greeting_message": "Catalog read API",
+              "service_label": "catalog-read Fastify service",
+              "package_description": "Catalog read hello/health Fastify service"
+            }
+          }
+        ]
+      },
+      {
+        "id": "port",
+        "options": [
+          {
+            "id": "3000",
+            "values": {
+              "default_port": "3000"
+            }
+          },
+          {
+            "id": "3080",
+            "values": {
+              "default_port": "3080"
+            }
+          },
+          {
+            "id": "4000",
+            "values": {
+              "default_port": "4000"
+            }
+          },
+          {
+            "id": "8080",
+            "values": {
+              "default_port": "8080"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Containerize the {{service_label}}\n\nA small Node.js (Fastify) service named `{{package_name}}` is on your desktop. Your job is to package it so it runs reliably as a container.\n\n### Outcomes\n- Build an image that starts the app and serves its HTTP routes.\n- Expose the service so it can be reached from outside the container on a documented host port.\n- Keep the runtime image reasonably small and suitable for a production-like baseline (prefer a multi-stage build when dependencies are installed during the image build).\n\n### Constraints\n- Do not change the app’s public behavior: GET / and GET /health must keep working as they do today (including the existing JSON payloads).\n- The process inside the container should listen on a port you can map (default app port is {{default_port}} unless you document otherwise).\n- Prefer running the app process as a non-root user in the final image when the base image supports it.\n- Starter files on the desktop stay as shared scenery — treat them as the application source you containerize; do not replace them with a different stack.\n\n### Deliverables\nProduce whatever files and commands a reviewer needs to rebuild and run your image from this desktop (for example a Dockerfile, and optionally Compose). Leave clear enough structure that someone else can build and start the service without guessing.\n",
+      "files": {
+        "app/index.js": "'use strict'\n\nconst Fastify = require('fastify')\n\nconst app = Fastify({ logger: true })\n\napp.get('/', async () => {\n  return { ok: true, message: '{{greeting_message}}' }\n})\n\napp.get('/health', async () => {\n  return { status: 'ok' }\n})\n\nconst start = async () => {\n  try {\n    const port = Number(process.env.PORT) || {{default_port}}\n    const host = process.env.HOST || '0.0.0.0'\n    await app.listen({ port, host })\n  } catch (err) {\n    app.log.error(err)\n    process.exit(1)\n  }\n}\n\nstart()\n",
+        "app/package.json": "{\n  \"name\": \"{{package_name}}\",\n  \"version\": \"1.0.0\",\n  \"description\": \"{{package_description}}\",\n  \"license\": \"ISC\",\n  \"author\": \"\",\n  \"type\": \"commonjs\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \"node index.js\",\n    \"dev\": \"node --watch index.js\",\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"dependencies\": {\n    \"fastify\": \"^5.6.0\"\n  }\n}\n"
+      }
+    }
+  }
+}
