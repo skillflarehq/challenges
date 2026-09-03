@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "title": "Drive a SIL board emulator from Java",
+  "slug": "java-embedded-sil-controller",
+  "version": 1,
+  "image": "java",
+  "tools": [
+    "OpenJDK 21",
+    "Maven",
+    "VS Code",
+    "Java Extension Pack",
+    "Continue"
+  ],
+  "duration_minutes": 30,
+  "skills_assessed": [
+    "Maven Java 21 builds",
+    "TCP client to a SIL emulator",
+    "Checksummed frame handling",
+    "Threshold command logic"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "OpenJDK 21, Maven, the SIL board emulator, and the stubbed Java controller are on the desktop."
+  ],
+  "role": {
+    "title": "Embedded / Java systems engineer",
+    "seniority": "Mid",
+    "company_context": "Engineering consultancy placing people on aerospace, defence, railway, and energy programs. Hardware often sits in the lab; day-to-day Java work is SIL controllers, protocol debug, and Linux-class device software rather than Spring microservices or bare-metal C. Hiring to strengthen Java engineers who can close the loop against a board emulator.",
+    "day_to_day": [
+      "Write and review Java that talks framed protocols to boards, benches, and SIL emulators",
+      "Parse checksummed telemetry and apply threshold or interlock command logic",
+      "Keep health and status endpoints predictable so a reviewer or test bench can curl the controller",
+      "Pair with C/C++ and systems engineers on “works against the emulator → works on the bench” issues",
+      "Improve shared Maven templates and SIL harness conventions"
+    ],
+    "required_skills": [
+      "Comfortable building Java 21 with Maven (compile, exec:java)",
+      "Can implement a TCP client that reads and writes line-oriented frames",
+      "Can validate a checksum and ignore malformed or corrupt frames",
+      "Can apply a documented threshold and send a command, then prove it with HTTP and emulator output"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with com.sun.net.httpserver or similar JDK HTTP APIs",
+      "Experience with SIL/MIL harnesses or serial/Ethernet protocol debug",
+      "Experience with the VS Code Java Extension Pack",
+      "Comfort reading Maven compiler output when a process fails to start"
+    ],
+    "constraints": [
+      "Assessment focuses on completing the provided Maven controller against the provided SIL emulator — not redesigning the stack, adding Spring, or flashing real hardware",
+      "Do not test QEMU, MicroEJ, GPIO libraries, Kubernetes, or cloud IaC in this challenge",
+      "Candidate works in a desktop environment with Terminal, JDK 21, and Maven available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different protocol or emulator"
+    ]
+  },
+  "problem_statement": {
+    "title": "Close the loop on the SIL emulator",
+    "summary": "A SIL board emulator and a stubbed Maven Java controller are on your desktop. The HTTP server already compiles and listens. Implement the TCP client and handlers so the controller parses checksummed SENS frames, commands the actuator when the sensor crosses the threshold, and serves GET /, GET /health, and GET /status.",
+    "outcomes": [
+      "Build the Maven project. Start the emulator, then the controller, so HTTP is served on the documented default port.",
+      "GET / and GET /health return HTTP 200 with the documented JSON payloads.",
+      "The controller sends a valid CMD ON after a valid trip SENS. GET /status reflects the last good reading and command. The emulator prints SCENARIO PASS."
+    ],
+    "constraints": [
+      "Do not change the public paths: GET /, GET /health, and GET /status must be the routes a reviewer curls.",
+      "Keep com.sun.net.httpserver and the Maven project; do not replace them with Spring or extra Maven dependencies.",
+      "Do not modify BoardEmulator.java. Use the documented ASCII SENS/CMD frames and XOR checksum (Protocol helpers). Drop malformed lines and bad checksums; trip only when value is strictly greater than the threshold.",
+      "The process should listen on a port you can curl (default HTTP port is 3000 unless you document otherwise). Prefer 0.0.0.0 as in the starter. Emulator TCP port is 9100 (or EMU_PORT).",
+      "Starter files on the desktop stay as shared scenery — treat them as the application source you complete; do not change the emulator sequence."
+    ],
+    "deliverables": "Leave a Maven project a reviewer can rebuild and run from this desktop without guessing. Start the emulator, then the controller. Demonstrate GET /health and GET /status with curl or a browser, and the emulator stdout line SCENARIO PASS."
+  },
+  "rubric": [
+    {
+      "name": "Working loop",
+      "weight": 40,
+      "summary": "Demonstrates emulator plus app running, GET /health HTTP 200, and emulator SCENARIO PASS.",
+      "description": "YES/NO: Did the candidate demonstrate the emulator and controller running, a successful GET /health with HTTP 200 through the instance’s documented default HTTP port (see starter Main.java / brief), AND emulator stdout SCENARIO PASS? Answer YES only if video or narrative shows both the health check and SCENARIO PASS. Compile-only, health-only, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct command",
+      "weight": 30,
+      "summary": "Sends CMD actuator ON after a valid SENS above threshold; GET /status matches.",
+      "description": "YES/NO: Does the leftover client send CMD,<actuator_id>,ON,<checksum> only after a valid SENS whose numeric value is strictly greater than the instance threshold, and does GET /status report that sensor id, a value above threshold, and command ON? Answer YES only if both the leftover client logic and /status match the instance sensor/actuator/threshold (see DeviceClient constants / scenario.md / brief). Hardcoded PASS without speaking the protocol, wrong actuator, command on nominal-only frames, or /status that does not show the trip = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Protocol hygiene",
+      "weight": 20,
+      "summary": "Uses ASCII SENS/CMD frames and the XOR checksum; drops bad frames.",
+      "description": "YES/NO: Does the leftover client use the documented ASCII frames and XOR checksum (via Protocol helpers or equivalent), and are malformed / bad-checksum lines not treated as trips? Answer YES only if checksum validation is visible in the client path. Raw guess-the-command on a timer, a rewritten BoardEmulator, or treating the emulator’s bad-checksum high-value frame as a trip = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a rebuildable Maven project a reviewer can compile and run without guessing steps.",
+      "description": "YES/NO: Is there a pom.xml plus sources left on the desktop that a reviewer could mvn-compile, then run the emulator (com.example.emu.BoardEmulator) and the controller (com.example.app.Main) without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No Maven project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (Maven Java SIL controller + provided TCP emulator)",
+      "Keep ASCII SENS/CMD frames, XOR checksum, JDK HttpServer, GET /, GET /health, GET /status, and trip-on-strictly-greater-than",
+      "Do not introduce Spring, extra Maven dependencies, QEMU, MicroEJ, GPIO libraries, Docker, or Kubernetes",
+      "Do not put a solved DeviceClient or Handlers under workspace/; do not rewrite Protocol checksum math"
+    ],
+    "factors": [
+      {
+        "id": "device",
+        "options": [
+          {
+            "id": "battery_thermal",
+            "values": {
+              "package_name": "battery-thermal",
+              "package_description": "SIL Java controller for a battery pack thermal trip / vent board",
+              "service_label": "battery-thermal SIL controller",
+              "greeting_message": "Battery thermal controller ready",
+              "sensor_id": "TEMP1",
+              "actuator_id": "VENT1",
+              "threshold": "80.0",
+              "nominal_value_1": "72.5",
+              "nominal_value_2": "75.0",
+              "trip_value": "85.0",
+              "unit": "deg C",
+              "device_context": "battery pack thermal trip / vent"
+            }
+          },
+          {
+            "id": "tank_pressure",
+            "values": {
+              "package_name": "tank-pressure",
+              "package_description": "SIL Java controller for a tank over-pressure relief board",
+              "service_label": "tank-pressure SIL controller",
+              "greeting_message": "Tank pressure controller ready",
+              "sensor_id": "PRES1",
+              "actuator_id": "RELIEF1",
+              "threshold": "12.0",
+              "nominal_value_1": "8.5",
+              "nominal_value_2": "9.0",
+              "trip_value": "14.0",
+              "unit": "bar",
+              "device_context": "tank over-pressure relief"
+            }
+          },
+          {
+            "id": "door_interlock",
+            "values": {
+              "package_name": "door-interlock",
+              "package_description": "SIL Java controller for a passenger door interlock board",
+              "service_label": "door-interlock SIL controller",
+              "greeting_message": "Door interlock controller ready",
+              "sensor_id": "DOOR1",
+              "actuator_id": "LOCK1",
+              "threshold": "1.0",
+              "nominal_value_1": "0.0",
+              "nominal_value_2": "0.5",
+              "trip_value": "2.0",
+              "unit": "open-state",
+              "device_context": "passenger door interlock"
+            }
+          },
+          {
+            "id": "bus_current",
+            "values": {
+              "package_name": "bus-current",
+              "package_description": "SIL Java controller for a DC bus over-current trip board",
+              "service_label": "bus-current SIL controller",
+              "greeting_message": "Bus current controller ready",
+              "sensor_id": "IBUS1",
+              "actuator_id": "BREAK1",
+              "threshold": "40.0",
+              "nominal_value_1": "22.5",
+              "nominal_value_2": "28.0",
+              "trip_value": "48.0",
+              "unit": "A",
+              "device_context": "DC bus over-current trip"
+            }
+          },
+          {
+            "id": "cabin_temp",
+            "values": {
+              "package_name": "cabin-temp",
+              "package_description": "SIL Java controller for a cabin over-temperature pack board",
+              "service_label": "cabin-temp SIL controller",
+              "greeting_message": "Cabin temperature controller ready",
+              "sensor_id": "CABIN1",
+              "actuator_id": "PACK1",
+              "threshold": "28.0",
+              "nominal_value_1": "22.0",
+              "nominal_value_2": "24.5",
+              "trip_value": "31.0",
+              "unit": "deg C",
+              "device_context": "cabin over-temperature pack"
+            }
+          },
+          {
+            "id": "fuel_level",
+            "values": {
+              "package_name": "fuel-level",
+              "package_description": "SIL Java controller for a fuel tank overfill shutoff board",
+              "service_label": "fuel-level SIL controller",
+              "greeting_message": "Fuel level controller ready",
+              "sensor_id": "FUEL1",
+              "actuator_id": "FILL1",
+              "threshold": "90.0",
+              "nominal_value_1": "62.0",
+              "nominal_value_2": "70.0",
+              "trip_value": "95.0",
+              "unit": "percent",
+              "device_context": "fuel tank overfill shutoff"
+            }
+          }
+        ]
+      },
+      {
+        "id": "http_port",
+        "options": [
+          {
+            "id": "3000",
+            "values": {
+              "default_port": "3000"
+            }
+          },
+          {
+            "id": "3080",
+            "values": {
+              "default_port": "3080"
+            }
+          },
+          {
+            "id": "4000",
+            "values": {
+              "default_port": "4000"
+            }
+          },
+          {
+            "id": "8080",
+            "values": {
+              "default_port": "8080"
+            }
+          }
+        ]
+      },
+      {
+        "id": "emu_port",
+        "options": [
+          {
+            "id": "9100",
+            "values": {
+              "emu_port": "9100"
+            }
+          },
+          {
+            "id": "9101",
+            "values": {
+              "emu_port": "9101"
+            }
+          },
+          {
+            "id": "9200",
+            "values": {
+              "emu_port": "9200"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Drive the {{service_label}}\n\nHardware for {{device_context}} is at the lab. A SIL board emulator is on your desktop. The HTTP server already compiles, binds, and registers GET /, GET /health, and GET /status. The handlers return HTTP 501 and the TCP client is stubbed. Implement the controller so it talks the documented ASCII protocol, commands the actuator when the sensor crosses the threshold, and serves the documented JSON.\n\n### Outcomes\n- Build the Maven project. Start the emulator, then the controller, so the controller listens on the documented HTTP port.\n- Serve GET / and GET /health with HTTP 200 and the documented JSON payloads.\n- Connect to the emulator, parse checksummed SENS frames, and send `CMD,{{actuator_id}},ON,<checksum>` when `{{sensor_id}}` is strictly greater than `{{threshold}}`. Prove it with GET /status and the emulator's `SCENARIO PASS` line.\n\n### Constraints\n- Keep the public paths GET /, GET /health, and GET /status. Do not replace `com.sun.net.httpserver` or the Maven project with a different stack (no Spring and no extra Maven dependencies).\n- Do not modify `BoardEmulator.java`. Treat it as the board. Use `Protocol` helpers for framing and the XOR checksum; drop malformed lines and bad checksums.\n- Listen on a port a reviewer can curl (default HTTP port is {{default_port}} unless you document otherwise). Prefer HOST 0.0.0.0 as in the starter. Emulator TCP port is {{emu_port}} (or `EMU_PORT`).\n- Starter files on the desktop stay as shared scenery — treat them as the application source you complete; do not change the emulator sequence.\n\n### Deliverables\nLeave a Maven project a reviewer can rebuild (`mvn -q compile`) and run without guessing: emulator via `mvn -q compile exec:java -Dexec.mainClass=com.example.emu.BoardEmulator`, controller via `mvn -q exec:java`. Demonstrate GET /health and GET /status with curl or a browser, and the emulator stdout line `SCENARIO PASS`.\n",
+      "files": {
+        "pom.xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n\n  <groupId>com.example</groupId>\n  <artifactId>{{package_name}}</artifactId>\n  <version>1.0.0</version>\n  <name>{{package_name}}</name>\n  <description>{{package_description}}</description>\n\n  <properties>\n    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    <maven.compiler.release>21</maven.compiler.release>\n    <exec.mainClass>com.example.app.Main</exec.mainClass>\n  </properties>\n\n  <build>\n    <plugins>\n      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-compiler-plugin</artifactId>\n        <version>3.13.0</version>\n      </plugin>\n      <plugin>\n        <groupId>org.codehaus.mojo</groupId>\n        <artifactId>exec-maven-plugin</artifactId>\n        <version>3.5.0</version>\n        <configuration>\n          <mainClass>${exec.mainClass}</mainClass>\n        </configuration>\n      </plugin>\n    </plugins>\n  </build>\n</project>\n",
+        "src/main/java/com/example/app/Main.java": "package com.example.app;\n\nimport com.sun.net.httpserver.HttpServer;\nimport java.io.IOException;\nimport java.net.InetSocketAddress;\n\npublic final class Main {\n  public static void main(String[] args) throws IOException {\n    int port = {{default_port}};\n    String envPort = System.getenv(\"PORT\");\n    if (envPort != null && !envPort.isBlank()) {\n      port = Integer.parseInt(envPort);\n    }\n    String host = System.getenv(\"HOST\");\n    if (host == null || host.isBlank()) {\n      host = \"0.0.0.0\";\n    }\n\n    Thread client = new Thread(new DeviceClient(), \"device-client\");\n    client.setDaemon(false);\n    client.start();\n\n    HttpServer server = HttpServer.create(new InetSocketAddress(host, port), 0);\n    server.createContext(\"/health\", Handlers::health);\n    server.createContext(\"/status\", Handlers::status);\n    server.createContext(\"/\", Handlers::root);\n    server.setExecutor(null);\n    System.out.println(\"Listening on \" + host + \":\" + port);\n    server.start();\n  }\n\n  private Main() {}\n}\n",
+        "src/main/java/com/example/app/DeviceClient.java": "package com.example.app;\n\nimport java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\nimport java.io.OutputStreamWriter;\nimport java.io.PrintWriter;\nimport java.net.InetSocketAddress;\nimport java.net.Socket;\nimport java.nio.charset.StandardCharsets;\n\npublic final class DeviceClient implements Runnable {\n  static final String SENSOR_ID = \"{{sensor_id}}\";\n  static final String ACTUATOR_ID = \"{{actuator_id}}\";\n  static final double THRESHOLD = {{threshold}};\n  static final int DEFAULT_EMU_PORT = {{emu_port}};\n\n  // Implement the SIL client loop. Do not change the public HTTP paths (see Handlers).\n  //\n  // Wire protocol (one UTF-8 line per frame, \\n-terminated). Use Protocol helpers:\n  //   emulator -> you  SENS,<sensor_id>,<value>,<checksum>\n  //   you -> emulator  CMD,<actuator_id>,<ON|OFF>,<checksum>\n  // Checksum is 8-bit XOR of the payload before the last comma, two uppercase hex digits\n  // (Protocol.checksumHex / parseLine / formatCmd).\n  //\n  // On each valid SENS frame (parseLine != null AND checksumValid):\n  //   - update Status.sensor and Status.value\n  //   - if sensor id equals SENSOR_ID and numeric value is strictly greater than THRESHOLD,\n  //     send Protocol.formatCmd(ACTUATOR_ID, \"ON\") and set Status.command to \"ON\"\n  // Drop malformed lines and frames whose checksum is invalid — do not treat them as trips.\n  //\n  // Connect to 127.0.0.1 at DEFAULT_EMU_PORT (or EMU_PORT from the environment).\n  // Set Status.linked = true once the TCP connection is up.\n\n  @Override\n  public void run() {\n    int port = DEFAULT_EMU_PORT;\n    String envPort = System.getenv(\"EMU_PORT\");\n    if (envPort != null && !envPort.isBlank()) {\n      port = Integer.parseInt(envPort);\n    }\n\n    Socket socket;\n    try {\n      socket = connectWithRetry(port);\n    } catch (IOException e) {\n      e.printStackTrace();\n      return;\n    }\n    if (socket == null) {\n      System.err.println(\"Could not connect to emulator on 127.0.0.1:\" + port);\n      return;\n    }\n    try (socket) {\n      BufferedReader in =\n          new BufferedReader(\n              new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));\n      PrintWriter out =\n          new PrintWriter(\n              new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);\n      // Implement the client loop using `in` and `out`.\n      // Keep the connection open until the emulator closes it (readLine returns null).\n    } catch (IOException e) {\n      e.printStackTrace();\n    }\n  }\n\n  static Socket connectWithRetry(int port) throws IOException {\n    IOException last = null;\n    for (int i = 0; i < 30; i++) {\n      Socket socket = new Socket();\n      try {\n        socket.connect(new InetSocketAddress(\"127.0.0.1\", port), 400);\n        return socket;\n      } catch (IOException e) {\n        last = e;\n        try {\n          socket.close();\n        } catch (IOException ignored) {\n          // retry\n        }\n        try {\n          Thread.sleep(400);\n        } catch (InterruptedException ie) {\n          Thread.currentThread().interrupt();\n          return null;\n        }\n      }\n    }\n    if (last != null) {\n      System.err.println(\"Emulator connect retries exhausted: \" + last.getMessage());\n    }\n    return null;\n  }\n}\n",
+        "src/main/java/com/example/app/Handlers.java": "package com.example.app;\n\nimport com.sun.net.httpserver.HttpExchange;\nimport java.io.IOException;\nimport java.io.OutputStream;\nimport java.nio.charset.StandardCharsets;\n\npublic final class Handlers {\n  private Handlers() {}\n\n  // Implement these handlers. Do not change the public paths.\n  //\n  // GET /        -> HTTP 200, Content-Type application/json\n  //                 {\"ok\":true,\"message\":\"{{greeting_message}}\"}\n  // GET /health  -> HTTP 200, Content-Type application/json\n  //                 {\"status\":\"ok\"}\n  // GET /status  -> HTTP 200, Content-Type application/json\n  //                 {\"sensor\":\"<id>\",\"value\":<number|null>,\"command\":\"ON\"|\"OFF\"|\"none\",\"linked\":true|false}\n  //\n  // Read live values from Status (updated by DeviceClient):\n  //   sensor  = last valid SENS id (empty string if none yet)\n  //   value   = last valid SENS numeric value, or JSON null if none yet\n  //   command = last CMD state sent (\"ON\", \"OFF\", or \"none\")\n  //   linked  = true after the TCP client has connected to the emulator\n\n  public static void root(HttpExchange exchange) throws IOException {\n    send(exchange, 501, \"{\\\"error\\\":\\\"not implemented\\\"}\");\n  }\n\n  public static void health(HttpExchange exchange) throws IOException {\n    send(exchange, 501, \"{\\\"error\\\":\\\"not implemented\\\"}\");\n  }\n\n  public static void status(HttpExchange exchange) throws IOException {\n    send(exchange, 501, \"{\\\"error\\\":\\\"not implemented\\\"}\");\n  }\n\n  static void send(HttpExchange exchange, int status, String body) throws IOException {\n    byte[] bytes = body.getBytes(StandardCharsets.UTF_8);\n    exchange.getResponseHeaders().set(\"Content-Type\", \"application/json\");\n    exchange.sendResponseHeaders(status, bytes.length);\n    try (OutputStream out = exchange.getResponseBody()) {\n      out.write(bytes);\n    }\n  }\n}\n",
+        "src/main/java/com/example/emu/BoardEmulator.java": "package com.example.emu;\n\nimport com.example.app.Protocol;\nimport java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\nimport java.io.OutputStreamWriter;\nimport java.io.PrintWriter;\nimport java.net.InetAddress;\nimport java.net.ServerSocket;\nimport java.net.Socket;\nimport java.net.SocketTimeoutException;\nimport java.nio.charset.StandardCharsets;\n\n/**\n * SIL board emulator. Do not modify this class — treat it as the hardware.\n *\n * Sequence after a client connects: two nominal SENS frames, one high-value frame\n * with a bad checksum (must be ignored), then a valid trip SENS. Prints\n * {@code SCENARIO PASS} when it receives a valid {@code CMD,<actuator>,ON,<checksum>}\n * after the trip, otherwise {@code SCENARIO FAIL}.\n */\npublic final class BoardEmulator {\n  static final String SENSOR_ID = \"{{sensor_id}}\";\n  static final String ACTUATOR_ID = \"{{actuator_id}}\";\n  static final double THRESHOLD = {{threshold}};\n  static final String NOMINAL_1 = \"{{nominal_value_1}}\";\n  static final String NOMINAL_2 = \"{{nominal_value_2}}\";\n  static final String TRIP_VALUE = \"{{trip_value}}\";\n  static final int DEFAULT_EMU_PORT = {{emu_port}};\n\n  public static void main(String[] args) throws IOException {\n    int port = DEFAULT_EMU_PORT;\n    String envPort = System.getenv(\"EMU_PORT\");\n    if (envPort != null && !envPort.isBlank()) {\n      port = Integer.parseInt(envPort);\n    }\n\n    try (ServerSocket server = new ServerSocket(port, 1, InetAddress.getLoopbackAddress())) {\n      System.out.println(\"Emulator listening on 127.0.0.1:\" + port);\n      System.out.println(\n          \"Scenario: \"\n              + SENSOR_ID\n              + \" trip > \"\n              + THRESHOLD\n              + \" -> CMD \"\n              + ACTUATOR_ID\n              + \" ON\");\n      try (Socket client = server.accept()) {\n        System.out.println(\"Client connected from \" + client.getRemoteSocketAddress());\n        runScenario(client);\n      }\n    }\n  }\n\n  static void runScenario(Socket client) throws IOException {\n    client.setTcpNoDelay(true);\n    BufferedReader in =\n        new BufferedReader(new InputStreamReader(client.getInputStream(), StandardCharsets.UTF_8));\n    PrintWriter out =\n        new PrintWriter(new OutputStreamWriter(client.getOutputStream(), StandardCharsets.UTF_8), true);\n\n    try {\n      Thread.sleep(400);\n    } catch (InterruptedException ie) {\n      Thread.currentThread().interrupt();\n    }\n\n    client.setSoTimeout(200);\n    boolean earlyCommand = false;\n    earlyCommand |= sendSens(out, in, Protocol.formatSens(SENSOR_ID, NOMINAL_1));\n    earlyCommand |= sendSens(out, in, Protocol.formatSens(SENSOR_ID, NOMINAL_2));\n    client.setSoTimeout(1000);\n    earlyCommand |= sendSens(out, in, badChecksumSens(SENSOR_ID, TRIP_VALUE));\n\n    if (earlyCommand) {\n      System.out.println(\"SCENARIO FAIL\");\n      System.out.println(\"Command received before a valid trip SENS (bad checksum or nominal).\");\n      return;\n    }\n\n    String trip = Protocol.formatSens(SENSOR_ID, TRIP_VALUE);\n    System.out.println(\"Sent \" + trip);\n    out.println(trip);\n\n    client.setSoTimeout(15000);\n    boolean pass = waitForTripCommand(in);\n    if (pass) {\n      System.out.println(\"SCENARIO PASS\");\n    } else {\n      System.out.println(\"SCENARIO FAIL\");\n      System.out.println(\"No valid CMD,\" + ACTUATOR_ID + \",ON,<checksum> after the trip SENS.\");\n    }\n  }\n\n  static boolean sendSens(PrintWriter out, BufferedReader in, String frame) throws IOException {\n    System.out.println(\"Sent \" + frame);\n    out.println(frame);\n    return pollEarlyCommand(in);\n  }\n\n  static String badChecksumSens(String sensorId, String value) {\n    String payload = \"SENS,\" + sensorId + \",\" + value;\n    String good = Protocol.checksumHex(payload);\n    String bad = \"00\".equals(good) ? \"FF\" : \"00\";\n    return payload + \",\" + bad;\n  }\n\n  static boolean pollEarlyCommand(BufferedReader in) throws IOException {\n    try {\n      String line = in.readLine();\n      return isTripCommand(line);\n    } catch (SocketTimeoutException timeout) {\n      return false;\n    }\n  }\n\n  static boolean waitForTripCommand(BufferedReader in) throws IOException {\n    long deadline = System.currentTimeMillis() + 15000;\n    while (System.currentTimeMillis() < deadline) {\n      try {\n        String line = in.readLine();\n        if (line == null) {\n          return false;\n        }\n        System.out.println(\"Recv \" + line);\n        if (isTripCommand(line)) {\n          return true;\n        }\n      } catch (SocketTimeoutException timeout) {\n        return false;\n      }\n    }\n    return false;\n  }\n\n  static boolean isTripCommand(String line) {\n    Protocol.Frame frame = Protocol.parseLine(line);\n    if (frame == null || !frame.checksumValid()) {\n      return false;\n    }\n    return \"CMD\".equals(frame.type())\n        && ACTUATOR_ID.equals(frame.id())\n        && \"ON\".equalsIgnoreCase(frame.value());\n  }\n\n  private BoardEmulator() {}\n}\n",
+        "data/scenario.md": "# SIL scenario — {{package_name}}\n\nTarget: {{service_label}} ({{device_context}})\n\n| Parameter | Value |\n|-----------|-------|\n| Sensor id | `{{sensor_id}}` |\n| Unit | {{unit}} |\n| Trip threshold (strictly greater than) | `{{threshold}}` |\n| Actuator id | `{{actuator_id}}` |\n| Trip command | `ON` |\n| Emulator TCP port | `{{emu_port}}` |\n| Controller HTTP port | `{{default_port}}` |\n\nStart the emulator first, then the controller (two terminals from this workspace root):\n\n```bash\nmvn -q compile exec:java -Dexec.mainClass=com.example.emu.BoardEmulator\nmvn -q exec:java\n```\n\nDo not modify `BoardEmulator.java`. Implement `DeviceClient` and `Handlers`. Prove the loop with `GET /health`, `GET /status`, and the emulator's `SCENARIO PASS` line.\n"
+      }
+    }
+  }
+}

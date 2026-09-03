@@ -9,6 +9,7 @@
     "CMake",
     "GDB",
     "clangd",
+    "C/C++",
     "VS Code",
     "Continue"
   ],
@@ -101,7 +102,7 @@
       "Keep the same deliverable kinds and difficulty band (CMake C++ HTTP service with stubbed handlers)",
       "Keep cpp-httplib, GET /, GET /health, GET /summary, and the items.csv aggregation rules",
       "Do not introduce Docker, Kubernetes, cloud IaC, or a different HTTP library",
-      "Do not rewrite include/httplib.h or data/items.csv; keep the same CSV across instances"
+      "Do not rewrite include/httplib.h, data/items.csv, or .vscode debug configs; keep the same CSV and library across instances"
     ],
     "factors": [
       {

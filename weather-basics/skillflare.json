@@ -4,7 +4,7 @@
   "slug": "weather-station-spreadsheet-summary",
   "version": 1,
   "image": "finance",
-  "duration_minutes": 25,
+  "duration_minutes": 3,
   "skills_assessed": [
     "Opening CSV data in a spreadsheet",
     "MIN, MAX, and AVERAGE functions",

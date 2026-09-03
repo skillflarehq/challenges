@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Emulator",
+      "request": "launch",
+      "mainClass": "com.example.emu.BoardEmulator",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "com.example.app.Main",
+      "cwd": "${workspaceFolder}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Emulator + App",
+      "configurations": ["Emulator", "App"],
+      "stopAll": true
+    }
+  ]
+}

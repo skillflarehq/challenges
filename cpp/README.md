@@ -8,7 +8,7 @@ Canonical sketch of a **strict** Skillflare challenge package. Almost everything
 | `truth_pack.md` | Grader mark scheme (required `##` headings) |
 | `workspace/` | Candidate starter files |
 
-The skeleton instance is `test-app` / `Hello from C++` / port `3000` (matches `workspace/` and `problem_statement`). With **variations enabled** at challenge create, packaging fans out buffer slots; each run picks an **unused valid permutation** of vetted factor options (`service` × `port`), applies `variation.apply` templates (brief + `CMakeLists.txt` + `src/main.cpp` + `src/handlers.cpp`), and writes a thin layer — **no LLM at runtime**. `include/httplib.h` and `data/items.csv` are not rewritten (same library and CSV).
+The skeleton instance is `test-app` / `Hello from C++` / port `3000` (matches `workspace/` and `problem_statement`). With **variations enabled** at challenge create, packaging fans out buffer slots; each run picks an **unused valid permutation** of vetted factor options (`service` × `port`), applies `variation.apply` templates (brief + `CMakeLists.txt` + `src/main.cpp` + `src/handlers.cpp`), and writes a thin layer — **no LLM at runtime**. `include/httplib.h`, `data/items.csv`, and `.vscode/launch.json` / `tasks.json` are not rewritten (same library, CSV, and debug config).
 
 `variation.strategy: "combinatorial"` is the builder-output shape: factor option bundles + mustache-style `{{key}}` templates. Invariants document authoring intent; runtime does not interpret free-text invariants.
 
