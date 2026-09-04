@@ -11,7 +11,7 @@
     "Java Extension Pack",
     "Continue"
   ],
-  "duration_minutes": 20,
+  "duration_minutes": 3,
   "skills_assessed": [
     "Maven Java 21 builds",
     "JDK HttpServer handler implementation",
