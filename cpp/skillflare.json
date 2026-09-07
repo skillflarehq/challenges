@@ -9,7 +9,7 @@
     "CMake",
     "GDB",
     "clangd",
-    "C/C++",
+    "CodeLLDB",
     "VS Code",
     "Continue"
   ],
