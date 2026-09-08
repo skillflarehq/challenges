@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "title": "Implement an Android Compose app",
+  "slug": "android-compose-summary-app",
+  "version": 1,
+  "image": "android",
+  "tools": [
+    "Android Studio",
+    "Android SDK",
+    "adb",
+    "Emulator",
+    "OpenJDK 17",
+    "VS Code",
+    "Continue"
+  ],
+  "duration_minutes": 45,
+  "skills_assessed": [
+    "Gradle Android builds",
+    "Jetpack Compose UI",
+    "CSV aggregation in Kotlin"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "Android Studio, the Android SDK (API 35), OpenJDK 17, and the starter Compose app are on the desktop.",
+    "The first Gradle sync downloads AGP and Compose artifacts. ANDROID_HOME is already set; do not add local.properties unless you must.",
+    "The emulator is available but software-accelerated and slow. A passing solution does not require running the AVD."
+  ],
+  "role": {
+    "title": "Android engineer",
+    "seniority": "Mid",
+    "company_context": "Product-led SaaS company shipping internal Android tools. A small mobile team owns Kotlin + Jetpack Compose apps so feature teams can expose status and summary screens without pulling in Flutter or a WebView shell. Hiring to strengthen day-to-day Android app work on that team.",
+    "day_to_day": [
+      "Implement and review Compose screens in Gradle Android projects",
+      "Parse operational CSV extracts and return stable summary values on screen",
+      "Keep Home, Status, and Summary destinations predictable for QA and staging builds",
+      "Pair with mobile engineers on assemble, Gradle, and “works on my machine” issues",
+      "Improve shared Compose templates and Gradle conventions"
+    ],
+    "required_skills": [
+      "Comfortable building Android with Gradle (assembleDebug)",
+      "Can implement Jetpack Compose screens that bind string resources and computed state",
+      "Can parse a simple CSV and aggregate numeric columns with defined skip/tie rules",
+      "Can validate a debug build (and optional unit tests) against the documented UI contract"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with Android Studio and the API 35 SDK / emulator",
+      "Experience with Compose Material 3",
+      "Prior work on internal platform or developer-experience Android apps",
+      "Comfort reading Gradle compiler output when a build fails"
+    ],
+    "constraints": [
+      "Assessment focuses on completing the provided Gradle + Jetpack Compose app — not redesigning the stack or adding Flutter, React Native, or a WebView",
+      "Do not test Play Store publishing, CI pipelines, or cloud backends in this challenge",
+      "Candidate works in a desktop environment with Terminal, Android Studio, OpenJDK 17, and the Android SDK available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different UI toolkit"
+    ]
+  },
+  "problem_statement": {
+    "title": "Implement the Compose screens",
+    "summary": "A small Kotlin + Jetpack Compose app is on your desktop. The Gradle project already compiles and wires Home, Status, and Summary tabs. Your job is to implement the stubbed screens and Summary.fromCsv so those destinations show the documented greeting, status copy, and CSV summary.",
+    "outcomes": [
+      "Build the Gradle project with ./gradlew assembleDebug so a reviewer can produce a debug APK without guessing SDK paths.",
+      "Home shows the instance greeting and Status shows the instance status copy from string resources.",
+      "Summary displays group, total, and skipped computed from app/src/main/assets/items.csv using the documented grouping, skip, and tie-break rules."
+    ],
+    "constraints": [
+      "Do not change the public destinations: Home, Status, and Summary must remain the three tabs a reviewer checks.",
+      "Keep Jetpack Compose and the Gradle project; do not replace them with Flutter, React Native, Views-only XML, or a WebView.",
+      "A passing solution does not require the emulator (it is software-accelerated and slow). assembleDebug and optional ./gradlew test are enough.",
+      "Starter files on the desktop stay as shared scenery — treat them as the application source you complete; do not change app/src/main/assets/items.csv."
+    ],
+    "deliverables": "Leave a Gradle project a reviewer can rebuild from this desktop without guessing. Demonstrate Home, Status, and Summary in the leftover sources (and optional unit tests or emulator)."
+  },
+  "rubric": [
+    {
+      "name": "Working Gradle build",
+      "weight": 40,
+      "summary": "Demonstrates a successful ./gradlew assembleDebug (or Studio Build APK) of the leftover project.",
+      "description": "YES/NO: Did the candidate demonstrate a successful Gradle debug build (./gradlew assembleDebug or Android Studio Build APK / assembleDebug) of the leftover project? Answer YES only if video or narrative shows a successful assembleDebug (BUILD SUCCESSFUL or equivalent Studio build). Sync-only, compile errors, or inferred “probably builds” = NO. Emulator launch is not required. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct screens",
+      "weight": 30,
+      "summary": "Shows the instance greeting, status copy, and the CSV summary winner.",
+      "description": "YES/NO: Do Home, Status, and Summary match the contract? Home text must equal the instance greeting from starter strings.xml / Screens.kt comments / brief (not a leftover Fastify or generic hello). Status text must equal the instance status_text (not a hardcoded leftover “ok” if this instance differs). Summary must match the truth-pack algorithm on starter assets/items.csv (group by category, sum numeric amount, skip empty category or non-numeric amount; max total, lexicographic tie-break). Numeric total 65.5 and 65.50 both count. Wrong greeting, wrong status copy, missing Summary fields, or a hardcoded summary that does not match the CSV algorithm = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Compose and Gradle",
+      "weight": 20,
+      "summary": "Uses the Gradle Compose project and keeps the three tab destinations.",
+      "description": "YES/NO: Does the leftover project build with the provided Gradle wrapper (./gradlew) rather than a one-off kotlinc that ignores the Android module, and do Home, Status, and Summary remain the three Compose destinations wired from MainActivity? Answer YES only if both the Gradle Android path and the three destinations are visible. Raw kotlinc of loose files, dropping a tab, or replacing Compose with Flutter / React Native / a WebView = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a rebuildable Gradle project on the desktop that a reviewer can follow without guessing steps.",
+      "description": "YES/NO: Is there a Gradle wrapper plus Android sources left on the desktop that a reviewer could ./gradlew assembleDebug without guessing SDK paths or undocumented steps? ANDROID_HOME is set on the image; local.properties is optional. Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No Gradle project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (Gradle Jetpack Compose app with stubbed screens)",
+      "Keep Compose, Home / Status / Summary destinations, and the items.csv aggregation rules",
+      "Do not introduce Flutter, React Native, WebView, Play Store publishing, or a different UI toolkit",
+      "Do not rewrite app/src/main/assets/items.csv; keep the same CSV across instances"
+    ],
+    "factors": [
+      {
+        "id": "app",
+        "options": [
+          {
+            "id": "test_app",
+            "values": {
+              "application_id": "com.example.testapp",
+              "app_name": "test-app",
+              "greeting_message": "Hello from Android",
+              "service_label": "test-app Android Compose app",
+              "package_description": "Small Android hello/status/summary Compose app"
+            }
+          },
+          {
+            "id": "orders_api",
+            "values": {
+              "application_id": "com.example.ordersapi",
+              "app_name": "orders-api",
+              "greeting_message": "Orders API ready",
+              "service_label": "orders-api Android Compose app",
+              "package_description": "Internal orders hello/status/summary Android Compose app"
+            }
+          },
+          {
+            "id": "inventory_svc",
+            "values": {
+              "application_id": "com.example.inventorysvc",
+              "app_name": "inventory-svc",
+              "greeting_message": "Inventory service online",
+              "service_label": "inventory-svc Android Compose app",
+              "package_description": "Inventory hello/status/summary Android Compose app"
+            }
+          },
+          {
+            "id": "billing_gateway",
+            "values": {
+              "application_id": "com.example.billinggateway",
+              "app_name": "billing-gateway",
+              "greeting_message": "Billing gateway up",
+              "service_label": "billing-gateway Android Compose app",
+              "package_description": "Billing gateway hello/status/summary Android Compose app"
+            }
+          },
+          {
+            "id": "notify_hook",
+            "values": {
+              "application_id": "com.example.notifyhook",
+              "app_name": "notify-hook",
+              "greeting_message": "Notify hook listening",
+              "service_label": "notify-hook Android Compose app",
+              "package_description": "Notification webhook hello/status/summary Android Compose app"
+            }
+          },
+          {
+            "id": "catalog_read",
+            "values": {
+              "application_id": "com.example.catalogread",
+              "app_name": "catalog-read",
+              "greeting_message": "Catalog read API",
+              "service_label": "catalog-read Android Compose app",
+              "package_description": "Catalog read hello/status/summary Android Compose app"
+            }
+          }
+        ]
+      },
+      {
+        "id": "status",
+        "options": [
+          {
+            "id": "ok",
+            "values": {
+              "status_text": "ok"
+            }
+          },
+          {
+            "id": "healthy",
+            "values": {
+              "status_text": "healthy"
+            }
+          },
+          {
+            "id": "ready",
+            "values": {
+              "status_text": "ready"
+            }
+          },
+          {
+            "id": "online",
+            "values": {
+              "status_text": "online"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Implement the {{service_label}}\n\nA small Android (Kotlin + Jetpack Compose) app named `{{app_name}}` (`{{application_id}}`) is on your desktop. The Gradle project already compiles and wires Home, Status, and Summary tabs. The screens are stubs. Implement those screens and `Summary.fromCsv` so the documented contracts work.\n\n### Outcomes\n- Build the Gradle project (`./gradlew assembleDebug`) so a reviewer can produce a debug APK without guessing SDK paths (`ANDROID_HOME` is set).\n- Home shows the instance greeting; Status shows the instance status copy (`{{status_text}}`).\n- Summary displays group, total, and skipped computed from `app/src/main/assets/items.csv` (group by category, sum numeric amount, skip malformed rows; winner is max total, ties go to the lexicographically smallest category).\n\n### Constraints\n- Keep the public destinations Home, Status, and Summary. Do not replace Jetpack Compose or the Gradle project with a different stack (no Flutter, React Native, or WebView).\n- A passing solution does not require the emulator; `assembleDebug` (and optional `./gradlew test`) is enough. The emulator is available but software-accelerated and slow.\n- Starter files on the desktop stay as shared scenery — treat them as the application source you complete; do not change `app/src/main/assets/items.csv`.\n\n### Deliverables\nLeave a Gradle project a reviewer can rebuild (`./gradlew assembleDebug`) without guessing. Demonstrate the three screens in the leftover sources (and optional unit tests or emulator).\n",
+      "files": {
+        "app/build.gradle.kts": "plugins {\n  id(\"com.android.application\")\n  id(\"org.jetbrains.kotlin.android\")\n  id(\"org.jetbrains.kotlin.plugin.compose\")\n}\n\nandroid {\n  namespace = \"com.example.app\"\n  compileSdk = 35\n\n  defaultConfig {\n    applicationId = \"{{application_id}}\"\n    minSdk = 26\n    targetSdk = 35\n    versionCode = 1\n    versionName = \"1.0\"\n    testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\n  }\n\n  compileOptions {\n    sourceCompatibility = JavaVersion.VERSION_17\n    targetCompatibility = JavaVersion.VERSION_17\n  }\n  kotlinOptions {\n    jvmTarget = \"17\"\n  }\n  buildFeatures {\n    compose = true\n  }\n}\n\ndependencies {\n  val composeBom = platform(\"androidx.compose:compose-bom:2024.12.01\")\n  implementation(composeBom)\n  implementation(\"androidx.activity:activity-compose:1.9.3\")\n  implementation(\"androidx.compose.material3:material3\")\n  implementation(\"androidx.compose.ui:ui\")\n  implementation(\"androidx.compose.ui:ui-tooling-preview\")\n  debugImplementation(\"androidx.compose.ui:ui-tooling\")\n  testImplementation(\"junit:junit:4.13.2\")\n}\n",
+        "app/src/main/res/values/strings.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n    <string name=\"app_name\">{{app_name}}</string>\n    <string name=\"greeting\">{{greeting_message}}</string>\n    <string name=\"status_text\">{{status_text}}</string>\n</resources>\n",
+        "app/src/main/java/com/example/app/ui/Screens.kt": "package com.example.app.ui\n\nimport androidx.compose.foundation.layout.Box\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.Modifier\n\n// Implement these screens. Do not change the public destinations.\n//\n// Home    -> show R.string.greeting (\"{{greeting_message}}\")\n// Status  -> show R.string.status_text (\"{{status_text}}\")\n// Summary -> read asset \"items.csv\" (app/src/main/assets/items.csv).\n//            Display group, total, and skipped from Summary.fromCsv.\n//\n// For /summary, skip the header row. Group by `category` and sum\n// numeric `amount`. Skip rows with an empty category or a non-numeric\n// amount. The winner is the category with the highest total; ties go to\n// the lexicographically smallest category name.\n\n@Composable\nfun HomeScreen(modifier: Modifier = Modifier) {\n  Box(modifier) {\n    Text(\"not implemented\")\n  }\n}\n\n@Composable\nfun StatusScreen(modifier: Modifier = Modifier) {\n  Box(modifier) {\n    Text(\"not implemented\")\n  }\n}\n\n@Composable\nfun SummaryScreen(modifier: Modifier = Modifier) {\n  Box(modifier) {\n    Text(\"not implemented\")\n  }\n}\n"
+      }
+    }
+  }
+}

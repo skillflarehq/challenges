@@ -16,6 +16,7 @@ This repository holds **example Skillflare challenges**: timed, role-shaped work
 | [`docker-node`](docker-node/) | Docker/Node example package layout |
 | [`cpp`](cpp/) | C++ CMake HTTP service (cpp-httplib handlers) |
 | [`java`](java/) | Java 21 Maven HTTP service (JDK HttpServer handlers) |
+| [`android`](android/) | Kotlin Jetpack Compose app (Home / Status / Summary + CSV) |
 | [`opentofu`](opentofu/) | OpenTofu dry-run for DigitalOcean managed Postgres |
 | [`supabase-bus-ticketing`](supabase-bus-ticketing/) | Vue + Supabase Kenya bus ticketing work sample |
 
