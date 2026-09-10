@@ -4,6 +4,7 @@
   "slug": "android-compose-summary-app",
   "version": 1,
   "image": "android",
+  "machine_size": "c3-standard-4",
   "tools": [
     "Android Studio",
     "Android SDK",

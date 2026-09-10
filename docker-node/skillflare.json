@@ -4,6 +4,8 @@
   "slug": "docker-backend-developer-fastify",
   "version": 1,
   "image": "npm",
+  "machine_size": "c3-standard-4",
+  "needs_dind": true,
   "tools": ["Node.js", "npm", "VS Code", "Continue"],
   "duration_minutes": 20,
   "skills_assessed": [

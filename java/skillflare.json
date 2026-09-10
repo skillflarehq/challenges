@@ -4,6 +4,7 @@
   "slug": "java-backend-http-service",
   "version": 1,
   "image": "java",
+  "machine_size": "c3-standard-4",
   "tools": [
     "OpenJDK 21",
     "Maven",

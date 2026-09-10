@@ -4,6 +4,7 @@
   "slug": "heat-pump-design-industrial-r1233zd",
   "version": 1,
   "image": "refrigeration",
+  "machine_size": "c3-standard-4",
   "duration_minutes": 45,
   "skills_assessed": [
     "Industrial vapor-compression heat-pump cycle analysis",

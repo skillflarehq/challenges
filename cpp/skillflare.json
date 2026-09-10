@@ -4,6 +4,7 @@
   "slug": "cpp-backend-http-service",
   "version": 1,
   "image": "cpp",
+  "machine_size": "c3-standard-4",
   "tools": [
     "g++",
     "CMake",

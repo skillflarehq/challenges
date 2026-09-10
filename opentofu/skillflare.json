@@ -4,6 +4,7 @@
   "slug": "opentofu-digitalocean-managed-postgres",
   "version": 1,
   "image": "opentofu",
+  "machine_size": "c3-standard-4",
   "duration_minutes": 60,
   "skills_assessed": [
     "OpenTofu provider and module setup",

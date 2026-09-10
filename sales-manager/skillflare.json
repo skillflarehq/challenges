@@ -4,6 +4,7 @@
   "slug": "sales-manager-sunking-nankanga",
   "version": 1,
   "image": "finance",
+  "machine_size": "c3-standard-4",
   "duration_minutes": 90,
   "skills_assessed": [
     "Territory and last-mile sales planning",
