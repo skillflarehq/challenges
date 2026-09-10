@@ -18,6 +18,7 @@ This repository holds **example Skillflare challenges**: timed, role-shaped work
 | [`java`](java/) | Java 21 Maven HTTP service (JDK HttpServer handlers) |
 | [`android`](android/) | Kotlin Jetpack Compose app (Home / Status / Summary + CSV) |
 | [`modelica-test`](modelica-test/) | OpenModelica mass-spring-damper (MSL translational plant + step-response KPIs) |
+| [`n8n-test`](n8n-test/) | n8n workflow: flatten local events JSON to NDJSON under `/data` |
 | [`opentofu`](opentofu/) | OpenTofu dry-run for DigitalOcean managed Postgres |
 | [`supabase-bus-ticketing`](supabase-bus-ticketing/) | Vue + Supabase Kenya bus ticketing work sample |
 

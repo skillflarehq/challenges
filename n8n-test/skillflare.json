@@ -1,188 +1,183 @@
 {
   "schema_version": 1,
-  "title": "Containerize a Fastify app",
-  "slug": "docker-backend-developer-fastify",
+  "title": "Flatten local events to NDJSON in n8n",
+  "slug": "n8n-events-ndjson-workflow",
   "version": 1,
-  "image": "npm",
+  "image": "n8n",
   "machine_size": "c3-standard-4",
-  "needs_dind": true,
-  "tools": ["Node.js", "npm", "VS Code", "Continue"],
+  "tools": [
+    "n8n",
+    "Node.js",
+    "npm",
+    "VS Code",
+    "Continue"
+  ],
   "duration_minutes": 20,
   "skills_assessed": [
-    "Dockerfile authoring",
-    "Multi-stage builds",
-    "Container networking basics"
+    "n8n workflow authoring and execution",
+    "JSON item explode (Code or Split Out)",
+    "Filter and field mapping",
+    "Writing NDJSON with n8n file nodes"
   ],
   "before_you_start": [
     "No personal accounts required.",
-    "Node.js, npm, Docker, and the starter Fastify app are on the desktop."
+    "n8n is on the desktop (launcher or http://127.0.0.1:5678/). Sign in with candidate@skillflare.local / Skillflare1.",
+    "File nodes can write to /data (same as /config/data). events.json and notes are on the desktop."
   ],
   "role": {
-    "title": "Backend / DevOps engineer",
-    "seniority": "Mid to senior",
-    "company_context": "Product-led SaaS company shipping Node services. A small platform team owns local-to-prod container patterns so feature teams can run and ship APIs without reinventing Docker each time. Hiring to strengthen day-to-day containerization and runtime hygiene on that team.",
+    "title": "Automation / integration engineer",
+    "seniority": "Junior to mid",
+    "company_context": "Ops-led SaaS company that uses self-hosted n8n to move internal JSON extracts onto a shared volume for downstream jobs. A small automation team owns editor workflows so feature teams are not writing one-off cron scripts. Hiring to strengthen day-to-day n8n workflow work on that team.",
     "day_to_day": [
-      "Package and run internal Node/Fastify services in Docker for local and staging use",
-      "Keep images lean (multi-stage builds, sensible bases) and document how others rebuild them",
-      "Review Dockerfiles and Compose setups for port publishing, health checks, and non-root defaults",
-      "Pair with backend engineers on “works on my machine → works in a container” issues",
-      "Improve shared templates and conventions for service containerization"
+      "Build and run n8n workflows that read local JSON and write files under /data",
+      "Explode a single HTTP/file payload into canonical n8n items, then map a small output schema",
+      "Filter malformed rows (empty ids, non-numeric amounts) before writing",
+      "Keep Manual Trigger (or equivalent) executions predictable so QA can rerun the same job",
+      "Pair with ops engineers on “the canvas looks right but Execute failed” issues"
     ],
     "required_skills": [
-      "Comfortable writing Dockerfiles for Node apps (including lockfile-based installs)",
-      "Solid grasp of container networking basics (published ports, listen host, health endpoints)",
-      "Can explain and apply multi-stage or otherwise lean image practices",
-      "Can validate a running container against expected HTTP behavior"
+      "Comfortable building and executing a workflow in the n8n editor",
+      "Can turn one JSON array / file into multiple n8n items (Code node or Split Out)",
+      "Can filter on a field and map id / source / amount without passing nested meta through",
+      "Can write NDJSON (or equivalent line-oriented JSON) with a file node to a documented path"
     ],
     "nice_to_have_skills": [
-      "Docker Compose for multi-service or proxy setups",
-      "Familiarity with Alpine/slim Node bases and non-root USER patterns",
-      "Experience reviewing PRs for container security and image size",
-      "Prior work on internal platform or developer-experience tooling"
+      "Familiarity with Read/Write Files from Disk, Extract From File, and Append/Write file nodes",
+      "Experience with Code node “Run Once for All Items” and returning [{json: …}]",
+      "Prior work on self-hosted n8n (not only n8n Cloud)",
+      "Comfort reading node errors when a file path is wrong"
     ],
     "constraints": [
-      "Assessment focuses on containerizing an existing Fastify app — not redesigning the service or swapping frameworks",
-      "Do not test Kubernetes, cloud IaC, or CI pipeline design in this challenge",
-      "Candidate works in a desktop environment with Terminal and Docker available",
-      "Starter app files in the workspace are shared scenery; do not require inventing a different stack"
+      "Assessment focuses on an n8n workflow over a provided local JSON extract — not GitHub, Slack, or a public SaaS integration",
+      "Do not test Redis queue mode, multi-host workers, Docker Compose, or n8n Cloud credentials",
+      "Candidate works in a desktop environment with the n8n editor, Terminal, and VS Code available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different automation tool"
     ]
   },
   "problem_statement": {
-    "title": "Containerize the Fastify app",
-    "summary": "A small Node.js (Fastify) service is on your desktop. Your job is to package it so it runs reliably as a container.",
+    "title": "Flatten kept events to NDJSON",
+    "summary": "A local events.json extract is on your desktop. n8n is already running on this machine. Your job is to build and execute a workflow that keeps paid events, drops malformed rows, and writes NDJSON to /data/events.ndjson.",
     "outcomes": [
-      "Build an image that starts the app and serves its HTTP routes.",
-      "Expose the service so it can be reached from outside the container on a documented host port.",
-      "Keep the runtime image reasonably small and suitable for a production-like baseline (prefer a multi-stage build when dependencies are installed during the image build)."
+      "Open n8n (desktop launcher or http://127.0.0.1:5678/) and execute a workflow that reads events.json.",
+      "Keep rows whose status is paid; skip empty id and non-numeric amount; drop nested meta.",
+      "Write one NDJSON line per kept event (id, source, amount) to /data/events.ndjson."
     ],
     "constraints": [
-      "Do not change the app’s public behavior: GET / and GET /health must keep working as they do today.",
-      "The process inside the container should listen on a port you can map (default app port is 3000 unless you document otherwise).",
-      "Prefer running the app process as a non-root user in the final image when the base image supports it.",
-      "Starter files on the desktop stay as shared scenery — treat them as the application source you containerize; do not replace them with a different stack."
+      "Use n8n for the work sample. Do not replace it with a one-off Node, Python, or spreadsheet script.",
+      "Do not change events.json. Do not call GitHub, Slack, or other personal/SaaS APIs.",
+      "File nodes should write under /data (same volume as /config/data).",
+      "Starter files on the desktop stay as shared scenery — treat events.json as the extract you flatten."
     ],
-    "deliverables": "Produce whatever files and commands a reviewer needs to rebuild and run your image from this desktop (for example a Dockerfile, and optionally Compose). Leave clear enough structure that someone else can build and start the service without guessing."
+    "deliverables": "Leave an executed n8n workflow a reviewer can open on this desktop, plus /data/events.ndjson (and optional results.md). Sign-in on this image is the baked owner account in Before you start."
   },
   "rubric": [
     {
-      "name": "Working container",
+      "name": "Working n8n execution",
       "weight": 40,
-      "summary": "Demonstrates a running container that serves the app through a published host port.",
-      "description": "YES/NO: Did the candidate demonstrate a running container that serves the starter Fastify routes (GET / and/or GET /health) through a published host port mapped to the app’s documented default listen port (see starter index.js / brief)? Answer YES only if video or narrative shows a successful check (browser or curl) against the mapped port. Build-only, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+      "summary": "Demonstrates a successful Execute of an n8n workflow that reads the starter extract.",
+      "description": "YES/NO: Did the candidate demonstrate a successful n8n Execute (editor execution list, success state, or a webhook POST that appears as a run) of a workflow that reads starter events.json? Answer YES only if video or narrative shows a completed run with no unresolved node error. Canvas-only, Node/Python-only, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
     },
     {
-      "name": "Dockerfile quality",
+      "name": "Correct NDJSON output",
       "weight": 30,
-      "summary": "Uses a lockfile-based install and a lean runtime image in the Dockerfile.",
-      "description": "YES/NO: Does the final Dockerfile use a reproducible lockfile install (npm ci or equivalent) and a lean final runtime (multi-stage or alpine/slim Node base, not an unexplained full OS image)? Answer YES only if both are visible in the deliverable Dockerfile. Missing lockfile-based install or a heavyweight unjustified base = NO. YES = full points; NO or unclear = 0."
+      "summary": "Writes the instance’s three kept events to the documented /data file.",
+      "description": "YES/NO: Does leftover /data/<instance output_file> (or /config/data) contain the three kept records for the instance keep-status in notes.md / brief, with id, source, and numeric amount, and without skipped ids (empty id, evt-bad, evt-skip, or wrong-status rows)? Answer YES only if all three instance keys match — not skeleton paid / events.ndjson when this instance differs. Wrong status, missing file, or all 15 input rows dumped = NO. Extra keys on a line are OK. YES = full points; NO or unclear = 0."
     },
     {
-      "name": "Runtime hygiene",
+      "name": "Item explode and field map",
       "weight": 20,
-      "summary": "Runs the app as a non-root user and documents the container port to publish.",
-      "description": "YES/NO: Does the final image configuration run the app as a non-root user (USER or equivalent) and expose/document a container port suitable for publishing (e.g. EXPOSE matching the app default listen port)? Answer YES only if both appear in the final Dockerfile (or equivalent compose). Missing non-root USER or no port exposure/documentation = NO. YES = full points; NO or unclear = 0."
+      "summary": "Turns the JSON array into multiple n8n items and maps id, source, and amount.",
+      "description": "YES/NO: Does the leftover workflow explode the file/array into multiple n8n items and map id / source / amount (meta dropped or unused), via a Code node returning canonical items or native Split Out + Filter / Edit Fields? Answer YES only if both explode and map are visible. Single-item dump of the whole array, or three hardcoded Set nodes with no read of events.json = NO. YES = full points; NO or unclear = 0."
     },
     {
       "name": "Clarity of deliverables",
       "weight": 10,
-      "summary": "Leaves a rebuildable Dockerfile on the desktop that a reviewer can follow without guessing steps.",
-      "description": "YES/NO: Is there a Dockerfile (or equivalent) left on the desktop that a reviewer could use to rebuild the image without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional compose/notes must be accurate if present. No Dockerfile / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+      "summary": "Leaves an n8n workflow and a /data output file a reviewer can find without guessing.",
+      "description": "YES/NO: Is there a leftover n8n workflow (still in the editor or exported JSON) plus the documented /data file (or labeled results.md pointing at it) that a reviewer could reopen without guessing paths? Answer YES if both the workflow and output location are findable; optional notes must be accurate if present. Deleted workflow, output only spoken, or never opened n8n = NO. YES = full points; NO or unclear = 0."
     }
   ],
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
       "Keep the same skills_assessed and rubric structure/weights",
-      "Keep the same deliverable kinds and difficulty band (Dockerfile + running container for a small Fastify app)",
-      "Keep Fastify, GET / and GET /health public routes, and lockfile-based install expectations",
-      "Do not introduce Kubernetes, cloud IaC, or a different application stack",
-      "Do not rewrite package-lock.json; keep the same fastify dependency range across instances"
+      "Keep the same deliverable kinds and difficulty band (n8n workflow + NDJSON under /data)",
+      "Keep events.json, three kept rows per keep-status, and skip rules (empty id, non-numeric amount, status filter)",
+      "Do not introduce GitHub, Slack, Redis queue mode, n8n Cloud, or a different automation tool",
+      "Do not rewrite events.json; keep the same 15-row extract across instances"
     ],
     "factors": [
       {
-        "id": "service",
+        "id": "pipeline",
         "options": [
           {
-            "id": "test_app",
+            "id": "test_events",
             "values": {
-              "package_name": "test-app",
-              "greeting_message": "Hello from Fastify",
-              "service_label": "test-app Fastify service",
-              "package_description": "Small Fastify hello/health service for containerization practice"
+              "pipeline_label": "test-events ingest",
+              "output_file": "events.ndjson"
             }
           },
           {
-            "id": "orders_api",
+            "id": "orders_desk",
             "values": {
-              "package_name": "orders-api",
-              "greeting_message": "Orders API ready",
-              "service_label": "orders-api Fastify service",
-              "package_description": "Internal orders hello/health Fastify service"
+              "pipeline_label": "orders-desk ingest",
+              "output_file": "orders.ndjson"
             }
           },
           {
-            "id": "inventory_svc",
+            "id": "inventory_moves",
             "values": {
-              "package_name": "inventory-svc",
-              "greeting_message": "Inventory service online",
-              "service_label": "inventory-svc Fastify service",
-              "package_description": "Inventory hello/health Fastify service"
+              "pipeline_label": "inventory-moves ingest",
+              "output_file": "inventory.ndjson"
             }
           },
           {
-            "id": "billing_gateway",
+            "id": "billing_events",
             "values": {
-              "package_name": "billing-gateway",
-              "greeting_message": "Billing gateway up",
-              "service_label": "billing-gateway Fastify service",
-              "package_description": "Billing gateway hello/health Fastify service"
+              "pipeline_label": "billing-events ingest",
+              "output_file": "billing.ndjson"
             }
           },
           {
-            "id": "notify_hook",
+            "id": "notify_hooks",
             "values": {
-              "package_name": "notify-hook",
-              "greeting_message": "Notify hook listening",
-              "service_label": "notify-hook Fastify service",
-              "package_description": "Notification webhook hello/health Fastify service"
+              "pipeline_label": "notify-hooks ingest",
+              "output_file": "notify.ndjson"
             }
           },
           {
-            "id": "catalog_read",
+            "id": "catalog_sync",
             "values": {
-              "package_name": "catalog-read",
-              "greeting_message": "Catalog read API",
-              "service_label": "catalog-read Fastify service",
-              "package_description": "Catalog read hello/health Fastify service"
+              "pipeline_label": "catalog-sync ingest",
+              "output_file": "catalog.ndjson"
             }
           }
         ]
       },
       {
-        "id": "port",
+        "id": "status",
         "options": [
           {
-            "id": "3000",
+            "id": "paid",
             "values": {
-              "default_port": "3000"
+              "keep_status": "paid"
             }
           },
           {
-            "id": "3080",
+            "id": "shipped",
             "values": {
-              "default_port": "3080"
+              "keep_status": "shipped"
             }
           },
           {
-            "id": "4000",
+            "id": "open",
             "values": {
-              "default_port": "4000"
+              "keep_status": "open"
             }
           },
           {
-            "id": "8080",
+            "id": "active",
             "values": {
-              "default_port": "8080"
+              "keep_status": "active"
             }
           }
         ]
@@ -190,10 +185,10 @@
     ],
     "constraints": [],
     "apply": {
-      "candidate_brief": "## Containerize the {{service_label}}\n\nA small Node.js (Fastify) service named `{{package_name}}` is on your desktop. Your job is to package it so it runs reliably as a container.\n\n### Outcomes\n- Build an image that starts the app and serves its HTTP routes.\n- Expose the service so it can be reached from outside the container on a documented host port.\n- Keep the runtime image reasonably small and suitable for a production-like baseline (prefer a multi-stage build when dependencies are installed during the image build).\n\n### Constraints\n- Do not change the app’s public behavior: GET / and GET /health must keep working as they do today (including the existing JSON payloads).\n- The process inside the container should listen on a port you can map (default app port is {{default_port}} unless you document otherwise).\n- Prefer running the app process as a non-root user in the final image when the base image supports it.\n- Starter files on the desktop stay as shared scenery — treat them as the application source you containerize; do not replace them with a different stack.\n\n### Deliverables\nProduce whatever files and commands a reviewer needs to rebuild and run your image from this desktop (for example a Dockerfile, and optionally Compose). Leave clear enough structure that someone else can build and start the service without guessing.\n",
+      "candidate_brief": "## Build the {{pipeline_label}} in n8n\n\nA local JSON extract named `events.json` is on your desktop. n8n is already on this machine. Your job is to build and execute a workflow that flattens the kept events into NDJSON under `/data`.\n\n### Outcomes\n- Open n8n (desktop launcher or http://127.0.0.1:5678/) and execute a workflow that reads `events.json`.\n- Keep rows whose `status` is `{{keep_status}}`; skip empty `id` and non-numeric `amount`; drop nested `meta`.\n- Write one NDJSON line per kept event (`id`, `source`, `amount`) to `/data/{{output_file}}`.\n\n### Constraints\n- Use n8n for the work sample. Do not replace it with a one-off Node, Python, or spreadsheet script.\n- Do not change `events.json`. Do not call GitHub, Slack, or other personal/SaaS APIs.\n- File nodes should write under `/data` (same volume as `/config/data`).\n- Starter files on the desktop stay as shared scenery — treat `events.json` as the extract you flatten.\n\n### Deliverables\nLeave an executed n8n workflow a reviewer can open on this desktop, plus `/data/{{output_file}}` (and optional `results.md`). Sign-in on this image is the baked owner account in Before you start.\n",
       "files": {
-        "app/index.js": "'use strict'\n\nconst Fastify = require('fastify')\n\nconst app = Fastify({ logger: true })\n\napp.get('/', async () => {\n  return { ok: true, message: '{{greeting_message}}' }\n})\n\napp.get('/health', async () => {\n  return { status: 'ok' }\n})\n\nconst start = async () => {\n  try {\n    const port = Number(process.env.PORT) || {{default_port}}\n    const host = process.env.HOST || '0.0.0.0'\n    await app.listen({ port, host })\n  } catch (err) {\n    app.log.error(err)\n    process.exit(1)\n  }\n}\n\nstart()\n",
-        "app/package.json": "{\n  \"name\": \"{{package_name}}\",\n  \"version\": \"1.0.0\",\n  \"description\": \"{{package_description}}\",\n  \"license\": \"ISC\",\n  \"author\": \"\",\n  \"type\": \"commonjs\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \"node index.js\",\n    \"dev\": \"node --watch index.js\",\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"dependencies\": {\n    \"fastify\": \"^5.6.0\"\n  }\n}\n"
+        "notes.md": "# {{pipeline_label}}\n\nBuild and run an n8n workflow that reads `events.json`, keeps rows whose `status` is **{{keep_status}}**, drops malformed rows, and writes one NDJSON line per kept event to `/data/{{output_file}}`.\n\n## Input\n\n- File: `events.json` on the desktop (typical path `/config/Desktop/events.json`). You may copy it to `/data/events.json` before reading.\n- Each object has `id`, `source`, `status`, `amount`, and nested `meta`.\n\n## Keep / skip rules\n\n- Keep only rows where `status` equals `{{keep_status}}`.\n- Skip rows with an empty `id`.\n- Skip rows whose `amount` is not a number.\n- Drop `meta` (and any other extra fields) from the output.\n\n## Output\n\nWrite newline-delimited JSON to **`/data/{{output_file}}`** (`/data` is the same volume as `/config/data`). Each line is one object:\n\n```json\n{\"id\":\"<id>\",\"source\":\"<source>\",\"amount\":<number>}\n```\n\nUse a Manual Trigger (or equivalent) and **Execute workflow** in the n8n editor. Do not replace n8n with a one-off Node/Python script as the work sample.\n",
+        "results.md": "# Workflow results — {{pipeline_label}}\n\nFill this in (or leave equivalent notes / a screenshot). Do not leave the output implied.\n\n## Run\n\n- n8n editor used (desktop launcher or http://127.0.0.1:5678/):\n- Workflow executed successfully (yes/no):\n- Items after flatten (expected: one item per kept event):\n\n## Output file\n\n- Path (required: `/data/{{output_file}}`):\n- Line count:\n- Keep status used: {{keep_status}}\n\n## Notes\n\n-\n"
       }
     }
   }

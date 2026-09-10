@@ -1,0 +1,107 @@
+[
+  {
+    "id": "evt-101",
+    "source": "checkout",
+    "status": "paid",
+    "amount": 12.5,
+    "meta": { "ua": "web", "nested": true }
+  },
+  {
+    "id": "evt-102",
+    "source": "warehouse",
+    "status": "shipped",
+    "amount": 20.0,
+    "meta": { "carrier": "box" }
+  },
+  {
+    "id": "evt-103",
+    "source": "inbox",
+    "status": "open",
+    "amount": 8.0,
+    "meta": { "queue": "n1" }
+  },
+  {
+    "id": "evt-104",
+    "source": "subscription",
+    "status": "active",
+    "amount": 40.0,
+    "meta": { "plan": "pro" }
+  },
+  {
+    "id": "evt-105",
+    "source": "checkout",
+    "status": "paid",
+    "amount": 7.25,
+    "meta": {}
+  },
+  {
+    "id": "evt-106",
+    "source": "warehouse",
+    "status": "shipped",
+    "amount": 15.5,
+    "meta": {}
+  },
+  {
+    "id": "evt-107",
+    "source": "inbox",
+    "status": "open",
+    "amount": 3.0,
+    "meta": {}
+  },
+  {
+    "id": "evt-108",
+    "source": "subscription",
+    "status": "active",
+    "amount": 12.0,
+    "meta": {}
+  },
+  {
+    "id": "evt-109",
+    "source": "checkout",
+    "status": "paid",
+    "amount": 5.0,
+    "meta": { "ip": "10.0.0.1" }
+  },
+  {
+    "id": "evt-110",
+    "source": "warehouse",
+    "status": "shipped",
+    "amount": 9.75,
+    "meta": {}
+  },
+  {
+    "id": "evt-111",
+    "source": "inbox",
+    "status": "open",
+    "amount": 11.0,
+    "meta": {}
+  },
+  {
+    "id": "evt-112",
+    "source": "subscription",
+    "status": "active",
+    "amount": 6.5,
+    "meta": {}
+  },
+  {
+    "id": "",
+    "source": "checkout",
+    "status": "paid",
+    "amount": 99.0,
+    "meta": {}
+  },
+  {
+    "id": "evt-bad",
+    "source": "warehouse",
+    "status": "shipped",
+    "amount": "n/a",
+    "meta": {}
+  },
+  {
+    "id": "evt-skip",
+    "source": "checkout",
+    "status": "failed",
+    "amount": 1.0,
+    "meta": {}
+  }
+]
