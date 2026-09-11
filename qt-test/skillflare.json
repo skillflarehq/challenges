@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "title": "Implement a Qt Widgets desktop app",
+  "slug": "qt-widgets-summary-app",
+  "version": 1,
+  "image": "qt",
+  "machine_size": "c3-standard-4",
+  "tools": [
+    "g++",
+    "CMake",
+    "Qt 6",
+    "Qt Creator",
+    "Qt Designer",
+    "GDB",
+    "clangd",
+    "CodeLLDB",
+    "VS Code",
+    "Continue"
+  ],
+  "duration_minutes": 20,
+  "skills_assessed": [
+    "CMake Qt 6 Widgets builds",
+    "Qt Widgets UI binding (Designer .ui + labels)",
+    "CSV aggregation in C++"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "g++, CMake, Qt 6, Qt Creator, Qt Designer, and the starter Widgets app are on the desktop."
+  ],
+  "role": {
+    "title": "Qt / desktop engineer",
+    "seniority": "Mid",
+    "company_context": "Product-led industrial software company shipping internal Qt desktop tools. A small desktop team owns CMake + Qt Widgets apps so feature teams can expose status and summary screens without pulling in Electron or a web shell. Hiring to strengthen day-to-day Qt app work on that team.",
+    "day_to_day": [
+      "Implement and review Qt Widgets screens in CMake C++ projects",
+      "Parse operational CSV extracts and show stable summary values on screen",
+      "Keep Home, Status, and Summary tabs predictable for QA and staging builds",
+      "Pair with desktop engineers on cmake configure, moc/uic, and “works on my machine” issues",
+      "Improve shared Qt Widgets templates and CMake conventions"
+    ],
+    "required_skills": [
+      "Comfortable building C++17 Qt 6 with CMake (configure, build, run)",
+      "Can bind Qt Designer widgets (QLabel / QTabWidget) from C++",
+      "Can parse a simple CSV and aggregate numeric columns with defined skip/tie rules",
+      "Can validate a running Widgets window against the documented UI contract"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with Qt Creator and Qt Designer .ui files",
+      "Experience with clangd / CMake Tools in VS Code",
+      "Prior work on internal platform or developer-experience Qt desktop apps",
+      "Comfort reading moc/uic/linker errors when a build fails"
+    ],
+    "constraints": [
+      "Assessment focuses on completing the provided CMake + Qt Widgets app — not redesigning the stack or adding QML, GTK, or Electron",
+      "Do not test packaging (CPack), installer generation, or cross-compilation in this challenge",
+      "Candidate works in a desktop environment with Terminal, g++, CMake, Qt 6, and Qt Creator available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different UI toolkit"
+    ]
+  },
+  "problem_statement": {
+    "title": "Implement the Widgets screens",
+    "summary": "A small CMake + Qt 6 Widgets app is on your desktop. The project already compiles and wires Home, Status, and Summary tabs. Your job is to implement the stubbed populate() and fromCsv so those destinations show the documented greeting, status copy, and CSV summary.",
+    "outcomes": [
+      "Build the CMake project and run the app so a reviewer can open the window without guessing Qt paths.",
+      "Home shows the instance greeting and Status shows the instance status copy.",
+      "Summary displays group, total, and skipped computed from data/items.csv using the documented grouping, skip, and tie-break rules."
+    ],
+    "constraints": [
+      "Do not change the public destinations: Home, Status, and Summary must remain the three tabs a reviewer checks.",
+      "Keep Qt Widgets and the CMake project; do not replace them with QML-only, GTK, Electron, or a from-scratch toolkit.",
+      "Run the binary from the workspace root so data/items.csv resolves (default output is build/app).",
+      "Starter files on the desktop stay as shared scenery — treat them as the application source you complete; do not change data/items.csv or ui/mainwindow.ui."
+    ],
+    "deliverables": "Leave a CMake project a reviewer can rebuild and run from this desktop without guessing. Demonstrate Home, Status, and Summary in the leftover sources and the running window."
+  },
+  "rubric": [
+    {
+      "name": "Working GUI",
+      "weight": 40,
+      "summary": "Demonstrates a running Qt Widgets window with Home and Status tabs populated.",
+      "description": "YES/NO: Did the candidate demonstrate a running Qt Widgets process that shows the Home and Status tabs (not leftover “not implemented”) through the leftover CMake binary (see starter src/main.cpp / brief)? Answer YES only if video or narrative shows a successful run of the window with those tabs visible and filled. Crash-on-start, compile-only, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct screens",
+      "weight": 30,
+      "summary": "Shows the instance greeting, status copy, and the CSV summary winner.",
+      "description": "YES/NO: Do Home, Status, and Summary match the contract? Home text must equal the instance greeting from the starter mainwindow.cpp comment / brief (not a leftover HTTP hello). Status text must equal the instance status_text. Summary must match the truth-pack algorithm on starter data/items.csv (group by category, sum numeric amount, skip empty category or non-numeric amount; max total, lexicographic tie-break). Extra label prefixes are fine; numeric total 65.5 and 65.50 both count. Wrong greeting, wrong status copy, missing Summary fields, or a hardcoded summary that does not match the CSV algorithm = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "CMake and Qt Widgets",
+      "weight": 20,
+      "summary": "Uses the CMake Qt Widgets project and keeps the three tab destinations.",
+      "description": "YES/NO: Does the leftover project build with CMake (cmake -S . -B build or equivalent) rather than a one-off g++ that ignores CMakeLists.txt, and do Home, Status, and Summary remain the three tabs wired from ui/mainwindow.ui? Answer YES only if both the CMake Qt path and the three destinations are visible. Raw g++ of a single file, dropping a tab, or replacing Qt Widgets with QML-only / GTK / Electron = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a rebuildable CMake project on the desktop that a reviewer can follow without guessing steps.",
+      "description": "YES/NO: Is there a CMakeLists.txt plus Qt sources left on the desktop that a reviewer could cmake-configure, build, and run without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No CMake project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (CMake Qt Widgets app with stubbed screens)",
+      "Keep Qt Widgets, Home / Status / Summary destinations, and the items.csv aggregation rules",
+      "Do not introduce QML-only rewrites, GTK, Electron, CPack installers, or a different UI toolkit",
+      "Do not rewrite data/items.csv or ui/mainwindow.ui; keep the same CSV and Designer form across instances"
+    ],
+    "factors": [
+      {
+        "id": "app",
+        "options": [
+          {
+            "id": "test_app",
+            "values": {
+              "package_name": "test-app",
+              "greeting_message": "Hello from Qt",
+              "service_label": "test-app Qt Widgets app",
+              "package_description": "Small Qt hello/status/summary Widgets app"
+            }
+          },
+          {
+            "id": "orders_api",
+            "values": {
+              "package_name": "orders-api",
+              "greeting_message": "Orders API ready",
+              "service_label": "orders-api Qt Widgets app",
+              "package_description": "Internal orders hello/status/summary Qt Widgets app"
+            }
+          },
+          {
+            "id": "inventory_svc",
+            "values": {
+              "package_name": "inventory-svc",
+              "greeting_message": "Inventory service online",
+              "service_label": "inventory-svc Qt Widgets app",
+              "package_description": "Inventory hello/status/summary Qt Widgets app"
+            }
+          },
+          {
+            "id": "billing_gateway",
+            "values": {
+              "package_name": "billing-gateway",
+              "greeting_message": "Billing gateway up",
+              "service_label": "billing-gateway Qt Widgets app",
+              "package_description": "Billing gateway hello/status/summary Qt Widgets app"
+            }
+          },
+          {
+            "id": "notify_hook",
+            "values": {
+              "package_name": "notify-hook",
+              "greeting_message": "Notify hook listening",
+              "service_label": "notify-hook Qt Widgets app",
+              "package_description": "Notification webhook hello/status/summary Qt Widgets app"
+            }
+          },
+          {
+            "id": "catalog_read",
+            "values": {
+              "package_name": "catalog-read",
+              "greeting_message": "Catalog read API",
+              "service_label": "catalog-read Qt Widgets app",
+              "package_description": "Catalog read hello/status/summary Qt Widgets app"
+            }
+          }
+        ]
+      },
+      {
+        "id": "status",
+        "options": [
+          {
+            "id": "ok",
+            "values": {
+              "status_text": "ok"
+            }
+          },
+          {
+            "id": "healthy",
+            "values": {
+              "status_text": "healthy"
+            }
+          },
+          {
+            "id": "ready",
+            "values": {
+              "status_text": "ready"
+            }
+          },
+          {
+            "id": "online",
+            "values": {
+              "status_text": "online"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Implement the {{service_label}}\n\nA small Qt 6 Widgets app named `{{package_name}}` is on your desktop. The CMake project already compiles and wires Home, Status, and Summary tabs. The screens are stubs. Implement `populate()` and `fromCsv` so the documented contracts work.\n\n### Outcomes\n- Build the CMake project (`cmake -S . -B build && cmake --build build`) so a reviewer can run `./build/app` without guessing Qt paths.\n- Home shows the instance greeting; Status shows the instance status copy (`{{status_text}}`).\n- Summary displays group, total, and skipped computed from `data/items.csv` (group by category, sum numeric amount, skip malformed rows; winner is max total, ties go to the lexicographically smallest category).\n\n### Constraints\n- Keep the public destinations Home, Status, and Summary. Do not replace Qt Widgets or the CMake project with a different stack (no QML rewrite, GTK, Electron, or a from-scratch toolkit).\n- Run the app from the workspace root so `data/items.csv` resolves. Demonstrate the three tabs in the running window.\n- Starter files on the desktop stay as shared scenery — treat them as the application source you complete; do not change `data/items.csv` or `ui/mainwindow.ui`.\n\n### Deliverables\nLeave a CMake project a reviewer can rebuild (`cmake -S . -B build && cmake --build build`) and run without guessing. Demonstrate Home, Status, and Summary in the leftover sources and the running window.\n",
+      "files": {
+        "CMakeLists.txt": "cmake_minimum_required(VERSION 3.16)\n\nproject({{package_name}} LANGUAGES CXX)\n\nset(CMAKE_CXX_STANDARD 17)\nset(CMAKE_CXX_STANDARD_REQUIRED ON)\nset(CMAKE_AUTOMOC ON)\nset(CMAKE_AUTOUIC ON)\nset(CMAKE_AUTORCC ON)\nset(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/ui)\n\nfind_package(Qt6 REQUIRED COMPONENTS Widgets)\n\nqt_add_executable(app\n  src/main.cpp\n  src/mainwindow.cpp\n  src/summary.cpp\n  ui/mainwindow.ui\n)\n\ntarget_include_directories(app PRIVATE src)\ntarget_link_libraries(app PRIVATE Qt6::Widgets)\n",
+        "src/mainwindow.cpp": "#include \"mainwindow.h\"\n#include \"ui_mainwindow.h\"\n\n// Implement populate(). Do not change the public tab destinations.\n//\n// Home    -> homeLabel text equals \"{{greeting_message}}\"\n// Status  -> statusLabel text equals \"{{status_text}}\"\n// Summary -> read data/items.csv from the process working directory\n//            (workspace root). Display group, total, and skipped from\n//            fromCsv.\n//\n// For Summary, skip the header row. Group by `category` and sum\n// numeric `amount`. Skip rows with an empty category or a non-numeric\n// amount. The winner is the category with the highest total; ties go to\n// the lexicographically smallest category name.\n\nMainWindow::MainWindow(QWidget *parent)\n    : QMainWindow(parent), ui(new Ui::MainWindow) {\n  ui->setupUi(this);\n  setWindowTitle(QStringLiteral(\"{{package_name}}\"));\n  populate();\n}\n\nMainWindow::~MainWindow() = default;\n\nvoid MainWindow::populate() {\n  ui->homeLabel->setText(QStringLiteral(\"not implemented\"));\n  ui->statusLabel->setText(QStringLiteral(\"not implemented\"));\n  ui->groupLabel->setText(QStringLiteral(\"not implemented\"));\n  ui->totalLabel->setText(QStringLiteral(\"not implemented\"));\n  ui->skippedLabel->setText(QStringLiteral(\"not implemented\"));\n}\n"
+      }
+    }
+  }
+}
