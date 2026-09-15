@@ -1,4 +1,6 @@
-# Solar minigrid PV + siting challenge (Skillflare package)
+# Solar minigrid PV + siting challenge (Skillflare package) — deprecated
+
+Temporarily parked with the solar desktop image. Restore by moving this directory back to `solar-test/` at the repo root.
 
 Canonical Skillflare challenge package for a **minigrid design** work sample on the **solar** desktop (QGIS, LibreOffice Calc, QCAD): size PV kWp and battery kWh from a village load list, then choose the generation plot that can host the array. Closed-world content lives in `skillflare.json`; grader prose stays in `truth_pack.md`.
 
@@ -13,7 +15,7 @@ The skeleton instance is **Kipeta health-post** / E_served = **30.0** kWh/day / 
 `variation.strategy: "combinatorial"` is the builder-output shape: factor option bundles + mustache-style `{{key}}` templates. Invariants document authoring intent; runtime does not interpret free-text invariants.
 
 ```bash
-node challenges/validate-challenge.mjs challenges/solar-test
+node challenges/validate-challenge.mjs challenges/deprecated/solar-test
 ```
 
 Do not put solved KPIs, a filled `results.md`, or an answer-key plot choice under `workspace/`.
