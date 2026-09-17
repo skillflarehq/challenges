@@ -4,6 +4,7 @@
   "slug": "weather-station-spreadsheet-summary",
   "version": 1,
   "image": "finance",
+  "compute_provider": "local",
   "duration_minutes": 25,
   "skills_assessed": [
     "Opening CSV data in a spreadsheet",

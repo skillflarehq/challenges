@@ -4,6 +4,7 @@
   "slug": "supabase-bus-ticketing-kenya",
   "version": 1,
   "image": "npm",
+  "compute_provider": "container",
   "duration_minutes": 45,
   "skills_assessed": [
     "Vue SPA development",

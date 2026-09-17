@@ -4,6 +4,7 @@
   "slug": "financial-analyst-manufacturing-three-statement",
   "version": 1,
   "image": "finance",
+  "compute_provider": "container",
   "duration_minutes": 90,
   "skills_assessed": [
     "Integrated three-statement financial modeling",
