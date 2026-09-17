@@ -28,8 +28,18 @@ Each example typically includes:
 
 | Path | Role |
 |------|------|
-| `skillflare.json` | Manifest (metadata, role, problem statement, rubric, variation policy) |
+| `skillflare.json` | Manifest (metadata, `compute_provider`, role, problem statement, rubric, variation policy) |
 | `truth_pack.md` | Grader mark scheme |
 | `workspace/` | Candidate starter files |
+
+`compute_provider` is required and must be one of:
+
+| Value | Meaning |
+|-------|---------|
+| `local` | Browser desktop (`screen/`); no cloud machine |
+| `container` | Fly.io Machine webtop |
+| `vm` | Google Cloud VM webtop |
+
+[`weather-basics`](weather-basics/) is `local`. The other complete examples are `container`.
 
 See each package’s README for details.

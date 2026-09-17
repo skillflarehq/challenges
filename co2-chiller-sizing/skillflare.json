@@ -4,6 +4,7 @@
   "slug": "co2-chiller-sizing-wine-r744",
   "version": 1,
   "image": "refrigeration",
+  "compute_provider": "container",
   "machine_size": "c3-standard-4",
   "duration_minutes": 45,
   "skills_assessed": [
