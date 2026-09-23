@@ -94,9 +94,17 @@
       "description": "YES/NO: Is there a pom.xml plus sources left on the desktop that a reviewer could mvn-compile and exec:java without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No Maven project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (Maven Java HTTP service with stubbed handlers)",
       "Keep JDK HttpServer, GET /, GET /health, GET /summary, and the items.csv aggregation rules",

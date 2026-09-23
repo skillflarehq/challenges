@@ -89,9 +89,17 @@
       "description": "YES/NO: Are OpenTofu .tf files left on the desktop that a reviewer could init and plan without guessing paths or undocumented steps? Answer YES if the primary module is present and self-explanatory enough to dry-run; optional notes must be accurate if present. No .tf / cannot plan from the workspace = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (OpenTofu root module + successful tofu plan for DO managed Postgres)",
       "Keep engine pg, digitalocean provider, and plan-only (no apply) expectations",

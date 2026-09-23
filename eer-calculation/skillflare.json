@@ -102,9 +102,17 @@
       "description": "YES/NO: Is there a readable state table and final numbers a reviewer can follow without guessing intermediate steps or units? Answer YES if the calculation path is auditable end-to-end. Opaque scrap numbers or missing table/finals that force guessing = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (written thermodynamics calculation with cooling EER, heat-pump COP, and Carnot comparison in EU W/W nomenclature)",
       "Keep refrigerant R22 for all instances (truth pack is skeleton-scoped; do not swap refrigerants)",

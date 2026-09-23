@@ -95,9 +95,17 @@
       "description": "YES/NO: Is the plan thorough and well reasoned, and does it reference starter CSVs/maps where relevant instead of ignoring them? Answer YES if depth of reasoning is clear and the provided data is used. Extremely sparse bullets without justification, or a plan that never engages the starter files = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (written last-mile sales plan using provided data/tools)",
       "Keep Tanzania / Mbeya regional hub framing and a six-month campaign window",

@@ -98,9 +98,17 @@
       "description": "YES/NO: Is there a Gradle wrapper plus Android sources left on the desktop that a reviewer could ./gradlew assembleDebug without guessing SDK paths or undocumented steps? ANDROID_HOME is set on the image; local.properties is optional. Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No Gradle project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (Gradle Jetpack Compose app with stubbed screens)",
       "Keep Compose, Home / Status / Summary destinations, and the items.csv aggregation rules",

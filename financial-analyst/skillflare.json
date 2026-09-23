@@ -96,9 +96,17 @@
       "description": "YES/NO: Is there an auditable workbook or completed template a reviewer can follow without guessing units, years, or which driver set was used? Answer YES if the path from drivers to outputs is reviewable. Opaque scrap tabs or missing finals that force guessing = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (integrated 5-year three-statement manufacturing forecast from provided history + drivers)",
       "Keep US light-manufacturing FP&A framing \u2014 not valuation, coding, or a different industry",

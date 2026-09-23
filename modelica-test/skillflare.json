@@ -95,9 +95,17 @@
       "description": "YES/NO: Is there a leftover Plant.mo plus a labeled s_ss / s_peak / damping block (results.md, notes, or plot annotations) that a reviewer could resimulate with omc simulate.mos or OMEdit without guessing paths? Answer YES if the model is present and the KPI block is findable; optional notes must be accurate if present. Deleted model, KPIs only spoken, or cannot resimulate from the workspace = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (stubbed MSL translational plant + OpenModelica simulate + three KPIs)",
       "Keep Plant.mo class name Plant, parallel spring-damper topology, and underdamped step from rest",

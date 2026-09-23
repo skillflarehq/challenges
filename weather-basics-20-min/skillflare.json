@@ -89,9 +89,17 @@
       "description": "YES (10) if the candidate opened and worked the extract in LibreOffice Calc or another spreadsheet (Excel-compatible) and left a labeled Min / Max / Average block (or equivalent headings) on the sheet or a second sheet so a reviewer can find TMAX, TMIN, and PRCP results without guessing which cells matter. soffice opening the CSV counts. Labels plus a findable min/max/avg block are enough — do not require all nine correctness keys here; missing numbers are scored on the correctness item. Partial 5 if spreadsheet work is visible but the leftover summary is unlabeled scrap, or a labeled block exists but spreadsheet work is not shown. Text-editor-only, terminal-only, or Python-only work = 0. Results only spoken, or a cleared sheet = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable (labeled min/max/average block in a spreadsheet) and difficulty band",
       "Keep the 9-column GHCN daily layout, stored tenths units, and 9999 missing code",

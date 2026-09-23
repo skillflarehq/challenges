@@ -92,9 +92,17 @@
       "description": "YES/NO: In the terminal and Continue (or other in-environment AI) logs, did the candidate diagnose the bottleneck (per-request full-file read/parse, heap/GC, event-loop block) before or while steering the assistant, rather than only pasting failing stack traces in a loop? Did they inspect the generated diff (tie-break, skipped rows, float totals, /health still serving) before treating the change as done? Blind “make it faster” with no diagnosis, or accepting an unverified heap-size/cluster patch as the finish, = NO. No AI used is not an automatic NO if they still diagnosed and verified; grade the oversight quality of whatever path they took. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (Fastify /summary under autocannon, AUDIT.md)",
       "Keep Fastify, GET /, GET /health, GET /summary, generate-data.mjs, and the items.csv aggregation rules",

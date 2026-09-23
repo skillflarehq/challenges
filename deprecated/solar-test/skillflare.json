@@ -97,9 +97,17 @@
       "description": "YES/NO: Is there a leftover results.md or spreadsheet with labeled E_day / PV_kWp / Battery_kWh / Array_area_m2 / plot_id that a reviewer can find without guessing paths? Answer YES if the KPI block is findable and optional notes are accurate if present. KPIs only spoken, deleted workbook and results, or cannot tell which plot was chosen = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (Calc energy balance + QGIS plot selection + five KPIs)",
       "Keep three plots A/B/C, loads.csv + plots.geojson, and exactly one valid plot per instance",
