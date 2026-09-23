@@ -14,8 +14,18 @@
     "Efficient range selection and formula fill"
   ],
   "before_you_start": [
-    "No personal accounts required.",
-    "The station CSV and data notes are on the desktop; use the spreadsheet app in the workspace."
+    "Sign in to Google Sheets and Excel for the web in this browser window before you start.",
+    "The timer starts only when you start the assessment."
+  ],
+  "prep_links": [
+    {
+      "label": "Google Sheets",
+      "url": "https://docs.google.com/spreadsheets/create"
+    },
+    {
+      "label": "Excel for the web",
+      "url": "https://excel.cloud.microsoft"
+    }
   ],
   "role": {
     "title": "Operations analyst",
