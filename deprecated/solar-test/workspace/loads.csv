@@ -1,0 +1,10 @@
+id,name,type,daily_kwh,lat,lon
+L1,Kipeta clinic,clinic,10.0,-6.81960,36.48020
+L2,Staff house 1,house,1.5,-6.81945,36.48005
+L3,Staff house 2,house,1.5,-6.81950,36.47990
+L4,Staff house 3,house,1.5,-6.81975,36.47985
+L5,Staff house 4,house,1.5,-6.81990,36.48000
+L6,Staff house 5,house,1.5,-6.81985,36.48025
+L7,Staff house 6,house,1.5,-6.81965,36.48035
+L8,Kipeta dispensary shop,shop,4.0,-6.81930,36.48015
+L9,Kipeta primary school,school,7.0,-6.82000,36.48045

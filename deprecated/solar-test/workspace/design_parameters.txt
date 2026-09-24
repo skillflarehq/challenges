@@ -1,0 +1,27 @@
+Kipeta health-post minigrid — design data
+==========================================
+
+Site (synthetic): Kipeta, Dodoma hinterland, Tanzania
+GPS: -6.82000, 36.48000
+Do not treat this as a live project.
+
+Peak-sun hours (PSH):              5.0 h/day
+Performance ratio (PR):            0.72
+Distribution + contingency loss:   0.20 (apply to served energy)
+Days of autonomy:                  2.0
+Battery depth of discharge (DoD):  0.80
+Round-trip efficiency (η_rt):      0.90
+Array packing (m2_per_kwp):        10 m²/kWp (modules + row spacing)
+
+Plot rule:
+  Choose the generation plot with excluded = false
+  and area_m2 >= Array_area_m2.
+  Use the plots.geojson attribute table (do not planimeter).
+  Exactly one plot qualifies.
+
+Formulas (use these; do not replace with HOMER / PVGIS):
+  E_served      = sum of daily_kwh in loads.csv
+  E_day         = E_served × (1 + loss_frac)
+  PV_kWp        = E_day / (PSH × PR)
+  Battery_kWh   = (E_day × autonomy_days) / (DoD × η_rt)
+  Array_area_m2 = PV_kWp × m2_per_kwp

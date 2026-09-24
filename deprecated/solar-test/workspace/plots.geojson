@@ -1,0 +1,67 @@
+{
+  "type": "FeatureCollection",
+  "name": "generation_plots",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4326" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "A",
+        "name": "South floodplain",
+        "area_m2": 500,
+        "excluded": true,
+        "exclusion_reason": "Seasonal flood / watercourse setback"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [36.48000, -6.82110],
+          [36.48020, -6.82110],
+          [36.48020, -6.82088],
+          [36.48000, -6.82088],
+          [36.48000, -6.82110]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "B",
+        "name": "West clearing",
+        "area_m2": 80,
+        "excluded": false,
+        "exclusion_reason": ""
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [36.47920, -6.81985],
+          [36.47928, -6.81985],
+          [36.47928, -6.81976],
+          [36.47920, -6.81976],
+          [36.47920, -6.81985]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "C",
+        "name": "East pad",
+        "area_m2": 220,
+        "excluded": false,
+        "exclusion_reason": ""
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [36.48090, -6.81975],
+          [36.48100, -6.81975],
+          [36.48100, -6.81957],
+          [36.48090, -6.81957],
+          [36.48090, -6.81975]
+        ]]
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@
   "version": 1,
   "image": "npm",
   "compute_provider": "container",
+  "machine_size": "c3-standard-4",
   "duration_minutes": 45,
   "skills_assessed": [
     "Vue SPA development",
@@ -95,9 +96,17 @@
       "description": "YES/NO: Do README (or equivalent notes) explain how to run frontend and backend, with no service-role or other secrets committed, such that a reviewer can reproduce without reverse-engineering undocumented steps? Answer YES only if run notes are sufficient and secrets are not committed. Empty/undocumented deliverable or committed service-role secrets = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (greenfield Vue + Supabase passenger booking MVP)",
       "Do not replace Vue as the primary UI or Supabase as the primary backend",

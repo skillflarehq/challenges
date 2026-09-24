@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "title": "Scale & Profile: High-Throughput Summary API",
+  "slug": "scale-profile-fastify-summary",
+  "version": 1,
+  "image": "npm",
+  "machine_size": "c3-standard-4",
+  "needs_dind": false,
+  "tools": ["Node.js", "npm", "VS Code", "Continue"],
+  "duration_minutes": 25,
+  "skills_assessed": [
+    "Node.js event loop and memory profiling",
+    "Fastify performance tuning",
+    "Load testing with Autocannon",
+    "AI steering and code review"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "Node.js, npm, Continue, and the starter Fastify app are on the desktop.",
+    "Run npm install from the workspace root, then npm start. The first start generates data/items.csv if it is missing (a few seconds)."
+  ],
+  "role": {
+    "title": "Backend engineer",
+    "seniority": "Mid to senior",
+    "company_context": "Product-led SaaS company shipping Node reporting APIs. Downstream jobs scrape a summary endpoint, and staging falls over under concurrent load even though a single curl looks fine. Hiring to strengthen day-to-day profiling, load testing, and review of AI-generated patches on that team.",
+    "day_to_day": [
+      "Profile Node/Fastify services when latency or memory blows up under concurrent clients",
+      "Keep JSON contracts stable while changing how data is loaded and aggregated",
+      "Run load tests (autocannon or equivalent) and treat p97.5 / error rate as the source of truth",
+      "Steer AI assistants with a diagnosis instead of pasting stack traces in a loop",
+      "Review generated diffs for event-loop blocking, heap blow-ups, and silent numeric drift"
+    ],
+    "required_skills": [
+      "Comfortable running and changing a small Fastify TypeScript service",
+      "Solid grasp of Node I/O vs the event loop, and why per-request full-file reads fail under load",
+      "Can run a load harness and interpret latency percentiles and non-2xx counts",
+      "Can keep an aggregation contract identical (grouping, skip rules, lexical tie-break)"
+    ],
+    "nice_to_have_skills": [
+      "Experience with autocannon, wrk, or similar HTTP load tools",
+      "Familiarity with Continue or other in-editor coding assistants",
+      "Prior work on internal reporting or read-model APIs over static extracts",
+      "Comfort reading heap OOM / event-loop lag symptoms without raising --max-old-space-size as the fix"
+    ],
+    "constraints": [
+      "Assessment focuses on making the provided Fastify /summary route survive concurrent load — not redesigning the stack",
+      "Do not test Kubernetes, cloud IaC, or introducing an external database",
+      "Candidate works in a desktop environment with Terminal, Node.js, and Continue available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different HTTP framework"
+    ]
+  },
+  "problem_statement": {
+    "title": "Optimize /summary under concurrent load",
+    "summary": "Our reporting API passes a single-request check but crashes or stalls in staging when scraped by downstream consumers. Profile the service, eliminate the memory/latency bottleneck, and pass the load test.",
+    "outcomes": [
+      "Keep GET /summary returning the exact contract and the same winning group, total, and skipped count as the starter calculation on data/items.csv.",
+      "Keep GET / and GET /health returning HTTP 200 with the documented JSON payloads.",
+      "With the server running, execute ./scripts/benchmark.sh successfully: 0 errors / timeouts / non-2xx, and p97.5 latency under 20ms.",
+      "Document the root cause and the fix in AUDIT.md."
+    ],
+    "constraints": [
+      "Do not add an external database (Redis, SQLite, Postgres, etc.).",
+      "Do not modify the raw data in data/items.csv.",
+      "The server must start via npm start and run on the instance default port (3000 unless you document otherwise). Prefer HOST 0.0.0.0 as in the starter.",
+      "Keep Fastify. Do not replace it with Express, Nest, or another stack."
+    ],
+    "deliverables": "Leave a Fastify project a reviewer can npm install && npm start and load-test without guessing. Demonstrate ./scripts/benchmark.sh and curl GET /summary against the listen port. Fill in AUDIT.md."
+  },
+  "rubric": [
+    {
+      "name": "Performance SLA",
+      "weight": 40,
+      "summary": "Passes the bundled autocannon harness under the documented latency and error-rate SLA.",
+      "description": "YES/NO: Did the candidate run ./scripts/benchmark.sh against a live server on the instance default listen port and show a passing result (p97.5 latency under 20ms and 0 errors / timeouts / non-2xx / resets)? Answer YES only if video or terminal output shows that script succeeding. Server crash, OOM, harness not run, or a passing claim without the script = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Payload invariant",
+      "weight": 25,
+      "summary": "GET /summary still returns the CSV aggregation winner, total, and skipped count.",
+      "description": "YES/NO: Does GET /summary return JSON whose group, total, and skipped match a recomputation of the starter algorithm on the generated data/items.csv (group by category, sum parseFloat amounts, skip empty category or non-numeric amount; max total, lexicographic tie-break)? GET / message must equal the instance greeting from the starter index.ts / brief, and GET /health must be status ok. Extra JSON whitespace is fine; do not treat toFixed rounding as equivalent if it changes the number. Wrong winner, drifted total, or a hardcoded payload that does not match the CSV = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Architectural root-cause",
+      "weight": 20,
+      "summary": "Removes the per-request full-file read and parse from the GET /summary path.",
+      "description": "YES/NO: Did the candidate eliminate per-request disk read and full-file parse of data/items.csv from the GET /summary handler (for example startup pre-aggregation into an immutable summary, fs.watch plus in-memory cache, or one-time memoization after which later requests do not touch disk)? Answer YES only if the request path no longer re-reads and re-parses the CSV. Raising --max-old-space-size, clustering that still reads the file per request, or streaming/parsing the whole file on every GET = NO even if the SLA limps through. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "AI steering and oversight",
+      "weight": 15,
+      "summary": "Diagnoses the bottleneck before prompting, and reviews AI-generated diffs before rerunning the server.",
+      "description": "YES/NO: In the terminal and Continue (or other in-environment AI) logs, did the candidate diagnose the bottleneck (per-request full-file read/parse, heap/GC, event-loop block) before or while steering the assistant, rather than only pasting failing stack traces in a loop? Did they inspect the generated diff (tie-break, skipped rows, float totals, /health still serving) before treating the change as done? Blind “make it faster” with no diagnosis, or accepting an unverified heap-size/cluster patch as the finish, = NO. No AI used is not an automatic NO if they still diagnosed and verified; grade the oversight quality of whatever path they took. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
+  "variation": {
+    "strategy": "combinatorial",
+    "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
+      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same deliverable kinds and difficulty band (Fastify /summary under autocannon, AUDIT.md)",
+      "Keep Fastify, GET /, GET /health, GET /summary, generate-data.mjs, and the items.csv aggregation rules",
+      "Do not introduce Docker, Kubernetes, cloud IaC, an external database, or a different HTTP framework",
+      "Do not rewrite src/routes/summary.ts, scripts/generate-data.mjs, scripts/benchmark.sh, or package-lock.json; keep the same naive route, dataset generator, and Fastify/tsx/autocannon ranges across instances"
+    ],
+    "factors": [
+      {
+        "id": "service",
+        "options": [
+          {
+            "id": "test_app",
+            "values": {
+              "package_name": "test-app",
+              "greeting_message": "Hello from Fastify",
+              "service_label": "test-app Fastify reporting API",
+              "package_description": "Reporting API with a /summary route over a local CSV extract"
+            }
+          },
+          {
+            "id": "orders_api",
+            "values": {
+              "package_name": "orders-api",
+              "greeting_message": "Orders API ready",
+              "service_label": "orders-api Fastify reporting API",
+              "package_description": "Orders reporting API with a /summary route over a local CSV extract"
+            }
+          },
+          {
+            "id": "inventory_svc",
+            "values": {
+              "package_name": "inventory-svc",
+              "greeting_message": "Inventory service online",
+              "service_label": "inventory-svc Fastify reporting API",
+              "package_description": "Inventory reporting API with a /summary route over a local CSV extract"
+            }
+          },
+          {
+            "id": "billing_gateway",
+            "values": {
+              "package_name": "billing-gateway",
+              "greeting_message": "Billing gateway up",
+              "service_label": "billing-gateway Fastify reporting API",
+              "package_description": "Billing reporting API with a /summary route over a local CSV extract"
+            }
+          },
+          {
+            "id": "notify_hook",
+            "values": {
+              "package_name": "notify-hook",
+              "greeting_message": "Notify hook listening",
+              "service_label": "notify-hook Fastify reporting API",
+              "package_description": "Notification reporting API with a /summary route over a local CSV extract"
+            }
+          },
+          {
+            "id": "catalog_read",
+            "values": {
+              "package_name": "catalog-read",
+              "greeting_message": "Catalog read API",
+              "service_label": "catalog-read Fastify reporting API",
+              "package_description": "Catalog reporting API with a /summary route over a local CSV extract"
+            }
+          }
+        ]
+      },
+      {
+        "id": "port",
+        "options": [
+          {
+            "id": "3000",
+            "values": {
+              "default_port": "3000"
+            }
+          },
+          {
+            "id": "3080",
+            "values": {
+              "default_port": "3080"
+            }
+          },
+          {
+            "id": "4000",
+            "values": {
+              "default_port": "4000"
+            }
+          },
+          {
+            "id": "8080",
+            "values": {
+              "default_port": "8080"
+            }
+          }
+        ]
+      }
+    ],
+    "constraints": [],
+    "apply": {
+      "candidate_brief": "## Optimize the {{service_label}} under load\n\nA Node.js (Fastify) reporting service named `{{package_name}}` is on your desktop. A single GET /summary works, but the service falls over when downstream scrapers hit it concurrently. Profile the bottleneck, keep the payload contract, and pass the load test.\n\n### Outcomes\n- Keep GET /summary returning the same JSON contract and the same winning group, total, and skipped count as the starter calculation on `data/items.csv`.\n- Keep GET / and GET /health returning HTTP 200 with the documented JSON payloads.\n- From the workspace root, with the server running, execute `./scripts/benchmark.sh` successfully (0 errors / timeouts / non-2xx, p97.5 latency under 20ms). The harness reads `PORT` (default 3000); if you keep the starter listen port, export `PORT={{default_port}}` or run with that already in the environment.\n- Document the root cause and the fix in `AUDIT.md`.\n\n### Constraints\n- Do not add an external database (Redis, SQLite, Postgres, etc.).\n- Do not modify the raw data in `data/items.csv` (the file is generated on first `npm start` if missing).\n- The server must start via `npm start` and listen on port {{default_port}} unless you document otherwise. Prefer HOST 0.0.0.0 as in the starter.\n- Keep Fastify. Do not replace it with Express, Nest, or another stack.\n\n### Deliverables\nLeave a Fastify project a reviewer can `npm install && npm start` and load-test without guessing. Demonstrate `./scripts/benchmark.sh` and a curl of GET /summary against the listen port. Fill in `AUDIT.md`.\n",
+      "files": {
+        "src/index.ts": "import Fastify from 'fastify'\nimport { summaryRoute } from './routes/summary.js'\n\nconst app = Fastify({ logger: true })\n\napp.get('/', async () => {\n  return { ok: true, message: '{{greeting_message}}' }\n})\n\napp.get('/health', async () => {\n  return { status: 'ok' }\n})\n\nconst start = async () => {\n  try {\n    await app.register(summaryRoute)\n    const port = Number(process.env.PORT) || {{default_port}}\n    const host = process.env.HOST || '0.0.0.0'\n    await app.listen({ port, host })\n  } catch (err) {\n    app.log.error(err)\n    process.exit(1)\n  }\n}\n\nvoid start()\n",
+        "package.json": "{\n  \"name\": \"{{package_name}}\",\n  \"version\": \"1.0.0\",\n  \"description\": \"{{package_description}}\",\n  \"license\": \"ISC\",\n  \"author\": \"\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"prestart\": \"node scripts/generate-data.mjs\",\n    \"start\": \"tsx src/index.ts\",\n    \"data\": \"node scripts/generate-data.mjs\"\n  },\n  \"dependencies\": {\n    \"fastify\": \"^5.6.0\",\n    \"tsx\": \"^4.19.0\"\n  },\n  \"devDependencies\": {\n    \"@types/node\": \"^22.10.0\",\n    \"autocannon\": \"^8.0.0\"\n  }\n}\n"
+      }
+    }
+  }
+}

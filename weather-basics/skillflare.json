@@ -5,7 +5,8 @@
   "version": 1,
   "image": "finance",
   "compute_provider": "local",
-  "duration_minutes": 25,
+  "machine_size": "c3-standard-4",
+  "duration_minutes": 3,
   "skills_assessed": [
     "Opening CSV data in a spreadsheet",
     "MIN, MAX, and AVERAGE functions",
@@ -13,8 +14,18 @@
     "Efficient range selection and formula fill"
   ],
   "before_you_start": [
-    "No personal accounts required.",
-    "The station CSV and data notes are on the desktop; use the spreadsheet app in the workspace."
+    "Sign in to Google Sheets and Excel for the web in this browser window before you start.",
+    "The timer starts only when you start the assessment."
+  ],
+  "prep_links": [
+    {
+      "label": "Google Sheets",
+      "url": "https://docs.google.com/spreadsheets/create"
+    },
+    {
+      "label": "Excel for the web",
+      "url": "https://excel.cloud.microsoft"
+    }
   ],
   "role": {
     "title": "Operations analyst",
@@ -65,34 +76,24 @@
   },
   "rubric": [
     {
-      "name": "Correct stats excluding missing",
-      "weight": 40,
-      "summary": "Reports min, max, and average for TMAX, TMIN, and PRCP in stored units, with 9999 excluded.",
-      "description": "Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). Award partial across the nine statistics: about 4 points per matching TMAX/TMIN min or max (exact key), about 5 per matching average (within ±0.1 of the instance key), and about 4/5/5 for PRCP min/max/average. Full 40 if all nine match. Formula bar is not required. 2010 examples only: TMAX −244 / 339 / 98.17; TMIN −328 / 211 / −6.34; PRCP 0 / 381 / 14.73 — do not fail a 2009/2013 run for not matching those. MIN over a range that still contains 9999 is YES for that min (9999 cannot be the temperature minimum). A leftover MAX of 9999 zeros only that max slice. The truth-pack including-9999 failure average zeros only that average slice. Unlabeled conversion (e.g. −24.4 instead of −244) zeros the affected stats. Omit a column entirely = 0 for that column’s slice (~13). If a cell cannot be read, 0 for that statistic only."
-    },
-    {
-      "name": "MIN, MAX, and AVERAGE via functions",
-      "weight": 30,
-      "summary": "Uses leftover MIN/MAX and AVERAGE (or AVERAGEIF) functions rather than typed results.",
-      "description": "YES (30) if leftover cells or the formula bar show MIN and MAX (or AutoSum min/max / MINIFS / MAXIFS) and AVERAGE, AVERAGEIF, AVERAGEIFS, or an equivalent spreadsheet average (including average of a filtered range) for at least one required column (TMAX, TMIN, or PRCP). Do not require all nine formula cells. Partial: 15 if leftover min/max functions but no average formula, or leftover average formula but no min/max functions; 10 if only MIN or only MAX remains. Typed literals, sort-then-copy-paste of values, status-bar reading typed back, calculator or Python results typed into cells, or no leftover functions = 0."
-    },
-    {
-      "name": "Efficient range selection",
-      "weight": 20,
-      "summary": "Summary formulas use contiguous column ranges and reuse one pattern across metrics.",
-      "description": "YES (20) if leftover formulas reference a contiguous column or block (for example TMAX as G2:G366 or G:G, a named range, or a filtered column) rather than listing hundreds of individual cells, and the same formula pattern is reused across columns (fill handle / copy-paste, mixed references, or isomorphic G vs H vs I). Contiguous-range leftover formulas are sufficient evidence of efficient selection — do not require a Ctrl+Shift+Arrow clip. Also YES if video shows column-letter click, Ctrl+Shift+Arrow (or LibreOffice equivalent), Name Box, fill handle, or AutoFilter, and leftover formulas still use ranges. Nine separately typed but isomorphic formulas still count as reuse. Partial 10 if contiguous ranges exist for at least one column but formulas were not reused (a different method per statistic). NO (0) if leftover formulas list individual cells, video shows hundreds of cells clicked as the way the summary was built, typed literals only, or no leftover formulas. Missing video of the gesture is not a fail when range formulas remain."
-    },
-    {
-      "name": "Labeled leftover spreadsheet",
-      "weight": 10,
-      "summary": "Completes the analysis in a spreadsheet and leaves a labeled Min / Max / Average block.",
-      "description": "YES (10) if the candidate opened and worked the extract in LibreOffice Calc or another spreadsheet (Excel-compatible) and left a labeled Min / Max / Average block (or equivalent headings) on the sheet or a second sheet so a reviewer can find TMAX, TMIN, and PRCP results without guessing which cells matter. soffice opening the CSV counts. Labels plus a findable min/max/avg block are enough — do not require all nine correctness keys here; missing numbers are scored on the correctness item. Partial 5 if spreadsheet work is visible but the leftover summary is unlabeled scrap, or a labeled block exists but spreadsheet work is not shown. Text-editor-only, terminal-only, or Python-only work = 0. Results only spoken, or a cleared sheet = 0."
+      "name": "Spreadsheet weather summary",
+      "weight": 100,
+      "summary": "Leaves a labeled min/max/average spreadsheet summary for TMAX, TMIN, and PRCP, with 9999 excluded, leftover functions, and contiguous ranges.",
+      "description": "Score this single criterion out of 100 as the sum of four slices. Do not invent other criteria. Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). 2010 examples only: TMAX −244 / 339 / 98.17; TMIN −328 / 211 / −6.34; PRCP 0 / 381 / 14.73 — do not fail a 2009/2013 run for not matching those. Correct stats excluding missing (40): award partial across the nine statistics — about 4 points per matching TMAX/TMIN min or max (exact key), about 5 per matching average (within ±0.1 of the instance key), and about 4/5/5 for PRCP min/max/average. Full 40 if all nine match. Formula bar is not required for this slice. MIN over a range that still contains 9999 is YES for that min (9999 cannot be the temperature minimum). A leftover MAX of 9999 zeros only that max slice. The truth-pack including-9999 failure average zeros only that average slice. Unlabeled conversion (e.g. −24.4 instead of −244) zeros the affected stats. Omit a column entirely = 0 for that column’s slice (~13). If a cell cannot be read, 0 for that statistic only. Leftover functions (30): YES (30) if leftover cells or the formula bar show MIN and MAX (or AutoSum min/max / MINIFS / MAXIFS) and AVERAGE, AVERAGEIF, AVERAGEIFS, or an equivalent spreadsheet average (including average of a filtered range) for at least one required column. Do not require all nine formula cells. Partial: 15 if leftover min/max functions but no average formula, or leftover average formula but no min/max functions; 10 if only MIN or only MAX remains. Typed literals, sort-then-copy-paste of values, status-bar reading typed back, calculator or Python results typed into cells, or no leftover functions = 0 on this slice. Efficient range selection (20): YES (20) if leftover formulas reference a contiguous column or block (for example TMAX as G2:G366 or G:G, a named range, or a filtered column) rather than listing hundreds of individual cells, and the same formula pattern is reused across columns (fill handle / copy-paste, mixed references, or isomorphic G vs H vs I). Contiguous-range leftover formulas are sufficient evidence of efficient selection — do not require a Ctrl+Shift+Arrow clip. Also YES if video shows column-letter click, Ctrl+Shift+Arrow (or LibreOffice equivalent), Name Box, fill handle, or AutoFilter, and leftover formulas still use ranges. Nine separately typed but isomorphic formulas still count as reuse. Partial 10 if contiguous ranges exist for at least one column but formulas were not reused. 0 if leftover formulas list individual cells, video shows hundreds of cells clicked as the way the summary was built, typed literals only, or no leftover formulas. Missing video of the gesture is not a fail when range formulas remain. Labeled leftover spreadsheet (10): YES (10) if the candidate opened and worked the extract in LibreOffice Calc or another spreadsheet (Excel-compatible) and left a labeled Min / Max / Average block (or equivalent headings) on the sheet or a second sheet so a reviewer can find TMAX, TMIN, and PRCP results without guessing which cells matter. soffice opening the CSV counts. Labels plus a findable min/max/avg block are enough — do not require all nine correctness keys on this slice. Partial 5 if spreadsheet work is visible but the leftover summary is unlabeled scrap, or a labeled block exists but spreadsheet work is not shown. Text-editor-only, terminal-only, or Python-only work = 0. Results only spoken, or a cleared sheet = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 0.333
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
-      "Keep the same skills_assessed and rubric structure/weights",
+      "Keep the same skills_assessed and a single rubric item of weight 100",
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same deliverable (labeled min/max/average block in a spreadsheet) and difficulty band",
       "Keep the 9-column GHCN daily layout, stored tenths units, and 9999 missing code",
       "Keep nine required statistics (min/max/avg for TMAX, TMIN, and PRCP) with column-wise exclusion of 9999",

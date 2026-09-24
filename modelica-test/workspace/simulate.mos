@@ -1,0 +1,9 @@
+// OpenModelica compiler script. From this folder:
+//   omc simulate.mos
+// Then inspect mass.s (OMEdit plot, or add val(mass.s, <stopTime>) here).
+loadModel(Modelica);
+getErrorString();
+loadFile("Plant.mo");
+getErrorString();
+simulate(Plant, stopTime=20, numberOfIntervals=1000);
+getErrorString();

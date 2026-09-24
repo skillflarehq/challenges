@@ -5,6 +5,7 @@
   "version": 1,
   "image": "refrigeration",
   "compute_provider": "container",
+  "machine_size": "c3-standard-4",
   "duration_minutes": 45,
   "skills_assessed": [
     "Transcritical R744 vapor-compression cycle analysis",
@@ -107,9 +108,17 @@
       "description": "YES/NO: Is there a readable state table and final numbers a reviewer can follow without guessing intermediate steps or units? Answer YES if the calculation path is auditable end-to-end. Opaque scrap numbers or missing table/finals that force guessing = NO. YES = full points; NO or unclear = 0."
     }
   ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  },
   "variation": {
     "strategy": "combinatorial",
     "invariants": [
+      "Keep the same evaluation policy (graders, cluster, agreement window, and video frame rate)",
       "Keep the same skills_assessed and rubric structure/weights",
       "Keep the same deliverable kinds and difficulty band (written transcritical R744 calculation with cooling EER, external Carnot comparison, and capacity sizing for a given Q_design)",
       "Keep refrigerant R744 for all instances (truth pack is skeleton-scoped; do not swap refrigerants)",
