@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "title": "Complete and simulate a mass-spring-damper in OpenModelica",
+  "slug": "modelica-mass-spring-damper",
+  "version": 1,
+  "image": "modelica",
+  "compute_provider": "container",
+  "machine_size": "c3-standard-4",
+  "duration_minutes": 20,
+  "skills_assessed": [
+    "Modelica connect-based acausal modeling",
+    "Modelica Standard Library translational mechanics",
+    "OpenModelica simulation (omc or OMEdit)",
+    "Reading 1D step-response KPIs (steady state, peak, damping class)"
+  ],
+  "tools": [
+    "OpenModelica",
+    "OMEdit",
+    "VS Code",
+    "Continue"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "OpenModelica (omc), OMEdit, and the Modelica Standard Library are on the desktop.",
+    "The stubbed Plant.mo, simulate.mos, and notes are on the desktop. From that folder: omc simulate.mos"
+  ],
+  "role": {
+    "title": "Model-based systems / simulation engineer",
+    "seniority": "Junior to mid",
+    "company_context": "Product company that ships 1D plant models in Modelica next to controls and test rigs. A small simulation team owns OpenModelica models so mechanical and controls engineers can share the same translational plant instead of maintaining ad-hoc MATLAB scripts. Hiring to strengthen day-to-day Modelica modeling and OpenModelica simulation on that team.",
+    "day_to_day": [
+      "Complete and review Modelica models that use Modelica Standard Library mechanical components",
+      "Wire acausal connect equations for 1D translational plants (mass, spring, damper, force)",
+      "Simulate in OpenModelica (omc or OMEdit) and extract steady-state and transient KPIs from the result",
+      "Keep parameter sets and initial conditions stable so QA can rerun the same experiment",
+      "Pair with mechanical engineers on “the diagram simulates but the numbers look wrong” issues"
+    ],
+    "required_skills": [
+      "Comfortable writing Modelica connect equations for MSL Translational components",
+      "Can distinguish parallel vs series spring-damper topology in 1D",
+      "Can run a model in OpenModelica (omc script or OMEdit) and read a plotted trajectory",
+      "Understands second-order step response: steady state F/k, damping ratio, peak overshoot"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with OMEdit diagram view and result files (*_res.mat)",
+      "Experience with Modelica.Mechanics.Translational.Sources.ConstantForce",
+      "Prior work on test-rig, actuator, or isolation-mount plant models",
+      "Comfort reading omc translation errors when a connect is missing"
+    ],
+    "constraints": [
+      "Assessment focuses on completing the provided OpenModelica translational plant — not redesigning the stack or adding 3D MultiBody, FMI export, or a controls controller",
+      "Do not test Dymola licenses, MATLAB/Simulink, or commercial Modelica libraries in this challenge",
+      "Candidate works in a desktop environment with Terminal, OpenModelica, OMEdit, and VS Code available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different physical domain"
+    ]
+  },
+  "rubric": [
+    {
+      "name": "Working OpenModelica simulation",
+      "weight": 40,
+      "summary": "Demonstrates a successful omc or OMEdit simulate of the leftover Plant.mo.",
+      "description": "YES/NO: Did the candidate demonstrate a successful OpenModelica simulation (omc simulate.mos or OMEdit Simulate) of the leftover Plant.mo through the instance stopTime? Answer YES only if video or narrative shows a completed translation/simulation (no still-empty equation section, no unresolved simulation error). Spreadsheet-only, Python-only, compile-only with no run, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct step-response KPIs",
+      "weight": 30,
+      "summary": "Reports instance s_ss, s_peak, and underdamped classification.",
+      "description": "YES/NO: Do leftover KPIs match the instance keys? s_ss must equal F/k for the instance parameters in notes.md / brief (within ±0.01 m or ±3%). s_peak must match the instance underdamped overshoot of mass.s (same band). Damping class must be underdamped. Answer YES only if all three match the instance table, not skeleton-only 0.200 / 0.305 when this instance differs. Wrong bundle, mm/m mixup, or missing peak = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Parallel spring-damper topology",
+      "weight": 20,
+      "summary": "Uses the MSL translational plant with spring and damper in parallel and force on the mass.",
+      "description": "YES/NO: Does leftover Plant.mo (or equivalent equations) implement spring and damper in parallel between the wall and the mass, with the constant force acting on the mass, using the declared MSL translational components or the equivalent 1D ODE m s̈ + d ṡ + k s = F? Answer YES only if that topology is visible. Series spring-damper, force on the wall only, or a different physical system (electrical RLC, extra masses) = NO. Flange_a/flange_b swaps on two-port elements are OK. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a simulatable Plant.mo and labeled KPIs a reviewer can follow without guessing.",
+      "description": "YES/NO: Is there a leftover Plant.mo plus a labeled s_ss / s_peak / damping block (results.md, notes, or plot annotations) that a reviewer could resimulate with omc simulate.mos or OMEdit without guessing paths? Answer YES if the model is present and the KPI block is findable; optional notes must be accurate if present. Deleted model, KPIs only spoken, or cannot resimulate from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  }
+}
