@@ -17,3 +17,16 @@ node challenges/validate-challenge.mjs challenges/qt-test
 ```
 
 Do not put solved `populate()` / `fromCsv` or answer-key binaries under `workspace/`.
+
+
+## Layers
+
+This pack is three self-contained files:
+
+| Path | Role |
+|------|------|
+| `requirements.json` | Job description text and author prompt |
+| `challenge.json` | Metadata, skills, tools, video rubric, and combinatorial generation |
+| `variation.json` | One locked instance (problem statement and workspace asset paths) |
+| `truth_pack.md` | Grader mark scheme, used with `variation.json` |
+| `workspace/` | Starter files named by `variation.json` assets |

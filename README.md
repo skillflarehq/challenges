@@ -12,7 +12,7 @@ This repository holds **example Skillflare challenges**: timed, role-shaped work
 | [`co2-chiller-sizing`](co2-chiller-sizing/) | Transcritical R744 wine-cellar chiller sizing work sample |
 | [`sales-manager`](sales-manager/) | Field sales planning work sample |
 | [`financial-analyst`](financial-analyst/) | Manufacturing three-statement forecast work sample |
-| [`weather-basics`](weather-basics/) | Spreadsheet screen: min / max / average on GHCN daily weather |
+| [`weather-basics`](weather-basics/) | Spreadsheet screen: min / max / average on a CSV (skill spec; sample extract in the workspace) |
 | [`docker-node`](docker-node/) | Docker/Node example package layout |
 | [`fastify-load`](fastify-load/) | Fastify `/summary` load-test (autocannon SLA, AI steering) |
 | [`cpp`](cpp/) | C++ CMake HTTP service (cpp-httplib handlers) |
@@ -24,15 +24,17 @@ This repository holds **example Skillflare challenges**: timed, role-shaped work
 
 ## Package layout
 
-Each example typically includes:
+Each example is three self-contained layers. Import the file that matches the step. A folder that contains all three imports as `variation.json` unless you ask for another layer.
 
 | Path | Role |
 |------|------|
-| `skillflare.json` | Manifest (metadata, `compute_provider`, role, problem statement, rubric, variation policy) |
-| `truth_pack.md` | Grader mark scheme |
-| `workspace/` | Candidate starter files |
+| `requirements.json` | Job description text and optional author prompt. Enough for the builder. |
+| `challenge.json` | Metadata, `compute_provider`, skills, tool names, video rubric, and how to generate a session. |
+| `variation.json` | One locked instance: concrete problem statement, rubric, compute, and `assets` paths. This replaces `skillflare.json`. |
+| `truth_pack.md` | Grader mark scheme. Travels with `variation.json`. |
+| `workspace/` | Starter files named by `variation.json` `assets`. |
 
-`compute_provider` is required and must be one of:
+`compute_provider` is required on `challenge.json` and `variation.json` and must be one of:
 
 | Value | Meaning |
 |-------|---------|
