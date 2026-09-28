@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "title": "Scale & Profile: High-Throughput Summary API",
+  "slug": "scale-profile-fastify-summary",
+  "version": 1,
+  "image": "npm",
+  "compute_provider": "container",
+  "machine_size": "c3-standard-4",
+  "needs_dind": false,
+  "duration_minutes": 25,
+  "skills_assessed": [
+    "Node.js event loop and memory profiling",
+    "Fastify performance tuning",
+    "Load testing with Autocannon",
+    "AI steering and code review"
+  ],
+  "tools": [
+    "Node.js",
+    "npm",
+    "VS Code",
+    "Continue"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "Node.js, npm, Continue, and the starter Fastify app are on the desktop.",
+    "Run npm install from the workspace root, then npm start. The first start generates data/items.csv if it is missing (a few seconds)."
+  ],
+  "role": {
+    "title": "Backend engineer",
+    "seniority": "Mid to senior",
+    "company_context": "Product-led SaaS company shipping Node reporting APIs. Downstream jobs scrape a summary endpoint, and staging falls over under concurrent load even though a single curl looks fine. Hiring to strengthen day-to-day profiling, load testing, and review of AI-generated patches on that team.",
+    "day_to_day": [
+      "Profile Node/Fastify services when latency or memory blows up under concurrent clients",
+      "Keep JSON contracts stable while changing how data is loaded and aggregated",
+      "Run load tests (autocannon or equivalent) and treat p97.5 / error rate as the source of truth",
+      "Steer AI assistants with a diagnosis instead of pasting stack traces in a loop",
+      "Review generated diffs for event-loop blocking, heap blow-ups, and silent numeric drift"
+    ],
+    "required_skills": [
+      "Comfortable running and changing a small Fastify TypeScript service",
+      "Solid grasp of Node I/O vs the event loop, and why per-request full-file reads fail under load",
+      "Can run a load harness and interpret latency percentiles and non-2xx counts",
+      "Can keep an aggregation contract identical (grouping, skip rules, lexical tie-break)"
+    ],
+    "nice_to_have_skills": [
+      "Experience with autocannon, wrk, or similar HTTP load tools",
+      "Familiarity with Continue or other in-editor coding assistants",
+      "Prior work on internal reporting or read-model APIs over static extracts",
+      "Comfort reading heap OOM / event-loop lag symptoms without raising --max-old-space-size as the fix"
+    ],
+    "constraints": [
+      "Assessment focuses on making the provided Fastify /summary route survive concurrent load — not redesigning the stack",
+      "Do not test Kubernetes, cloud IaC, or introducing an external database",
+      "Candidate works in a desktop environment with Terminal, Node.js, and Continue available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different HTTP framework"
+    ]
+  },
+  "rubric": [
+    {
+      "name": "Performance SLA",
+      "weight": 40,
+      "summary": "Passes the bundled autocannon harness under the documented latency and error-rate SLA.",
+      "description": "YES/NO: Did the candidate run ./scripts/benchmark.sh against a live server on the instance default listen port and show a passing result (p97.5 latency under 20ms and 0 errors / timeouts / non-2xx / resets)? Answer YES only if video or terminal output shows that script succeeding. Server crash, OOM, harness not run, or a passing claim without the script = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Payload invariant",
+      "weight": 25,
+      "summary": "GET /summary still returns the CSV aggregation winner, total, and skipped count.",
+      "description": "YES/NO: Does GET /summary return JSON whose group, total, and skipped match a recomputation of the starter algorithm on the generated data/items.csv (group by category, sum parseFloat amounts, skip empty category or non-numeric amount; max total, lexicographic tie-break)? GET / message must equal the instance greeting from the starter index.ts / brief, and GET /health must be status ok. Extra JSON whitespace is fine; do not treat toFixed rounding as equivalent if it changes the number. Wrong winner, drifted total, or a hardcoded payload that does not match the CSV = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Architectural root-cause",
+      "weight": 20,
+      "summary": "Removes the per-request full-file read and parse from the GET /summary path.",
+      "description": "YES/NO: Did the candidate eliminate per-request disk read and full-file parse of data/items.csv from the GET /summary handler (for example startup pre-aggregation into an immutable summary, fs.watch plus in-memory cache, or one-time memoization after which later requests do not touch disk)? Answer YES only if the request path no longer re-reads and re-parses the CSV. Raising --max-old-space-size, clustering that still reads the file per request, or streaming/parsing the whole file on every GET = NO even if the SLA limps through. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "AI steering and oversight",
+      "weight": 15,
+      "summary": "Diagnoses the bottleneck before prompting, and reviews AI-generated diffs before rerunning the server.",
+      "description": "YES/NO: In the terminal and Continue (or other in-environment AI) logs, did the candidate diagnose the bottleneck (per-request full-file read/parse, heap/GC, event-loop block) before or while steering the assistant, rather than only pasting failing stack traces in a loop? Did they inspect the generated diff (tie-break, skipped rows, float totals, /health still serving) before treating the change as done? Blind “make it faster” with no diagnosis, or accepting an unverified heap-size/cluster patch as the finish, = NO. No AI used is not an automatic NO if they still diagnosed and verified; grade the oversight quality of whatever path they took. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  }
+}

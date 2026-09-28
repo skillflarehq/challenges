@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "title": "Summarize CSV columns in a spreadsheet",
+  "slug": "spreadsheet-column-summary",
+  "version": 1,
+  "image": "finance",
+  "compute_provider": "local",
+  "machine_size": "c3-standard-4",
+  "duration_minutes": 3,
+  "skills_assessed": [
+    "Opening CSV data in a spreadsheet",
+    "MIN, MAX, and AVERAGE functions",
+    "Excluding missing values from statistics",
+    "Efficient range selection and formula fill"
+  ],
+  "tools": [
+    "Google Sheets",
+    "Excel"
+  ],
+  "before_you_start": [
+    "Sign in to Google Sheets and Excel for the web in this browser window before you start.",
+    "The timer starts only when you start the assessment."
+  ],
+  "prep_links": [
+    {
+      "label": "Google Sheets",
+      "url": "https://docs.google.com/spreadsheets/create"
+    },
+    {
+      "label": "Excel for the web",
+      "url": "https://excel.cloud.microsoft"
+    }
+  ],
+  "role": {
+    "title": "Operations analyst",
+    "seniority": "Junior to mid",
+    "company_context": "Operations desk that reviews tabular extracts. Analysts open a CSV, summarize the numeric columns a reviewer asked for, and leave a formula-driven block a colleague can reopen. Hiring to screen that candidates can use a spreadsheet on messy data — the subject of the table is scenery, not the skill.",
+    "day_to_day": [
+      "Open a tabular extract and summarize the columns a reviewer named",
+      "Exclude documented missing codes before computing averages",
+      "Leave labeled summary blocks colleagues can reopen and reuse",
+      "Spot-check figures against column minima and maxima",
+      "Keep working files auditable instead of one-off calculator notes"
+    ],
+    "required_skills": [
+      "Can open a CSV in a spreadsheet",
+      "Can compute MIN, MAX, and AVERAGE, including AVERAGEIF (or a filter) when missing codes exist",
+      "Can select a full column or data range without clicking every cell",
+      "Can leave a labeled, formula-driven summary a reviewer can follow"
+    ],
+    "nice_to_have_skills": [
+      "Keyboard shortcuts for range selection (Ctrl+Shift+Arrow or equivalent)",
+      "Fill or copy formulas across a summary block",
+      "AutoFilter or AVERAGEIF for missing sentinels",
+      "Named ranges or a dedicated summary sheet"
+    ],
+    "constraints": [
+      "Assessment is a spreadsheet screen — not coding, modeling, or a subject-matter exam",
+      "Candidates work in the units stored in the file; do not require conversion",
+      "Starter CSV and notes are scenery, not a solved workbook",
+      "A calculator or script may corroborate numbers but does not replace the spreadsheet work sample"
+    ]
+  },
+  "rubric": [
+    {
+      "name": "Spreadsheet column summary",
+      "weight": 100,
+      "summary": "Leaves a labeled min/max/average spreadsheet summary for the columns the brief names, with the documented missing code excluded, leftover functions, and contiguous ranges.",
+      "description": "Score this single criterion out of 100 as the sum of four slices. Do not invent other criteria. Grade numbers against the truth pack for this instance. Do not require knowledge of the table's subject. Correct stats excluding missing (40): award partial across the nine statistics — about 4 points per matching min or max on each of the first two named columns (exact key), about 5 per matching average (within ±0.1 of the instance key), and about 4/5/5 for the third column's min/max/average. Full 40 if all nine match. Formula bar is not required for this slice. MIN over a range that still contains the sentinel is YES for that min when the sentinel is larger than real values and cannot be the minimum. A leftover MAX equal to the sentinel zeros only that max slice. An average that matches the truth-pack including-sentinel failure average zeros only that average slice. Unlabeled unit conversion (stored key divided by 10, with no unit label) zeros the affected stats. Omit a column entirely = 0 for that column's slice (~13). If a cell cannot be read, 0 for that statistic only. Leftover functions (30): YES (30) if leftover cells or the formula bar show MIN and MAX (or AutoSum min/max / MINIFS / MAXIFS) and AVERAGE, AVERAGEIF, AVERAGEIFS, or an equivalent spreadsheet average (including average of a filtered range) for at least one required column. Do not require all nine formula cells. Partial: 15 if leftover min/max functions but no average formula, or leftover average formula but no min/max functions; 10 if only MIN or only MAX remains. Typed literals, sort-then-copy-paste of values, status-bar reading typed back, calculator or script results typed into cells, or no leftover functions = 0 on this slice. Efficient range selection (20): YES (20) if leftover formulas reference a contiguous column or block (a bounded data range, a whole column, a named range, or a filtered column) rather than listing hundreds of individual cells, and the same formula pattern is reused across the named columns (fill handle / copy-paste, mixed references, or isomorphic formulas). Contiguous-range leftover formulas are sufficient evidence of efficient selection — do not require a Ctrl+Shift+Arrow clip. Also YES if video shows a column-letter click, Ctrl+Shift+Arrow (or equivalent), Name Box, fill handle, or AutoFilter, and leftover formulas still use ranges. Nine separately typed but isomorphic formulas still count as reuse. Partial 10 if contiguous ranges exist for at least one column but formulas were not reused. 0 if leftover formulas list individual cells, video shows hundreds of cells clicked as the way the summary was built, typed literals only, or no leftover formulas. Missing video of the gesture is not a fail when range formulas remain. Labeled leftover spreadsheet (10): YES (10) if the candidate opened and worked the extract in a spreadsheet and left a labeled Min / Max / Average block (or equivalent headings) on the sheet or a second sheet so a reviewer can find each named column's results without guessing which cells matter. Labels plus a findable min/max/avg block are enough — do not require all nine correctness keys on this slice. Partial 5 if spreadsheet work is visible but the leftover summary is unlabeled scrap, or a labeled block exists but spreadsheet work is not shown. Text-editor-only, terminal-only, or script-only work = 0. Results only spoken, or a cleared sheet = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 0.333
+  },
+  "generation": {
+    "mode": "llm",
+    "instructions": "Write one session that tests the skills in this challenge and nothing else. Give the candidate a CSV with a header and three numeric columns, plus short notes that name those columns, the stored units, and one missing-value sentinel. Ask for a labeled min, max, and average of each named column in stored units, with the sentinel excluded. The subject of the rows is scenery: change it from session to session, and do not require subject-matter knowledge. Put the nine numeric keys and the including-sentinel failure averages in truth_pack_md. Do not change skills_assessed, the rubric, or the evaluation policy.",
+    "invariants": [
+      "Keep the same skills_assessed and a single rubric item of weight 100",
+      "Keep the same evaluation policy",
+      "The deliverable stays a labeled min/max/average block in a spreadsheet, at the same difficulty",
+      "Each instance has a header, three numeric columns, stored units, and one documented missing sentinel",
+      "Nine statistics are required: min, max, and average for each named column, with the sentinel excluded column by column",
+      "Do not require unit conversion, charts, pivot tables, coding, or knowledge of the table's subject"
+    ]
+  }
+}

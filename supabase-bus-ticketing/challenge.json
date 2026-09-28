@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "title": "Build a Kenya intercity bus ticketing platform",
+  "slug": "supabase-bus-ticketing-kenya",
+  "version": 1,
+  "image": "npm",
+  "compute_provider": "container",
+  "machine_size": "c3-standard-4",
+  "duration_minutes": 45,
+  "skills_assessed": [
+    "Vue SPA development",
+    "Supabase schema, Auth, and RLS",
+    "Booking domain modeling",
+    "End-to-end product demo"
+  ],
+  "tools": [],
+  "before_you_start": [
+    "A personal Supabase account ready so you can create a project (hosted and/or local CLI).",
+    "No starter app is provided on the desktop; you will build the Vue frontend and schema from scratch."
+  ],
+  "role": {
+    "title": "Full-stack engineer (Vue + Supabase)",
+    "seniority": "Mid",
+    "company_context": "Early product team building a digital ticketing product for Kenya intercity buses. Engineers own the passenger booking experience end to end: Postgres schema and Row Level Security on Supabase, plus a thin Vue client that talks to it. Hiring someone who can ship a credible MVP without a separate custom API layer unless they choose one.",
+    "day_to_day": [
+      "Model routes, trips, seats/capacity, and bookings in Postgres on Supabase",
+      "Configure Auth and RLS so passengers only see and mutate their own bookings",
+      "Build Vue screens for search, trip selection, and booking confirmation",
+      "Seed enough Kenya corridor data to demo a real search → book path",
+      "Leave clear run notes so a teammate can reproduce the demo locally or against a hosted project"
+    ],
+    "required_skills": [
+      "Comfortable building a Vue SPA that calls a backend over HTTP",
+      "Can design a relational schema for trips and bookings and apply Supabase Auth + RLS",
+      "Can prevent obvious double-booking (constraints, transactions, or explicit holds)",
+      "Can document how to run the frontend and connect it to Supabase without leaking secrets"
+    ],
+    "nice_to_have_skills": [
+      "Supabase Edge Functions or RPC for atomic booking",
+      "Seat-map UI beyond a simple remaining-capacity counter",
+      "Local Supabase CLI workflow (supabase start / migrations)"
+    ],
+    "constraints": [
+      "Assessment is a greenfield MVP — no starter app, schema, or seed data is provided on the desktop",
+      "Primary UI must be Vue; primary backend must be Supabase (Postgres + Auth + RLS)",
+      "Do not require a real payment gateway; booking may create a confirmed or held ticket record only",
+      "Do not turn the challenge into operator fleet ops, live GPS tracking, or a multi-tenant marketplace"
+    ]
+  },
+  "rubric": [
+    {
+      "name": "Working end-to-end booking demo",
+      "weight": 35,
+      "summary": "Shows a working Vue + Supabase flow from sign-in through a persisted booking.",
+      "description": "YES/NO: Can a reviewer run (or follow documented hosted setup for) the Vue app against Supabase, sign in or sign up, search trips, and complete a booking that appears as a persisted row? Answer YES only if video or narrative shows a real Supabase write path end-to-end. Mock-only UI with no persisted booking, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Schema and booking integrity",
+      "weight": 25,
+      "summary": "Models trips and bookings coherently and prevents double-booking or overselling capacity.",
+      "description": "YES/NO: Does the schema model trips and bookings coherently (routes/trips/capacity or seats), and is double-booking of the same seat or overselling capacity mitigated (unique constraint, transactional RPC, hold, or equivalent)? Answer YES only if both a coherent model and an oversell/double-book mitigation are visible. Unchecked concurrent inserts with no integrity control = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Auth and RLS quality",
+      "weight": 20,
+      "summary": "Uses Auth on the booking path and RLS that stops anonymous writes and cross-user access.",
+      "description": "YES/NO: Is Auth used for the booking path, and does RLS (or equivalent server-side enforcement) prevent anonymous unrestricted writes and prevent one user from freely reading or mutating another user’s bookings? Answer YES only if both Auth on the booking path and non-trivial RLS/enforcement are present. Policies that are effectively `true` for booking writes, or no Auth on booking = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Vue UX clarity for search to book",
+      "weight": 10,
+      "summary": "Makes search, trip selection, and booking confirmation understandable without reverse-engineering the UI.",
+      "description": "YES/NO: Is search → trip selection → book confirmation understandable without guessing, with empty and error states usable enough for a demo? Answer YES if a reviewer can follow the flow without reverse-engineering the UI. Broken or opaque flow that forces guessing next steps = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Reproducibility",
+      "weight": 10,
+      "summary": "Documents how to run the app and does not commit secrets.",
+      "description": "YES/NO: Do README (or equivalent notes) explain how to run frontend and backend, with no service-role or other secrets committed, such that a reviewer can reproduce without reverse-engineering undocumented steps? Answer YES only if run notes are sufficient and secrets are not committed. Empty/undocumented deliverable or committed service-role secrets = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  }
+}

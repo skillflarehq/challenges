@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "title": "Implement a QT Widgets desktop app",
+  "slug": "qt-widgets-summary-app",
+  "version": 1,
+  "image": "qt",
+  "compute_provider": "container",
+  "machine_size": "c3-standard-4",
+  "duration_minutes": 20,
+  "skills_assessed": [
+    "CMake Qt 6 Widgets builds",
+    "Qt Widgets UI binding (Designer .ui + labels)",
+    "CSV aggregation in C++"
+  ],
+  "tools": [
+    "g++",
+    "CMake",
+    "Qt 6",
+    "Qt Creator",
+    "Qt Designer",
+    "GDB",
+    "clangd",
+    "CodeLLDB",
+    "VS Code",
+    "Continue"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "g++, CMake, Qt 6, Qt Creator, Qt Designer, and the starter Widgets app are on the desktop."
+  ],
+  "role": {
+    "title": "Qt / desktop engineer",
+    "seniority": "Mid",
+    "company_context": "Product-led industrial software company shipping internal Qt desktop tools. A small desktop team owns CMake + Qt Widgets apps so feature teams can expose status and summary screens without pulling in Electron or a web shell. Hiring to strengthen day-to-day Qt app work on that team.",
+    "day_to_day": [
+      "Implement and review Qt Widgets screens in CMake C++ projects",
+      "Parse operational CSV extracts and show stable summary values on screen",
+      "Keep Home, Status, and Summary tabs predictable for QA and staging builds",
+      "Pair with desktop engineers on cmake configure, moc/uic, and “works on my machine” issues",
+      "Improve shared Qt Widgets templates and CMake conventions"
+    ],
+    "required_skills": [
+      "Comfortable building C++17 Qt 6 with CMake (configure, build, run)",
+      "Can bind Qt Designer widgets (QLabel / QTabWidget) from C++",
+      "Can parse a simple CSV and aggregate numeric columns with defined skip/tie rules",
+      "Can validate a running Widgets window against the documented UI contract"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with Qt Creator and Qt Designer .ui files",
+      "Experience with clangd / CMake Tools in VS Code",
+      "Prior work on internal platform or developer-experience Qt desktop apps",
+      "Comfort reading moc/uic/linker errors when a build fails"
+    ],
+    "constraints": [
+      "Assessment focuses on completing the provided CMake + Qt Widgets app — not redesigning the stack or adding QML, GTK, or Electron",
+      "Do not test packaging (CPack), installer generation, or cross-compilation in this challenge",
+      "Candidate works in a desktop environment with Terminal, g++, CMake, Qt 6, and Qt Creator available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different UI toolkit"
+    ]
+  },
+  "rubric": [
+    {
+      "name": "Working GUI",
+      "weight": 40,
+      "summary": "Demonstrates a running Qt Widgets window with Home and Status tabs populated.",
+      "description": "YES/NO: Did the candidate demonstrate a running Qt Widgets process that shows the Home and Status tabs (not leftover “not implemented”) through the leftover CMake binary (see starter src/main.cpp / brief)? Answer YES only if video or narrative shows a successful run of the window with those tabs visible and filled. Crash-on-start, compile-only, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct screens",
+      "weight": 30,
+      "summary": "Shows the instance greeting, status copy, and the CSV summary winner.",
+      "description": "YES/NO: Do Home, Status, and Summary match the contract? Home text must equal the instance greeting from the starter mainwindow.cpp comment / brief (not a leftover HTTP hello). Status text must equal the instance status_text. Summary must match the truth-pack algorithm on starter data/items.csv (group by category, sum numeric amount, skip empty category or non-numeric amount; max total, lexicographic tie-break). Extra label prefixes are fine; numeric total 65.5 and 65.50 both count. Wrong greeting, wrong status copy, missing Summary fields, or a hardcoded summary that does not match the CSV algorithm = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "CMake and Qt Widgets",
+      "weight": 20,
+      "summary": "Uses the CMake Qt Widgets project and keeps the three tab destinations.",
+      "description": "YES/NO: Does the leftover project build with CMake (cmake -S . -B build or equivalent) rather than a one-off g++ that ignores CMakeLists.txt, and do Home, Status, and Summary remain the three tabs wired from ui/mainwindow.ui? Answer YES only if both the CMake Qt path and the three destinations are visible. Raw g++ of a single file, dropping a tab, or replacing Qt Widgets with QML-only / GTK / Electron = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a rebuildable CMake project on the desktop that a reviewer can follow without guessing steps.",
+      "description": "YES/NO: Is there a CMakeLists.txt plus Qt sources left on the desktop that a reviewer could cmake-configure, build, and run without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No CMake project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  }
+}

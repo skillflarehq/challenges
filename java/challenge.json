@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "title": "Implement a Java HTTP service",
+  "slug": "java-backend-http-service",
+  "version": 1,
+  "image": "java",
+  "compute_provider": "container",
+  "machine_size": "c3-standard-4",
+  "duration_minutes": 3,
+  "skills_assessed": [
+    "Maven Java 21 builds",
+    "JDK HttpServer handler implementation",
+    "CSV aggregation and JSON responses"
+  ],
+  "tools": [
+    "OpenJDK 21",
+    "Maven",
+    "VS Code",
+    "Java Extension Pack",
+    "Continue"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "OpenJDK 21, Maven, and the starter Java HTTP app are on the desktop."
+  ],
+  "role": {
+    "title": "Java backend engineer",
+    "seniority": "Mid",
+    "company_context": "Product-led SaaS company shipping internal Java services. A small platform team owns lightweight HTTP tools on the JDK so feature teams can expose health and summary endpoints without pulling in Spring. Hiring to strengthen day-to-day Java service work on that team.",
+    "day_to_day": [
+      "Implement and review HTTP handlers in Maven Java projects",
+      "Parse operational CSV extracts and return stable JSON summaries",
+      "Keep listen host, port, and health endpoints predictable for local and staging use",
+      "Pair with backend engineers on compile, package, and “works on my machine” issues",
+      "Improve shared Maven templates and handler conventions"
+    ],
+    "required_skills": [
+      "Comfortable building Java 21 with Maven (compile, exec:java)",
+      "Can implement HTTP GET handlers that return JSON",
+      "Can parse a simple CSV and aggregate numeric columns with defined skip/tie rules",
+      "Can validate a running process against expected HTTP behavior with curl or a browser"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with com.sun.net.httpserver or similar JDK HTTP APIs",
+      "Experience with the VS Code Java Extension Pack",
+      "Prior work on internal platform or developer-experience Java services",
+      "Comfort reading Maven compiler output when a process fails to start"
+    ],
+    "constraints": [
+      "Assessment focuses on completing the provided Maven + JDK HttpServer service — not redesigning the stack or adding Spring",
+      "Do not test Kubernetes, cloud IaC, or containerization in this challenge",
+      "Candidate works in a desktop environment with Terminal, JDK 21, and Maven available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different HTTP framework"
+    ]
+  },
+  "rubric": [
+    {
+      "name": "Working HTTP",
+      "weight": 40,
+      "summary": "Demonstrates a running server that serves GET / and GET /health with HTTP 200.",
+      "description": "YES/NO: Did the candidate demonstrate a running process that serves GET / and GET /health with HTTP 200 through the instance’s documented default listen port (see starter Main.java / brief)? Answer YES only if video or narrative shows a successful check (browser or curl) against that port. HTTP 501, compile-only, crash-on-start, or inferred “probably works” = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct payloads",
+      "weight": 30,
+      "summary": "Returns the instance greeting, health ok, and the CSV summary winner.",
+      "description": "YES/NO: Do GET / , GET /health, and GET /summary match the contract? GET / message must equal the instance greeting from the starter Handlers comment / brief (not a leftover Fastify or generic hello). GET /health must be status ok. GET /summary must match the truth-pack algorithm on starter data/items.csv (group by category, sum numeric amount, skip empty category or non-numeric amount; max total, lexicographic tie-break). Extra JSON whitespace is fine; numeric total 65.5 and 65.50 both count. Wrong greeting, missing /summary, or a hardcoded summary that does not match the CSV algorithm = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Build and listen",
+      "weight": 20,
+      "summary": "Uses the Maven project and listens on 0.0.0.0 at the instance default port.",
+      "description": "YES/NO: Does the leftover project build with Maven (mvn compile / exec:java or equivalent) rather than a one-off javac that ignores pom.xml, and does the server listen on 0.0.0.0 (or HOST from the environment) at the instance default port from Main.java? Answer YES only if both the Maven build path and a non-localhost-only listen are visible. Raw javac of loose files, or listen bound only to 127.0.0.1 with no documented reason = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a rebuildable Maven project on the desktop that a reviewer can follow without guessing steps.",
+      "description": "YES/NO: Is there a pom.xml plus sources left on the desktop that a reviewer could mvn-compile and exec:java without guessing paths or undocumented steps? Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No Maven project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "title": "Summarize daily station weather in a spreadsheet",
+  "slug": "weather-station-spreadsheet-summary-20-min",
+  "version": 1,
+  "image": "finance",
+  "compute_provider": "local",
+  "machine_size": "c3-standard-4",
+  "duration_minutes": 20,
+  "skills_assessed": [
+    "Opening CSV data in a spreadsheet",
+    "MIN, MAX, and AVERAGE functions",
+    "Excluding missing values from statistics",
+    "Efficient range selection and formula fill"
+  ],
+  "tools": [],
+  "before_you_start": [
+    "Sign in to Google Sheets and Excel for the web in this browser window before you start.",
+    "The timer starts only when you start the assessment."
+  ],
+  "prep_links": [
+    {
+      "label": "Google Sheets",
+      "url": "https://docs.google.com/spreadsheets/create"
+    },
+    {
+      "label": "Excel for the web",
+      "url": "https://excel.cloud.microsoft"
+    }
+  ],
+  "role": {
+    "title": "Operations analyst",
+    "seniority": "Junior to mid",
+    "company_context": "Regional crop-insurance and ag-weather operations desk. Analysts pull GHCN daily station extracts to sanity-check field reports and brief claims reviewers. Hiring to screen that candidates can actually use a spreadsheet on messy observational data — not just list Excel on a CV.",
+    "day_to_day": [
+      "Open station extracts and summarize temperature and precipitation for a reviewer",
+      "Exclude missing observation codes before computing averages",
+      "Leave labeled summary blocks colleagues can reopen and reuse",
+      "Spot-check field reports against station minima and maxima",
+      "Keep working files auditable instead of one-off calculator notes"
+    ],
+    "required_skills": [
+      "Can open a CSV in LibreOffice Calc or Excel",
+      "Can compute MIN, MAX, and AVERAGE, including AVERAGEIF (or filter) when missing codes exist",
+      "Can select a full column or data range without clicking every cell",
+      "Can leave a labeled, formula-driven summary a reviewer can follow"
+    ],
+    "nice_to_have_skills": [
+      "Keyboard shortcuts for range selection (Ctrl+Shift+Arrow or equivalent)",
+      "Fill or copy formulas across a summary block",
+      "AutoFilter or AVERAGEIF for missing sentinels",
+      "Named ranges or a dedicated summary sheet"
+    ],
+    "constraints": [
+      "Assessment is a spreadsheet screen — not coding, GIS, modeling, or a meteorology exam",
+      "Candidates work in stored units (tenths of °C / tenths of mm); do not require conversion",
+      "Starter CSV and data_notes on the desktop are shared scenery, not a solved workbook",
+      "Python or a calculator may corroborate numbers but do not replace the spreadsheet work sample"
+    ]
+  },
+  "rubric": [
+    {
+      "name": "Spreadsheet weather summary",
+      "weight": 100,
+      "summary": "Leaves a labeled min/max/average spreadsheet summary for TMAX, TMIN, and PRCP, with 9999 excluded, leftover functions, and contiguous ranges.",
+      "description": "Score this single criterion out of 100 as the sum of four slices. Do not invent other criteria. Grade against the truth-pack table for the brief year (2010 / 2009 / 2013). 2010 examples only: TMAX −244 / 339 / 98.17; TMIN −328 / 211 / −6.34; PRCP 0 / 381 / 14.73 — do not fail a 2009/2013 run for not matching those. Correct stats excluding missing (40): award partial across the nine statistics — about 4 points per matching TMAX/TMIN min or max (exact key), about 5 per matching average (within ±0.1 of the instance key), and about 4/5/5 for PRCP min/max/average. Full 40 if all nine match. Formula bar is not required for this slice. MIN over a range that still contains 9999 is YES for that min (9999 cannot be the temperature minimum). A leftover MAX of 9999 zeros only that max slice. The truth-pack including-9999 failure average zeros only that average slice. Unlabeled conversion (e.g. −24.4 instead of −244) zeros the affected stats. Omit a column entirely = 0 for that column’s slice (~13). If a cell cannot be read, 0 for that statistic only. Leftover functions (30): YES (30) if leftover cells or the formula bar show MIN and MAX (or AutoSum min/max / MINIFS / MAXIFS) and AVERAGE, AVERAGEIF, AVERAGEIFS, or an equivalent spreadsheet average (including average of a filtered range) for at least one required column. Do not require all nine formula cells. Partial: 15 if leftover min/max functions but no average formula, or leftover average formula but no min/max functions; 10 if only MIN or only MAX remains. Typed literals, sort-then-copy-paste of values, status-bar reading typed back, calculator or Python results typed into cells, or no leftover functions = 0 on this slice. Efficient range selection (20): YES (20) if leftover formulas reference a contiguous column or block (for example TMAX as G2:G366 or G:G, a named range, or a filtered column) rather than listing hundreds of individual cells, and the same formula pattern is reused across columns (fill handle / copy-paste, mixed references, or isomorphic G vs H vs I). Contiguous-range leftover formulas are sufficient evidence of efficient selection — do not require a Ctrl+Shift+Arrow clip. Also YES if video shows column-letter click, Ctrl+Shift+Arrow (or LibreOffice equivalent), Name Box, fill handle, or AutoFilter, and leftover formulas still use ranges. Nine separately typed but isomorphic formulas still count as reuse. Partial 10 if contiguous ranges exist for at least one column but formulas were not reused. 0 if leftover formulas list individual cells, video shows hundreds of cells clicked as the way the summary was built, typed literals only, or no leftover formulas. Missing video of the gesture is not a fail when range formulas remain. Labeled leftover spreadsheet (10): YES (10) if the candidate opened and worked the extract in LibreOffice Calc or another spreadsheet (Excel-compatible) and left a labeled Min / Max / Average block (or equivalent headings) on the sheet or a second sheet so a reviewer can find TMAX, TMIN, and PRCP results without guessing which cells matter. soffice opening the CSV counts. Labels plus a findable min/max/avg block are enough — do not require all nine correctness keys on this slice. Partial 5 if spreadsheet work is visible but the leftover summary is unlabeled scrap, or a labeled block exists but spreadsheet work is not shown. Text-editor-only, terminal-only, or Python-only work = 0. Results only spoken, or a cleared sheet = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 0.333
+  }
+}

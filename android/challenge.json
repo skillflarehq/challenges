@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "title": "Implement an Android Compose app",
+  "slug": "android-compose-summary-app",
+  "version": 1,
+  "image": "android",
+  "compute_provider": "container",
+  "machine_size": "c3-standard-8",
+  "duration_minutes": 45,
+  "skills_assessed": [
+    "Gradle Android builds",
+    "Jetpack Compose UI",
+    "CSV aggregation in Kotlin"
+  ],
+  "tools": [
+    "Android Studio",
+    "Android SDK",
+    "adb",
+    "Emulator",
+    "OpenJDK 17",
+    "VS Code",
+    "Continue"
+  ],
+  "before_you_start": [
+    "No personal accounts required.",
+    "Android Studio, the Android SDK (API 35), OpenJDK 17, and the starter Compose app are on the desktop.",
+    "The first Gradle sync downloads AGP and Compose artifacts. ANDROID_HOME is already set; do not add local.properties unless you must.",
+    "The emulator is available but software-accelerated and slow. A passing solution does not require running the AVD."
+  ],
+  "role": {
+    "title": "Android engineer",
+    "seniority": "Mid",
+    "company_context": "Product-led SaaS company shipping internal Android tools. A small mobile team owns Kotlin + Jetpack Compose apps so feature teams can expose status and summary screens without pulling in Flutter or a WebView shell. Hiring to strengthen day-to-day Android app work on that team.",
+    "day_to_day": [
+      "Implement and review Compose screens in Gradle Android projects",
+      "Parse operational CSV extracts and return stable summary values on screen",
+      "Keep Home, Status, and Summary destinations predictable for QA and staging builds",
+      "Pair with mobile engineers on assemble, Gradle, and “works on my machine” issues",
+      "Improve shared Compose templates and Gradle conventions"
+    ],
+    "required_skills": [
+      "Comfortable building Android with Gradle (assembleDebug)",
+      "Can implement Jetpack Compose screens that bind string resources and computed state",
+      "Can parse a simple CSV and aggregate numeric columns with defined skip/tie rules",
+      "Can validate a debug build (and optional unit tests) against the documented UI contract"
+    ],
+    "nice_to_have_skills": [
+      "Familiarity with Android Studio and the API 35 SDK / emulator",
+      "Experience with Compose Material 3",
+      "Prior work on internal platform or developer-experience Android apps",
+      "Comfort reading Gradle compiler output when a build fails"
+    ],
+    "constraints": [
+      "Assessment focuses on completing the provided Gradle + Jetpack Compose app — not redesigning the stack or adding Flutter, React Native, or a WebView",
+      "Do not test Play Store publishing, CI pipelines, or cloud backends in this challenge",
+      "Candidate works in a desktop environment with Terminal, Android Studio, OpenJDK 17, and the Android SDK available",
+      "Starter files on the desktop are shared scenery; do not require inventing a different UI toolkit"
+    ]
+  },
+  "rubric": [
+    {
+      "name": "Working Gradle build",
+      "weight": 40,
+      "summary": "Demonstrates a successful ./gradlew assembleDebug (or Studio Build APK) of the leftover project.",
+      "description": "YES/NO: Did the candidate demonstrate a successful Gradle debug build (./gradlew assembleDebug or Android Studio Build APK / assembleDebug) of the leftover project? Answer YES only if video or narrative shows a successful assembleDebug (BUILD SUCCESSFUL or equivalent Studio build). Sync-only, compile errors, or inferred “probably builds” = NO. Emulator launch is not required. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Correct screens",
+      "weight": 30,
+      "summary": "Shows the instance greeting, status copy, and the CSV summary winner.",
+      "description": "YES/NO: Do Home, Status, and Summary match the contract? Home text must equal the instance greeting from starter strings.xml / Screens.kt comments / brief (not a leftover Fastify or generic hello). Status text must equal the instance status_text (not a hardcoded leftover “ok” if this instance differs). Summary must match the truth-pack algorithm on starter assets/items.csv (group by category, sum numeric amount, skip empty category or non-numeric amount; max total, lexicographic tie-break). Numeric total 65.5 and 65.50 both count. Wrong greeting, wrong status copy, missing Summary fields, or a hardcoded summary that does not match the CSV algorithm = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Compose and Gradle",
+      "weight": 20,
+      "summary": "Uses the Gradle Compose project and keeps the three tab destinations.",
+      "description": "YES/NO: Does the leftover project build with the provided Gradle wrapper (./gradlew) rather than a one-off kotlinc that ignores the Android module, and do Home, Status, and Summary remain the three Compose destinations wired from MainActivity? Answer YES only if both the Gradle Android path and the three destinations are visible. Raw kotlinc of loose files, dropping a tab, or replacing Compose with Flutter / React Native / a WebView = NO. YES = full points; NO or unclear = 0."
+    },
+    {
+      "name": "Clarity of deliverables",
+      "weight": 10,
+      "summary": "Leaves a rebuildable Gradle project on the desktop that a reviewer can follow without guessing steps.",
+      "description": "YES/NO: Is there a Gradle wrapper plus Android sources left on the desktop that a reviewer could ./gradlew assembleDebug without guessing SDK paths or undocumented steps? ANDROID_HOME is set on the image; local.properties is optional. Answer YES if the primary build artifact is present and self-explanatory enough to rebuild; optional notes must be accurate if present. No Gradle project / cannot rebuild from the workspace = NO. YES = full points; NO or unclear = 0."
+    }
+  ],
+  "evaluation": {
+    "graders": 3,
+    "max_graders": 5,
+    "cluster_size": 3,
+    "agreement_points": 10,
+    "video_fps": 1
+  }
+}
